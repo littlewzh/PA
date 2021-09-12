@@ -37,14 +37,13 @@ static int cmd_q(char *args) {
   return -1;
 }
 static int cmd_si(char *args){
+  char *arg=strtok(NULL," ");
   int number;
-  char *buf;
-  char *p=strtok_r(args," ", &buf);
-  if(p==NULL){
+  if(arg==NULL){
      number=1;
   }
   else {
-     number=atoi(buf);	 
+     number=atoi(arg);	 
     }
    cpu_exec(number);
    return 0;   
