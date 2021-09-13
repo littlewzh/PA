@@ -48,6 +48,13 @@ static int cmd_si(char *args){
    cpu_exec(number);
    return 0;   
 }
+static int cmd_info(char *args){
+  char *arg=strtok(NULL," ");
+  if(strcmp(arg,"r")==0){
+    isa_reg_display();
+    }
+    return 0;
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -59,6 +66,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si","让程序单步执行N条指令后暂停执行,当N没有给出时, 缺省为1",cmd_si },
+  { "info","r 打印寄存器状态,w 打印监视点信息",cmd_info },
   /* TODO: Add more commands */
 
 };
