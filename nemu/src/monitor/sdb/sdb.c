@@ -3,7 +3,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
-
+#include <memory/paddr.h>
 static int is_batch_mode = false;
 
 void init_regex();
@@ -55,6 +55,18 @@ static int cmd_info(char *args){
     }
     return 0;
 }
+static int cmd_x(char *args){
+  char *arg=strtok(NULL," ");
+  int number=atoi(arg);
+  arg=strtok(NULL," ");
+  uint32_t address;
+  sscanf(arg,"%x",&address);
+  for(int i=0;i<number;i++){
+    printf("%08x\n",paddr_read(address,4));
+    address+=4;
+  }
+  return 0;
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -67,7 +79,9 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si","让程序单步执行N条指令后暂停执行,当N没有给出时, 缺省为1",cmd_si },
   { "info","r 打印寄存器状态,w 打印监视点信息",cmd_info },
-  /* TODO: Add more commands */
+  { "x","扫描内存",cmd_x },
+
+ /* TODO: Add more commands */
 
 };
 
