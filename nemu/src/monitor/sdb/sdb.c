@@ -62,8 +62,15 @@ static int cmd_x(char *args){
   uint32_t address;
   sscanf(arg,"%x",&address);
   for(int i=0;i<number;i++){
-    printf("%08x\n",paddr_read(address,4));
-    address+=4;
+    printf("%02x\n",paddr_read(address,1));
+    address++;
+    printf("%02x\n",paddr_read(address,1));
+    address++;
+    printf("%02x\n",paddr_read(address,1));
+    address++;
+    printf("%02x\n",paddr_read(address,1));
+    address++;
+    
   }
   return 0;
 }
