@@ -6,7 +6,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_EQ,TK_NUM,
 
   /* TODO: Add more token types */
 
@@ -24,6 +24,12 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
+  {"\\-",'-'},          //减
+  {"\\*",'*'},          //乘
+  {"\\/",'/'},          //除
+  {"\\(",'('},          //左括号 
+  {"\\)",')'},          //右括号  
+  {"[0-9]+",TK_NUM},    //十进制整数
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -65,7 +71,7 @@ static bool make_token(char *e) {
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
-      if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
+      if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {              //模式匹配函数regexec()
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
@@ -73,14 +79,21 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
+        
+
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
         switch (rules[i].token_type) {
-          default: TODO();
+	  case TK_NOTYPE:
+	    break;
+          default: 
+	    strncpy(tokens[nr_token].str,substr_start,substr_len);
+            nr_token++;
+	    break;
+
         }
 
         break;
