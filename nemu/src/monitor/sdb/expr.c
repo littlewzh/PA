@@ -90,6 +90,7 @@ static bool make_token(char *e) {
 	  case TK_NOTYPE:
 	    break;
           default: 
+            tokens[nr_token].type=rules[i].token_type;
 	    strncpy(tokens[nr_token].str,substr_start,substr_len);
             nr_token++;
 	    break;
@@ -108,8 +109,79 @@ static bool make_token(char *e) {
 
   return true;
 }
+bool check_parentheses(int p,int q){                   //括号匹配函数 
+  if(tokens[p].type!='('||tokens[q].type!=')') return false;
+  else {
+    int cout=0;
+    for(int i=p+1;i<q;i++){
+      if(tokens[i].type=='(') cout++;  
+      else if(tokens[i].type==')'){
+        cout--;
+	if(cout<0) return false;       
+        }
+      else {continue;}
+      }
+     return true;
+  }
+}
+int find_main_operator(int p,int q){
+  int ans=0;
+  int k=q;//表示符号的位置
+  int pri=10;//代表优先级
+  while(k!=p){
+    if(tokens[k].type==')'){
+      int t=k;
+      while(!check_parentheses(k,t)){
+        k--;
+        }
+	
+      }
+    else if(tokens[k].type=='+'||tokens[k].type=='-'){
+        int l=1;
+	if(l<pri){
+	  pri=l;
+	  ans=k;
+	  }
 
-
+	}
+   else if(tokens[k].type=='*'||tokens[k].type=='/'){
+         int l=2;
+         if(l<pri){
+           pri=l;
+           ans=k;
+           }
+        }
+   k--;
+    }
+    return ans;
+}
+//寻找主操作符
+word_t eval(int p,int q){
+  if(p>q){
+    assert(0);
+  }
+  else if(p==q){
+    uint32_t val;
+    sscanf(tokens[p].str,"%d",&val);
+    return val;
+  }
+  else if(check_parentheses(p,q)==true){
+    return eval(p+1,q-1);
+  }
+  else {
+    int op=find_main_operator(p,q);
+    word_t val1=eval(p,op-1);
+    word_t val2=eval(op+1,q);
+    switch(tokens[op].type){
+      case '+': return val1+val2;
+      case '-': return val1-val2;
+      case '*': return val1*val2;
+      case '/': return val1/val2;
+      //add more cases
+    }
+  }
+  return 0;
+}
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
@@ -117,7 +189,9 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-
-  return 0;
+  
+  else {
+    *success=true;
+    return eval(0,nr_token-1);
+    }
 }
