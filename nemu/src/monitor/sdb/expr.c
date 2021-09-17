@@ -182,7 +182,7 @@ word_t eval(int p,int q){
   }
   return 0;
 }
-word_t expr(char *e, bool *success) {
+word_t expr(char *e,bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -191,7 +191,8 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   
   else {
-    *success=true;
-    return eval(0,nr_token-1);
+    *success = true;
+    printf("%d",eval(0,nr_token-1));
+    return 0;
     }
 }

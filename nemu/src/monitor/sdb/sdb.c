@@ -75,6 +75,12 @@ static int cmd_x(char *args){
   }
   return 0;
 }
+static int cmd_p(char *args){
+  char *arg=strtok(NULL," ");
+  bool success;
+  expr(arg,&success);
+  return 0;
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -88,7 +94,7 @@ static struct {
   { "si","让程序单步执行N条指令后暂停执行,当N没有给出时, 缺省为1",cmd_si },
   { "info","r 打印寄存器状态,w 打印监视点信息",cmd_info },
   { "x","扫描内存",cmd_x },
-
+  { "p","表达式求值",cmd_p },
  /* TODO: Add more commands */
 
 };
