@@ -77,8 +77,8 @@ static int cmd_x(char *args){
 }
 static int cmd_p(char *args){
   char *arg=strtok(NULL," ");
-  bool success;
-  expr(arg,&success);
+  bool asuccess;
+  expr(arg,&asuccess);
   return 0;
 }
 static int cmd_help(char *args);
