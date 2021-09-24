@@ -193,6 +193,7 @@ word_t eval(int p,int q){
       case DEREF : return paddr_read(val2,4);
       case NEG : return -val2;
       //add more cases
+      default: assert(0);
     }
   }
   return 0;
