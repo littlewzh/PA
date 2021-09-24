@@ -1,4 +1,5 @@
 #include <isa.h>
+#include <memory/paddr.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -6,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUM,TK_HEX,TK_NOTEQ,TK_AND,TK_REG,
+  TK_NOTYPE = 256, TK_EQ,TK_NUM,TK_HEX,TK_NOTEQ,TK_AND,TK_REG,DEREF,NEG,
 
   /* TODO: Add more token types */
 
@@ -129,7 +130,8 @@ bool check_parentheses(int p,int q){                   //括号匹配函数
      return true;
   }
 }
-int find_main_operator(int p,int q){
+int find_main_operator(int p,int q){          //寻找主操作符
+
   int ans=0;
   int k=q;//表示符号的位置
   int pri=10;//代表优先级
@@ -156,16 +158,22 @@ int find_main_operator(int p,int q){
            ans=k;
            }
         }
+  else if(tokens[k].type==DEREF||tokens[k].type==NEG){
+        int l=3;
+        if(l<pri){
+          pri=l;
+          ans=k;
+          }
+        }
    k--;
     }
     return ans;
 }
-//寻找主操作符
 word_t eval(int p,int q){
   if(p>q){
     assert(0);
   }
-  else if(p==q){
+  else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     uint32_t val;
     sscanf(tokens[p].str,"%d",&val);
     return val;
@@ -182,6 +190,8 @@ word_t eval(int p,int q){
       case '-': return val1-val2;
       case '*': return val1*val2;
       case '/': return val1/val2;
+      case DEREF : return paddr_read(val2,4);
+      case NEG : return -val2;
       //add more cases
     }
   }
@@ -194,10 +204,18 @@ word_t expr(char *e,bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  
-  else {
-    *success = true;
-    printf("%d\n",eval(0,nr_token-1));
-    return 0;
-    }
+  for(int i=0;i<nr_token;i++){
+  if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
+  tokens[i].type=DEREF;
+}  
+  if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
+  tokens[i].type=NEG;
+}
+}  
+
+
+
+  *success = true;
+  printf("%d\n",eval(0,nr_token-1));
+  return 0;
 }
