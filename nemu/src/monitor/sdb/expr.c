@@ -171,7 +171,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
 }
 word_t eval(int p,int q){
   if(p>q){
-    assert(0);
+    assert(1);                              //这个地方（）里是0还是1还要在思考一下？
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     uint32_t val;
