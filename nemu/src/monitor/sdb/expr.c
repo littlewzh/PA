@@ -117,7 +117,9 @@ static bool make_token(char *e) {
 }
 int trans(char *s){                            //进制转换函数
   int n=0;
-  int pos=2;
+  int pos;
+  if(s[0]=='0'&&s[1]=='x') pos=2;
+  else pos=0;
   while(s[pos]!='\0'){
   if(s[pos]>'9') n=16*n+(s[pos]-'a');
   else n=16*n+(s[pos]-'0');
@@ -191,6 +193,13 @@ word_t eval(int p,int q){
     }
     else if(tokens[p].type==TK_HEX){
       return trans(tokens[p].str);
+    }
+    else if(tokens[p].type==TK_REG){          //读取寄存器的值
+      char *s=strtok(tokens[p].str,"$");
+      s=strtok(NULL," ");
+      bool success;
+      
+      return isa_reg_str2val(s,&success);
     }
     else assert(0);
   }
