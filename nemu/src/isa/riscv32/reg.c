@@ -18,10 +18,10 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   int t=0;
   int k;
   for(int i=0;i<=32;i++){
-  if(strcmp(s,regs[i])==0){
-    t=1;
-    k=i;
-    break;
+    if(strcmp(s,regs[i])==0){
+      t=1;
+      k=i;
+      break;
     }
   }
   if(t==1){
