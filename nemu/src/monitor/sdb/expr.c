@@ -116,14 +116,14 @@ static bool make_token(char *e) {
   return true;
 }
 int trans(char *s){                            //进制转换函数
-  uint32_t number=0;
+  int n=0;
   int pos=2;
   while(s[pos]!='\0'){
-  if(s[pos]>'9') number=16*number+(s[pos]-'a');
-  else number=16*number+(s[pos]-'0');
+  if(s[pos]>'9') n=16*n+(s[pos]-'a');
+  else n=16*n+(s[pos]-'0');
   pos++;
   }
-  return number;
+  return n;
 }
 bool check_parentheses(int p,int q){                   //括号匹配函数 
   if(tokens[p].type!='('||tokens[q].type!=')') return false;
@@ -188,6 +188,7 @@ word_t eval(int p,int q){
     switch(tokens[p].type){
       case TK_NUM: sscanf(tokens[p].str,"%d",&val);
       case TK_HEX: val=trans(tokens[p].str);
+      break;
     }  
     return val;
   }
