@@ -15,16 +15,16 @@ void isa_reg_display() {
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
-  int t=0;
+  bool t=false;
   //int k=0;
   uint32_t num;
   for(int i=0;i<32;i++){
     if(strcmp(s,regs[i])==0){
-      t=1;
+      t=true;
       num=cpu.gpr[i]._32;
       break;
     }
   }
-  if(t==0){*success=false; assert(0);}
+  if(!t){*success=false; assert(0);}
   else {return num;}
 }
