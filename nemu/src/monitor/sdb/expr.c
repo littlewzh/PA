@@ -215,7 +215,7 @@ word_t eval(int p,int q){
       char s[10];
       sscanf(tokens[p].str,"%[^$]",s);
       bool success;
-      
+      printf("%s",s); 
       return   isa_reg_str2val(s,&success);
     }
     else assert(0);
