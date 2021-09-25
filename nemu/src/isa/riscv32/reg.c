@@ -26,7 +26,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
   }
   if(t==1){
   *success=true;
-  return cpu.gpr[k]._32;
+  return k;//cpu.gpr[k]._32;
 }
  else {
  *success=false;
