@@ -116,7 +116,7 @@ static bool make_token(char *e) {
   return true;
 }
 word_t trans(char *s){                            //进制转换函数
-  int n=0;
+  word_t n=0;
   int pos;
   if(s[0]=='0'&&s[1]=='x') pos=2;
   else pos=0;
@@ -196,13 +196,13 @@ word_t eval(int p,int q){
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     if(tokens[p].type==TK_NUM){
-      uint32_t val;
+      word_t val;
       sscanf(tokens[p].str,"%d",&val);  
       return val;
     }
     else if(tokens[p].type==TK_HEX){
       if(tokens[p-1].type==DEREF){
-        uint32_t address;
+        word_t address;
         sscanf(tokens[p].str,"%x",&address);
         return address;    
       }
