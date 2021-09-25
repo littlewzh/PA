@@ -97,7 +97,7 @@ static bool make_token(char *e) {
 	    break;
           default: 
             tokens[nr_token].type=rules[i].token_type;
-           // memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
+            memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
 	    strncpy(tokens[nr_token].str,substr_start,substr_len);
             nr_token++;
 	    break;
@@ -117,7 +117,7 @@ static bool make_token(char *e) {
   return true;
 }
 word_t trans(char *s){                            //进制转换函数
-  word_t n=0;
+  uint32_t n=0;
   int pos;
   if(s[0]=='0'&&s[1]=='x') pos=2;
   else pos=0;
