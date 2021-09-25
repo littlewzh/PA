@@ -213,8 +213,12 @@ word_t eval(int p,int q){
     }
     else if(tokens[p].type==TK_REG){          //读取寄存器的值
       char s[10];
-      memset(s,'\0',sizeof(s));
-      sscanf(tokens[p].str,"%[a-z0-9]",s);
+      int pos=1;
+      while(tokens[p].str[pos]!='\0'){
+        s[pos-1]=tokens[p].str[pos];
+        pos++; 
+      }
+      s[pos-1]='\0';
       bool success;
       return   isa_reg_str2val(s,&success);
     }
