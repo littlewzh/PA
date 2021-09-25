@@ -25,6 +25,6 @@ word_t isa_reg_str2val(const char *s, bool *success) {
       break;
     }
   }
-  if(t==0)  {*success=false; assert(0);}
-  else return num;
+  if(t==0){*success=false; assert(0);}
+  else {return num;}
 }
