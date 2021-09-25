@@ -115,6 +115,16 @@ static bool make_token(char *e) {
 
   return true;
 }
+word_t trans(char *s){                            //进制转换函数
+  uint32_t number=0;
+  int pos=2;
+  while(s[pos]!='\0'){
+  if(s[pos]>'9') number=16*number+(s[pos]-'a');
+  else number=16*number+(s[pos]-'0');
+  pos++;
+  }
+  return number;
+}
 bool check_parentheses(int p,int q){                   //括号匹配函数 
   if(tokens[p].type!='('||tokens[q].type!=')') return false;
   else {
@@ -175,7 +185,10 @@ word_t eval(int p,int q){
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     uint32_t val;
-    sscanf(tokens[p].str,"%d",&val);
+    switch(tokens[p].type){
+      case TK_NUM: sscanf(tokens[p].str,"%d",&val);
+      case TK_HEX: val=trans(tokens[p].str);
+    }  
     return val;
   }
   else if(check_parentheses(p,q)==true){
