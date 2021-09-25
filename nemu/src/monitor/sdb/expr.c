@@ -188,7 +188,7 @@ word_t eval(int p,int q){
     switch(tokens[p].type){
       case TK_NUM: sscanf(tokens[p].str,"%d",&val);
       case TK_HEX: val=trans(tokens[p].str);
-      break;
+      default : assert(0);
     }  
     return val;
   }
