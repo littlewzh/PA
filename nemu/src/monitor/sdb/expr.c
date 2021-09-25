@@ -213,7 +213,7 @@ word_t eval(int p,int q){
     }
     else if(tokens[p].type==TK_REG){          //读取寄存器的值
       char *s;
-      strtok(tokens[p].str,"$");
+      s= strtok(tokens[p].str,"$");
       s=strtok(NULL," ");
       bool success;
       return   isa_reg_str2val(s,&success);
