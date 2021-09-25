@@ -185,11 +185,7 @@ word_t eval(int p,int q){
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     uint32_t val;
-    switch(tokens[p].type){
-      case TK_NUM: sscanf(tokens[p].str,"%d",&val);
-      case TK_HEX: val=trans(tokens[p].str);
-      default : assert(0);
-    }  
+    sscanf(tokens[p].str,"%d",&val);  
     return val;
   }
   else if(check_parentheses(p,q)==true){
