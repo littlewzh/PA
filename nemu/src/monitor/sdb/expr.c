@@ -97,7 +97,7 @@ static bool make_token(char *e) {
 	    break;
           default: 
             tokens[nr_token].type=rules[i].token_type;
-            memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
+           // memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
 	    strncpy(tokens[nr_token].str,substr_start,substr_len);
             nr_token++;
 	    break;
