@@ -201,7 +201,14 @@ word_t eval(int p,int q){
       return val;
     }
     else if(tokens[p].type==TK_HEX){
-      return trans(tokens[p].str);
+      if(tokens[p-1].type==DEREF){
+        uint32_t address;
+        sscanf(tokens[p].str,"%x",&address);
+        return address;    
+      }
+      else {
+        return trans(tokens[p].str);
+      }
     }
     else if(tokens[p].type==TK_REG){          //读取寄存器的值
       char *s=strtok(tokens[p].str,"$");
