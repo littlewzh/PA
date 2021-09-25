@@ -115,7 +115,7 @@ static bool make_token(char *e) {
 
   return true;
 }
-word_t trans(char *s){                            //进制转换函数
+int trans(char *s){                            //进制转换函数
   uint32_t number=0;
   int pos=2;
   while(s[pos]!='\0'){
