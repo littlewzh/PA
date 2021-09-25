@@ -122,7 +122,7 @@ word_t trans(char *s){                            //进制转换函数
   if(s[0]=='0'&&s[1]=='x') pos=2;
   else pos=0;
   while(s[pos]!='\0'){
-  if(s[pos]>'9') n=16*n+(s[pos]-'a');
+  if(s[pos]>'9') n=16*n+(s[pos]-'a')+10;
   else n=16*n+(s[pos]-'0');
   pos++;
   }
