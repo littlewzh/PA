@@ -30,6 +30,6 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 }
  else {
  *success=false;
-}
   return 0;
+}
 }
