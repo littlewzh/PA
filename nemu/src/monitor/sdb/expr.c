@@ -155,8 +155,17 @@ int find_main_operator(int p,int q){          //寻找主操作符
         }
 	
       }
+    else if(tokens[k].type==TK_EQ||tokens[k].type==TK_NOTEQ){
+         int l=3;
+         if(l<pri){
+           pri=l;
+           ans=k;
+           }
+ 
+         }
+
     else if(tokens[k].type=='+'||tokens[k].type=='-'){
-        int l=1;
+        int l=4;
 	if(l<pri){
 	  pri=l;
 	  ans=k;
@@ -164,14 +173,14 @@ int find_main_operator(int p,int q){          //寻找主操作符
 
 	}
    else if(tokens[k].type=='*'||tokens[k].type=='/'){
-         int l=2;
+         int l=5;
          if(l<pri){
            pri=l;
            ans=k;
            }
         }
   else if(tokens[k].type==DEREF||tokens[k].type==NEG){
-        int l=3;
+        int l=6;
         if(l<pri){
           pri=l;
           ans=k;
@@ -217,6 +226,8 @@ word_t eval(int p,int q){
       case '/': return val1/val2;
       case DEREF : return paddr_read(val2,4);
       case NEG : return -val2;
+      case TK_EQ: return val1==val2;
+      case TK_NOTEQ: return val1!=val2;
       //add more cases
       default: assert(0);
     }
