@@ -116,7 +116,7 @@ static bool make_token(char *e) {
   return true;
 }
 word_t trans(char *s){                            //进制转换函数
-  uint32_t n=0;
+  int n=0;
   int pos;
   if(s[0]=='0'&&s[1]=='x') pos=2;
   else pos=0;
