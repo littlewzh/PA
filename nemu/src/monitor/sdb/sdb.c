@@ -60,7 +60,8 @@ static int cmd_x(char *args){
   int number=atoi(arg);
   arg=strtok(NULL," ");
   uint32_t address;
-  sscanf(arg,"%x",&address);
+  bool success;
+  address=expr(arg,&success);
   for(int i=0;i<number;i++){
     printf("0x%08x : ",address);
     printf("%02x ",paddr_read(address,1));
