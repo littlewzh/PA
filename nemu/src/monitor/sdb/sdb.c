@@ -84,6 +84,11 @@ static int cmd_p(char *args){
   printf("%u\n", expr(arg,&success));
   return 0;
 }
+static int cmd_w(char *args){
+  char *arg=strtok(NULL," ");
+  new_wp(arg);
+  return 0;
+}
 
 static int cmd_help(char *args);
 
@@ -99,6 +104,7 @@ static struct {
   { "info","r 打印寄存器状态,w 打印监视点信息",cmd_info },
   { "x","扫描内存",cmd_x },
   { "p","表达式求值",cmd_p },
+  { "w","设置监视点",cmd_w },
  /* TODO: Add more commands */
 
 };

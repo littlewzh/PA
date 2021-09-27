@@ -3,7 +3,7 @@
 #include <cpu/difftest.h>
 #include <isa-all-instr.h>
 #include <locale.h>
-
+#include "../monitor/sdb/sdb.h"
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -24,6 +24,7 @@ void device_update();
 static void debug_hook(vaddr_t pc, const char *asmbuf) {
   log_write("%s\n", asmbuf);
   if (g_print_step) { puts(asmbuf); }
+  if(!test()) nemu_state.state=NEMU_STOP;
 }
 #endif
 
