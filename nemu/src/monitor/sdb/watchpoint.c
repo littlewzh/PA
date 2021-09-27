@@ -96,5 +96,13 @@ WP* match(int n){
     else {return p;}
   }
 }
+void wp_print(){
+  WP* p=head;
+  while(p!=NULL){
+    printf("%d : %s",p->NO,p->str);
+    p=p->next;
+  }
+  return;
+}
 /* TODO: Implement the functionality of watchpoint */
 

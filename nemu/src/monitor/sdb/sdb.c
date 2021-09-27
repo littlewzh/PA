@@ -52,7 +52,11 @@ static int cmd_info(char *args){
   char *arg=strtok(NULL," ");
   if(strcmp(arg,"r")==0){
     isa_reg_display();
-    }
+  }
+  else if(strcmp(arg,"w")==0){
+    wp_print();
+  }
+  else {printf("Unknown command");}
     return 0;
 }
 static int cmd_x(char *args){

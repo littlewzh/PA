@@ -8,4 +8,5 @@ word_t expr(char *e,bool *success);
 WP* new_wp(char *s);
 WP* match(int n);
 int test();
+void wp_print();
 #endif
