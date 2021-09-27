@@ -53,8 +53,7 @@ WP* new_wp(char *s){
 }
 void free_wp(WP *wp){
   WP *current;
-  WP *p;
-  if(wp==head) {head=head->next;}
+  if(wp==head) {head=head->next;current=wp;}
   else {                                                //遍历以找到wp
     current=head;
     while((current->next!=wp)&&current!=NULL){
@@ -62,16 +61,20 @@ void free_wp(WP *wp){
     }
     if(current==NULL) {printf("没有此监视点"); assert(1);}
     else {
-      p=wp->next;
-      current->next=p;
+      current->next=wp->next;
+      
     }
   }
-  while(current)
+  if(current!=NULL){
+   wp->val=0;
+   memset(wp->str,'\0',sizeof(wp->str));
+   wp->next=free_;
+   free_=wp;
+  }
   wp->val=0;
   memset(wp->str,'\0',sizeof(wp->str));
   wp->next=free_;
   free_=wp;
-  free_->next=p;
   return;
 }
 int test(){
