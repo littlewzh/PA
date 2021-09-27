@@ -92,7 +92,7 @@ WP* match(int n){
     while(p->NO!=n&&p!=NULL){
       p=p->next;
     }
-    if(p==NULL) {printf("无此监视点");return 0;}
+    if(p==NULL) {printf("无此监视点");assert(0);}
     else {return p;}
   }
   assert(0);
