@@ -85,5 +85,16 @@ int test(){
   }
   return 1;
 }
+WP* match(int n){
+  if(head==NULL) {printf("无");return 0;}
+  else {
+    WP *p=head;
+    while(p->NO!=n&&p!=NULL){
+      p=p->next;
+    }
+    if(p==NULL) {printf("无此监视点");return 0;}
+    else {return p;}
+  }
+}
 /* TODO: Implement the functionality of watchpoint */
 

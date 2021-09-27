@@ -89,6 +89,13 @@ static int cmd_w(char *args){
   new_wp(arg);
   return 0;
 }
+static int cmd_d(char *args){
+  char *arg=strtok(NULL," ");
+  int num=atoi(arg);
+  WP *p=match(num);
+  free_wp(p);
+  return 0;
+}
 
 static int cmd_help(char *args);
 
@@ -105,6 +112,7 @@ static struct {
   { "x","扫描内存",cmd_x },
   { "p","表达式求值",cmd_p },
   { "w","设置监视点",cmd_w },
+  { "d","删除监视点",cmd_d },
  /* TODO: Add more commands */
 
 };
