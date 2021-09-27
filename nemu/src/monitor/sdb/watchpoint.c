@@ -103,7 +103,7 @@ WP* match(int n){
 void wp_print(){
   WP* p=head;
   while(p!=NULL){
-    printf("%d : %s",p->NO,p->str);
+    printf("%d : %s\n",p->NO,p->str);
     p=p->next;
   }
   return;
