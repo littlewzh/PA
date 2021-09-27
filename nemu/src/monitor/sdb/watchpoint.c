@@ -54,13 +54,13 @@ WP* new_wp(char *s){
 void free_wp(WP *wp){
   WP *current;
   WP *p;
-  if(wp==head) head=head->next;
-  else {
+  if(wp==head) {head=head->next;}
+  else {                                                //遍历以找到wp
     current=head;
     while((current->next!=wp)&&current!=NULL){
       current=current->next;
     }
-    if(current==NULL) {printf("没有此监视点"); return;}
+    if(current==NULL) {printf("没有此监视点"); assert(1);}
     else {
       p=wp->next;
       current->next=p;
@@ -95,6 +95,7 @@ WP* match(int n){
     if(p==NULL) {printf("无此监视点");return 0;}
     else {return p;}
   }
+  assert(0);
 }
 void wp_print(){
   WP* p=head;
