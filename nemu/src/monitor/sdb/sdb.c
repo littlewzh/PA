@@ -5,7 +5,7 @@
 #include "sdb.h"
 #include <memory/paddr.h>
 static int is_batch_mode = false;
-
+int is_exit_status_bad();
 void init_regex();
 void init_wp_pool();
 //  dawdassss
@@ -34,7 +34,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  return 1;
+  return !is_exit_status_bad();
 }
 static int cmd_si(char *args){
   char *arg=strtok(NULL," ");
