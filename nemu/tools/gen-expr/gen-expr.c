@@ -21,8 +21,8 @@ uint32_t choose(int s){
   return rand()%s;
 }
 void gen_num(){
-  uint32_t num=choose(100);
-  int n[10];
+  uint32_t num=choose(9)+1;
+  /*int n[10];
   int k=0;
    while(num!=0){
   
@@ -33,7 +33,9 @@ void gen_num(){
   for(int i=k-1;i>=0;i--){
     pos++;
     buf[pos]=n[i]+'0';
-  }
+  }*/
+  pos++;
+  buf[pos]=num+'0';
 }
 void gen(char a){
    pos++;
@@ -45,16 +47,19 @@ void gen_rand_op(){
     case 0: a='+';break;
     case 1: a='-';break;
     case 2: a='*';break;
-    case 3: a='/';break;
+    default: a='/';break;
     }
     pos++;
     buf[pos]=a;
 }
 static void gen_rand_expr() {
+  if(pos>1000) {gen_num;}
+  else{
   switch(choose(3)){
-    case 0: gen_num();break;
+    case 0: gen_rand_expr();gen_rand_op();gen_rand_expr();break;
     case 1: gen('(');gen_rand_expr();gen(')');break;
-    default : gen_rand_expr();gen_rand_op();gen_rand_expr();break;
+    default :gen_num();break;
+}
 }
 }
 

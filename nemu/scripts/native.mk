@@ -6,7 +6,8 @@ include $(NEMU_HOME)/tools/difftest.mk
 compile_git:
 	$(call git_commit, "compile")
 $(BINARY): compile_git
-
+count:
+	$(find . | grep '\.c$\|\.h$' | xargs wc -l)
 # Some convenient rules
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
@@ -17,8 +18,6 @@ IMG ?=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
 run-env: $(BINARY) $(DIFF_REF_SO)
-count: run-env
-	$(find . | grep '\.c$\|\.h$' | xargs wc -l)
 run: run-env
 	$(call git_commit, "run")
 	$(NEMU_EXEC)
