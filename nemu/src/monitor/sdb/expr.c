@@ -146,7 +146,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
   int ans=0;
   int k=q;//表示符号的位置
   int pri=10;//代表优先级
-  while(k>p){
+  while(k>=p){
     if(tokens[k].type==')'){
       int t=k;
       while(!check_parentheses(k,t)&&k>p){
