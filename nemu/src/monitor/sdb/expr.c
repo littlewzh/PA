@@ -257,7 +257,9 @@ word_t expr(char *e,bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  for(int i=0;i<nr_token;i++){
+  if(tokens[1].type=='*') {tokens[1].type=DEREF;}
+  else if(tokens[1].type=='-') {tokens[1].type=NEG;}
+  else {for(int i=1;i<nr_token;i++){
   if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
   tokens[i].type=DEREF;
 }  
@@ -265,7 +267,7 @@ word_t expr(char *e,bool *success) {
   tokens[i].type=NEG;Log("%d",tokens[i].type);
 }
 }  
-
+}
 
 
   return eval(0,nr_token-1);
