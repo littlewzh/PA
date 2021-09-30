@@ -193,7 +193,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
 }
 word_t eval(int p,int q){
   if(p>q){
-    assert(0);                             //这个地方（）里是0还是1还要在思考一下？
+    return 0;                             //这个地方（）里是0还是1还要在思考一下？
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     if(tokens[p].type==TK_NUM){
@@ -229,7 +229,7 @@ word_t eval(int p,int q){
   }
   else {
     int op=find_main_operator(p,q);
-    word_t val1=eval(p,op-1);;
+    word_t val1=eval(p,op-1);
     word_t val2=eval(op+1,q);
     switch(tokens[op].type){
       case '+': return val1+val2;
@@ -247,6 +247,10 @@ word_t eval(int p,int q){
   
 }
 word_t expr(char *e,bool *success) {
+  for(int i=0;i<320;i++){
+     memset(tokens[i].str,'\0',sizeof(tokens[i].str));
+     
+  }
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -264,6 +268,5 @@ word_t expr(char *e,bool *success) {
 
 
 
-  *success = true;
   return eval(0,nr_token-1);
 }
