@@ -35,7 +35,7 @@ static struct rule {
   {"!=",TK_NOTEQ},      //NOT equal
   {"&&",TK_AND},        //与
   {"\\$[0-9a-z]{2,3}",TK_REG},  //寄存器(在这我没有考虑名为$0的寄存器，一是麻烦，而是它里面的内容恒为零)
-  {"\\$$0",TK_ZERO},            //零号寄存器
+  {"\\$\\$0",TK_ZERO},            //零号寄存器
 };
 
 #define NR_REGEX ARRLEN(rules)
