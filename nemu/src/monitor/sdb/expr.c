@@ -64,7 +64,7 @@ typedef struct token {
   char str[64];
 } Token;
 
-static Token tokens[320] __attribute__((used)) = {};
+static Token tokens[128] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -257,14 +257,15 @@ word_t expr(char *e,bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  if(tokens[1].type=='*') {tokens[1].type=DEREF;}
-  else if(tokens[1].type=='-') {tokens[1].type=NEG;}
-  else {for(int i=1;i<nr_token;i++){
-  if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
+  if(tokens[0].type=='*') {tokens[0].type=DEREF;}
+  else if(tokens[0].type=='-') {tokens[0].type=NEG;}
+  else {
+  for(int i=1;i<nr_token;i++){
+   if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
   tokens[i].type=DEREF;
 }  
-  if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
-  tokens[i].type=NEG;Log("%d",tokens[i].type);
+   if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
+  tokens[i].type=NEG;//Log("%d",tokens[i].type);
 }
 }  
 }
