@@ -229,8 +229,10 @@ word_t eval(int p,int q){
   }
   else {
     int op=find_main_operator(p,q);
-    word_t val1=eval(p,op-1);
-    word_t val2=eval(op+1,q);
+    word_t val1=0;
+    word_t val2=0;
+    if(op>p){val1=eval(p,op-1);val2=eval(op+1,q);}
+    else {val2=eval(op+1,q);}
     switch(tokens[op].type){
       case '+': return val1+val2;
       case '-': return val1-val2;
