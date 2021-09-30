@@ -61,7 +61,7 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[32];
+  char str[64];
 } Token;
 
 static Token tokens[320] __attribute__((used)) = {};
@@ -97,7 +97,7 @@ static bool make_token(char *e) {
 	    break;
           default: 
             tokens[nr_token].type=rules[i].token_type;
-            //memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));      //这句话很关键，一定要注意strncpy函数的坑爹之处
+            memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));      //这句话很关键，一定要注意strncpy函数的坑爹之处
 	    strncpy(tokens[nr_token].str,substr_start,substr_len);
             nr_token++;
 	    break;
@@ -151,7 +151,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
   while(k>=p){
     if(tokens[k].type==')'){
       int t=k;
-      while(!check_parentheses(k,t)){
+      while(!check_parentheses(k,t)&&k>=p){
         k--;
         }
 	
@@ -247,10 +247,10 @@ word_t eval(int p,int q){
   
 }
 word_t expr(char *e,bool *success) {
-  for(int i=0;i<320;i++){
-     memset(tokens[i].str,'\0',sizeof(tokens[i].str));
+  //for(int i=0;i<320;i++){
+  //   memset(tokens[i].str,'\0',sizeof(tokens[i].str));
      
-  }
+  //}
   if (!make_token(e)) {
     *success = false;
     return 0;
