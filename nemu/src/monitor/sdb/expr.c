@@ -241,10 +241,10 @@ word_t eval(int p,int q){
       case TK_EQ: return val1==val2;
       case TK_NOTEQ: return val1!=val2;
       //add more cases
-      default: assert(0);
+      //default: assert(0);
     }
   }
-  
+  return 0;
 }
 word_t expr(char *e,bool *success) {
   //for(int i=0;i<320;i++){
@@ -257,9 +257,7 @@ word_t expr(char *e,bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  if(tokens[0].type=='*') {tokens[0].type=DEREF;}
-  else if(tokens[0].type=='-') {tokens[0].type=NEG;}
-  else {
+
   for(int i=1;i<nr_token;i++){
    if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
   tokens[i].type=DEREF;
@@ -268,7 +266,7 @@ word_t expr(char *e,bool *success) {
   tokens[i].type=NEG;//Log("%d",tokens[i].type);
 }
 }  
-}
+
 
 
   return eval(0,nr_token-1);
