@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_HEX,TK_NUM,TK_NOTEQ,TK_AND,TK_REG,DEREF,NEG
+  TK_NOTYPE = 256, TK_EQ,TK_HEX,TK_NUM,TK_NOTEQ,TK_AND,TK_REG,DEREF,NEG,TK_ZERO,
 
   /* TODO: Add more token types */
 
@@ -35,7 +35,7 @@ static struct rule {
   {"!=",TK_NOTEQ},      //NOT equal
   {"&&",TK_AND},        //与
   {"\\$[0-9a-z]{2,3}",TK_REG},  //寄存器(在这我没有考虑名为$0的寄存器，一是麻烦，而是它里面的内容恒为零)
-
+  {"\\$$0",TK_ZERO},            //零号寄存器
 };
 
 #define NR_REGEX ARRLEN(rules)
