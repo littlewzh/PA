@@ -181,7 +181,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
         }
   else if(tokens[k].type==DEREF||tokens[k].type==NEG){
         int l=6;
-        if(l<=pri){
+        if(l<pri){
           pri=l;
           ans=k;
           }
