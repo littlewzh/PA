@@ -192,7 +192,8 @@ int find_main_operator(int p,int q){          //寻找主操作符
 }
 uint32_t eval(int p,int q){
   if(p>q){
-    assert(0);                             //这个地方（）里是0还是1还要在思考一下？
+    //assert(0);
+    return 0;                             //这个地方（）里是0还是1还要在思考一下？
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     if(tokens[p].type==TK_NUM){
@@ -221,7 +222,7 @@ uint32_t eval(int p,int q){
       bool success;
       return   isa_reg_str2val(s,&success);
     }
-    else assert(0);//if(tokens[p].type==NEG) {return }
+    //else assert(0);//if(tokens[p].type==NEG) {return }
   }
   else if(check_parentheses(p,q)==true){
     return eval(p+1,q-1);
@@ -229,13 +230,13 @@ uint32_t eval(int p,int q){
   else {
     int op=find_main_operator(p,q);
     uint32_t val1,val2;
-    //if(op!=p){
+    if(op!=p){
       val1=eval(p,op-1);
-      val2=eval(op+1,q);//}
-    /*else {
+      val2=eval(op+1,q);}
+    else {
       val1=0;
       val2=eval(op+1,q);
-    }*/
+    }
     switch(tokens[op].type){
       case '+': return val1+val2;
       case '-': return val1-val2;
@@ -246,7 +247,7 @@ uint32_t eval(int p,int q){
       case TK_EQ: return val1==val2;
       case TK_NOTEQ: return val1!=val2;
       //add more cases
-      default: assert(0);
+      default: return 0;//assert(0);
     }
   }
   return 0;
