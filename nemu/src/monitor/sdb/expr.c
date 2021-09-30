@@ -223,6 +223,7 @@ uint32_t eval(int p,int q){
       bool success;
       return   isa_reg_str2val(s,&success);
     }
+    else if(tokens[p].type==TK_ZERO) {return 0;}
     else {assert(0);}//if(tokens[p].type==NEG) {return }
   }
   else if(check_parentheses(p,q)==true){
