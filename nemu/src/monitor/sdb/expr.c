@@ -182,7 +182,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
         }
   else if(tokens[k].type==DEREF||tokens[k].type==NEG){
         int l=6;
-        if(l<=pri){
+        if(l<pri){
           pri=l;
           ans=k;
           }
@@ -260,7 +260,7 @@ word_t expr(char *e,bool *success) {
   tokens[i].type=DEREF;
 }  
   if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
-  tokens[i].type=NEG;Log("%d",i);
+  tokens[i].type=NEG;//Log("%d",i);
 }
 }  
 
