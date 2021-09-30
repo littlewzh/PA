@@ -61,10 +61,10 @@ void init_regex() {
 
 typedef struct token {
   int type;
-  char str[64];
+  char str[32];
 } Token;
 
-static Token tokens[128] __attribute__((used)) = {};
+static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -103,8 +103,6 @@ static bool make_token(char *e) {
 	    break;
 
         }
-
-        break;
       }
     }
 
@@ -148,10 +146,10 @@ int find_main_operator(int p,int q){          //寻找主操作符
   int ans=0;
   int k=q;//表示符号的位置
   int pri=10;//代表优先级
-  while(k>=p){
+  while(k>p){
     if(tokens[k].type==')'){
       int t=k;
-      while(!check_parentheses(k,t)&&k>=p){
+      while(!check_parentheses(k,t)&&k>p){
         k--;
         }
 	
@@ -193,7 +191,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
 }
 word_t eval(int p,int q){
   if(p>q){
-    return 0;                             //这个地方（）里是0还是1还要在思考一下？
+    assert(0);                             //这个地方（）里是0还是1还要在思考一下？
   }
   else if(p==q){                          //此处应进行更加详细的分类，区别十进制，十六进制，寄存器的值
     if(tokens[p].type==TK_NUM){
@@ -241,7 +239,7 @@ word_t eval(int p,int q){
       case TK_EQ: return val1==val2;
       case TK_NOTEQ: return val1!=val2;
       //add more cases
-      //default: assert(0);
+      default: assert(0);
     }
   }
   return 0;
