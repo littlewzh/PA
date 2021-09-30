@@ -64,7 +64,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[2048] __attribute__((used)) = {};
+static Token tokens[320] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -229,10 +229,8 @@ word_t eval(int p,int q){
   }
   else {
     int op=find_main_operator(p,q);
-    word_t val1=0;
-    word_t val2=0;
-    if(op>p){val1=eval(p,op-1);val2=eval(op+1,q);}
-    else {val2=eval(op+1,q);}
+    word_t val1=eval(p,op-1);;
+    word_t val2=eval(op+1,q);
     switch(tokens[op].type){
       case '+': return val1+val2;
       case '-': return val1-val2;
@@ -243,10 +241,10 @@ word_t eval(int p,int q){
       case TK_EQ: return val1==val2;
       case TK_NOTEQ: return val1!=val2;
       //add more cases
-      //default: assert(0);
+      default: assert(0);
     }
   }
-  return 0;
+  
 }
 word_t expr(char *e,bool *success) {
   if (!make_token(e)) {
