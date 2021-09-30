@@ -82,7 +82,7 @@ static int cmd_x(char *args){
 
 
 static int cmd_p(char *args){
-  char *arg=strtok(NULL," ");
+  char *arg=strtok(NULL,"\0");
   bool success;
   printf("%u\n", expr(arg,&success));
   return 0;
