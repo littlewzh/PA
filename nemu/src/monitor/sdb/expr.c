@@ -143,7 +143,7 @@ bool check_parentheses(int p,int q){                   //括号匹配函数
   }
 }
 int find_main_operator(int p,int q){          //寻找主操作符
-
+  int l=0;
   int ans=q;
   int k=q;//表示符号的位置
   int pri=10;//代表优先级
@@ -156,7 +156,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
 	
       }
     else if(tokens[k].type==TK_EQ||tokens[k].type==TK_NOTEQ){
-         int l=3;
+         l=3;
          if(l<pri){
            pri=l;
            ans=k;
@@ -165,7 +165,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
          }
 
     else if(tokens[k].type=='+'||tokens[k].type=='-'){
-        int l=4;
+        l=4;
 	if(l<pri){
 	  pri=l;
 	  ans=k;
@@ -173,15 +173,15 @@ int find_main_operator(int p,int q){          //寻找主操作符
 
 	}
    else if(tokens[k].type=='*'||tokens[k].type=='/'){
-         int l=5;
+         l=5;
          if(l<pri){
            pri=l;
            ans=k;
            }
         }
   else if(tokens[k].type==DEREF||tokens[k].type==NEG){
-        int l=6;
-        if(l<pri){
+        l=6;
+        if(l<=pri){
           pri=l;
           ans=k;
           }
