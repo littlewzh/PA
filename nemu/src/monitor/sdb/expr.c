@@ -64,7 +64,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[64] __attribute__((used)) = {};
+static Token tokens[2048] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -243,7 +243,7 @@ word_t eval(int p,int q){
       case TK_EQ: return val1==val2;
       case TK_NOTEQ: return val1!=val2;
       //add more cases
-      default: assert(0);
+      //default: assert(0);
     }
   }
   return 0;
