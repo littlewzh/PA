@@ -103,7 +103,7 @@ static bool make_token(char *e) {
 	    break;
 
         }
-        //break;
+        break;                                                                   //为神魔会有一个break?
       }
     }
 
@@ -128,7 +128,7 @@ word_t trans(char *s){                            //进制转换函数
   return n;
 }
 bool check_parentheses(int p,int q){                   //括号匹配函数 
-  if(tokens[p].type!='('||tokens[q].type!=')') return false;
+  if(tokens[p].type!='('||tokens[q].type!=')') {return false;}
   else {
     int cout=0;
     for(int i=p+1;i<q;i++){
@@ -144,7 +144,7 @@ bool check_parentheses(int p,int q){                   //括号匹配函数
 }
 int find_main_operator(int p,int q){          //寻找主操作符
 
-  int ans=0;
+  int ans=q;
   int k=q;//表示符号的位置
   int pri=10;//代表优先级
   while(k>=p){
@@ -228,8 +228,14 @@ word_t eval(int p,int q){
   }
   else {
     int op=find_main_operator(p,q);
-    word_t val1=eval(p,op-1);
-    word_t val2=eval(op+1,q);
+    uint32_t val1,val2;
+    if(op!=p){
+      val1=eval(p,op-1);
+      val2=eval(op+1,q);}
+    else {
+      val1=0;
+      val2=eval(op+1,q);
+    }
     switch(tokens[op].type){
       case '+': return val1+val2;
       case '-': return val1-val2;
