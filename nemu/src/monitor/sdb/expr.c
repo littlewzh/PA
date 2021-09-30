@@ -150,7 +150,7 @@ int find_main_operator(int p,int q){          //寻找主操作符
   while(k>=p){
     if(tokens[k].type==')'){
       int t=k;
-      while(!check_parentheses(k,t)&&k>p){
+      while(!check_parentheses(k,t)){
         k--;
         }
 	
@@ -264,13 +264,13 @@ word_t expr(char *e,bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
 
-  for(int i=1;i<nr_token;i++){
-   if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
-  tokens[i].type=DEREF;
-}  
+  for(int i=0;i<nr_token;i++){
+   //if(tokens[i].type=='*'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
+  //tokens[i].type=DEREF;
+  //}    
    if(tokens[i].type=='-'&&(i==0||(tokens[i-1].type!=TK_NUM&&tokens[i-1].type!=TK_HEX&&tokens[i-1].type!=TK_REG&&tokens[i-1].type!=')'))){
   tokens[i].type=NEG;//Log("%d",tokens[i].type);
-}
+   }
 }  
 
 
