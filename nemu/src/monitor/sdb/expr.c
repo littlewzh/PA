@@ -231,7 +231,6 @@ uint32_t eval(int p,int q){
   }
   else {
     int op=find_main_operator(p,q);
-    Log("%d",op);
     uint32_t val1,val2;
     if(op!=p){
       val1=eval(p,op-1);
