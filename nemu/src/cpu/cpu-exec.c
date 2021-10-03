@@ -60,9 +60,9 @@ void assert_fail_msg() {
 void fetch_decode(Decode *s, vaddr_t pc) {
   s->pc = pc;
   s->snpc = pc;
-  int idx = isa_fetch_decode(s);
+  int idx = isa_fetch_decode(s);                //从内存中取指令，并更新pc，返回一个索引，指示执行函数。
   s->dnpc = s->snpc;
-  s->EHelper = g_exec_table[idx];
+  s->EHelper = g_exec_table[idx];               // g_exec_table[idx]，表示执行函数数组。
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
