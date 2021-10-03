@@ -35,7 +35,7 @@ void gen_num(){
     buf[pos]=n[i]+'0';
   }*/
   pos++;
-  buf[pos]=num+'0';
+    buf[pos]=num+'0';
 }
 void gen(char a){
    pos++;
@@ -53,7 +53,7 @@ void gen_rand_op(){
     buf[pos]=a;
 }
 static void gen_rand_expr() {
-  if(pos>1000) {gen_num;}
+  if(pos>60000) {gen_num;}
   else{
   switch(choose(3)){
     case 0: gen_rand_expr();gen_rand_op();gen_rand_expr();break;
