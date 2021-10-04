@@ -16,7 +16,7 @@ static def_DopHelper(i) {
   op->imm = val;
 }
 
-static def_DopHelper(r) {
+static def_DopHelper(r) {                                //指令译码，用于分出不同的操作数
   bool is_write = flag;
   static word_t zero_null = 0;
   op->preg = (is_write && val == 0) ? &zero_null : &gpr(val);
@@ -40,7 +40,7 @@ static def_DHelper(S) {
   decode_op_r(s, id_dest, s->isa.instr.s.rs2, false);
 }
 
-def_THelper(load) {
+def_THelper(load) {                                                    //找到标识该指令唯一ID
   def_INSTR_TAB("??????? ????? ????? 010 ????? ????? ??", lw);
   return EXEC_ID_inv;
 }
@@ -58,7 +58,7 @@ def_THelper(main) {
   return table_inv(s);
 };
 
-int isa_fetch_decode(Decode *s) {
+int isa_fetch_decode(Decode *s) {                                //取指令，并找到该指令对应的操作类型
   s->isa.instr.val = instr_fetch(&s->snpc, 4);
   int idx = table_main(s);
   return idx;
