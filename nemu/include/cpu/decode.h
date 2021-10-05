@@ -26,7 +26,7 @@ typedef struct Decode {
   IFDEF(CONFIG_ITRACE, char logbuf[128]);
 } Decode;
 
-#define id_src1 (&s->src1)
+#define id_src1 (&s->src1)               //daibiao  operand  zhezhongjiegoutidedizhi
 #define id_src2 (&s->src2)
 #define id_dest (&s->dest)
 
