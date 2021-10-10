@@ -32,7 +32,6 @@ static inline def_rtl(sext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
     *dest=imm|(*src1);
   }
   else {*dest=*src1;}
-  TODO();
 }
 
 static inline def_rtl(zext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
