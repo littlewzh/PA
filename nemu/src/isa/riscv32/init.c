@@ -4,7 +4,7 @@
 // this is not consistent with uint8_t
 // but it is ok since we do not access the array directly
 static const uint32_t img [] = {
-  0x00000413,  // lui t0,0x80000
+  0x00100413,  // lui t0,0x80000
   0x00009117,  // sw  zero,0(t0)
   0xffc10113,  // lw  a0,0(t0)
   0x00c000ef,  // nemu_trap
