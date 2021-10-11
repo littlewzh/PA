@@ -5,3 +5,6 @@ def_EHelper(jal) {
   rtl_sext(s,s2,s1,4);
   s->dnpc=(s->snpc)+(*s2);
 }
+def_EHelper(ret) {
+  s->dnpc=cpu.gpr[1]._32;
+}
