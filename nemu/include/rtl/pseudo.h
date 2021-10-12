@@ -27,8 +27,11 @@ static inline def_rtl(neg, rtlreg_t *dest, const rtlreg_t* src1) {
 
 static inline def_rtl(sext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  uint32_t imm=4293918720;
-  if((*src1>>20)&1){
+  uint32_t imm=0;
+  if(width==20)
+  {imm=4293918720;}
+  else if(width==12){imm=0;}
+  if((*src1>>width)&1){
     *dest=imm|(*src1);
   }
   else {*dest=*src1;}
