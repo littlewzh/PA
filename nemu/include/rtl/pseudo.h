@@ -16,8 +16,8 @@ static inline def_rtl(mv, rtlreg_t* dest, const rtlreg_t *src1) {
 }
 
 static inline def_rtl(not, rtlreg_t *dest, const rtlreg_t* src1) {
-  // dest <- ~src1
-  TODO();
+  uint32_t imm=4294967295;
+  *dest=(*src1)^imm;
 }
 
 static inline def_rtl(neg, rtlreg_t *dest, const rtlreg_t* src1) {
