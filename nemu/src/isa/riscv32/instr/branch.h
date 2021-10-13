@@ -12,3 +12,13 @@ def_EHelper(bne){
         s->dnpc=(s->pc)+(*t0);
     }
 }
+def_EHelper(bge) {
+    int a,b;
+    a=*dsrc1;
+    b=*dsrc2;
+    if(a>=b){
+        rtl_li(s,t0,id_dest->imm);
+        rtl_sext(s,t0,t0,12);
+        s->dnpc=(s->pc)+(*t0);
+    }
+}
