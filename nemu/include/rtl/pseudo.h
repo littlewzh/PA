@@ -30,7 +30,7 @@ static inline def_rtl(sext, rtlreg_t* dest, const rtlreg_t* src1, int width) {
   uint32_t imm=0;
   if(width==20)
   {imm=4292870144;}
-  else if(width==12){imm=4294959104;}
+  else if(width==12){imm=4294963200;}
   if((*src1>>(width-1))&1){
     *dest=imm|(*src1);
   }
