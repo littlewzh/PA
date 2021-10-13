@@ -31,3 +31,6 @@ def_EHelper(sltiu) {
 def_EHelper(xor) {
   *ddest=*dsrc1^*dsrc2;
 }
+def_EHelper(or) {
+  *ddest=*dsrc1|*dsrc2;
+}
