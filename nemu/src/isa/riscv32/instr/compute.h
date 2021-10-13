@@ -2,6 +2,8 @@ def_EHelper(lui) {
   rtl_li(s, ddest, id_src1->imm);
 }
 def_EHelper(addi) {
+  rtl_li(s,ddest,id_src2->imm);
+  rtl_sext(s,ddest,ddest,12);
   rtl_addi(s,ddest,dsrc1,id_src2->imm);
 }
 def_EHelper(auipc) {
@@ -23,7 +25,9 @@ def_EHelper(sltu) {
   else {rtl_li(s,ddest,0);}
 }                                        //fuhaowenti
 def_EHelper(sltiu) {
-  if(*dsrc1<id_src2->imm) {
+  rtl_li(s,ddest,id_src2->imm);
+  rtl_sext(s,ddest,ddest,12);
+  if(*dsrc1<*ddest) {
     rtl_li(s,ddest,1);
   }
   else {rtl_li(s,ddest,0);}
@@ -33,4 +37,7 @@ def_EHelper(xor) {
 }
 def_EHelper(or) {
   *ddest=*dsrc1|*dsrc2;
+}
+def_EHelper(srai) {
+
 }
