@@ -25,9 +25,9 @@ def_EHelper(sltu) {
   else {rtl_li(s,ddest,0);}
 }                                        //fuhaowenti
 def_EHelper(sltiu) {
-  rtl_li(s,ddest,id_src2->imm);
-  rtl_sext(s,ddest,ddest,12);
-  if(*dsrc1<*ddest) {
+  //rtl_li(s,ddest,id_src2->imm);
+  //rtl_sext(s,ddest,ddest,12);
+  if(*dsrc1<id_src2->imm) {
     rtl_li(s,ddest,1);
   }
   else {rtl_li(s,ddest,0);}
