@@ -2,9 +2,9 @@ def_EHelper(lui) {
   rtl_li(s, ddest, id_src1->imm);
 }
 def_EHelper(addi) {
-  rtl_li(s,ddest,id_src2->imm);
-  rtl_sext(s,ddest,ddest,12);
-  rtl_add(s,ddest,dsrc1,ddest);
+  //rtl_li(s,ddest,id_src2->imm);
+  //rtl_sext(s,ddest,ddest,12);
+  rtl_addi(s,ddest,dsrc1,id_src2->imm);
 }
 def_EHelper(auipc) {
   rtl_li(s,t0,id_src1->imm);
