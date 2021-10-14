@@ -89,3 +89,6 @@ def_EHelper(srli){
 def_EHelper(rem){
   rtl_divu_r(s,ddest,dsrc1,dsrc2);
 }
+def_EHelper(mulh){
+  rtl_mulu_hi(s,ddest,dsrc1,dsrc2);
+}
