@@ -14,15 +14,26 @@ def_EHelper(add) {
   rtl_add(s,ddest,dsrc1,dsrc2);
 }
 def_EHelper(sub) {
-  rtl_not(s,dsrc2,dsrc2);
-  rtl_addi(s,dsrc2,dsrc2,1);
-  rtl_add(s,ddest,dsrc1,dsrc2);
+  //rtl_not(s,dsrc2,dsrc2);
+  //rtl_addi(s,dsrc2,dsrc2,1);
+  rtl_sub(s,ddest,dsrc1,dsrc2);
+}
+def_EHelper(sll) {
+  rtl_sll(s,ddest,dsrc1,dsrc2);
+}
+def_EHelper(slt) {
+  //if(rtl_setrelop(s,4,dsrc1,dsrc2)) {
+  //  rtl_li(s,ddest,1);
+  //}
+  //else {rtl_li(s,ddest,0);}
+  rtl_setrelop(s,4,ddest,dsrc1,dsrc2);
 }
 def_EHelper(sltu) {
-  if(*dsrc1<*dsrc2) {
-    rtl_li(s,ddest,1);
-  }
-  else {rtl_li(s,ddest,0);}
+  //if(rtl_setrelop(s,8,dsrc1,dsrc2)) {
+  //  rtl_li(s,ddest,1);
+  //}
+  //else {rtl_li(s,ddest,0);}
+  rtl_setrelop(s,8,ddest,dsrc1,dsrc2);
 }                                        //fuhaowenti
 def_EHelper(sltiu) {
   //rtl_li(s,ddest,id_src2->imm);
@@ -39,5 +50,5 @@ def_EHelper(or) {
   *ddest=*dsrc1|*dsrc2;
 }
 def_EHelper(srai) {
-
+   rtl_srai(s,ddest,dsrc1,id_src2->imm);
 }
