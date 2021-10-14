@@ -77,3 +77,12 @@ def_EHelper(mul){
 def_EHelper(div){
   rtl_divu_q(s,ddest,dsrc1,dsrc2);
 }
+def_EHelper(ori){
+  rtl_ori(s,ddest,dsrc1,id_src2->imm);
+}
+def_EHelper(slli){
+  rtl_slli(s,ddest,dsrc1,id_src2->imm);
+}
+def_EHelper(srli){
+  rtl_srli(s,ddest,dsrc1,id_src2->imm);
+}
