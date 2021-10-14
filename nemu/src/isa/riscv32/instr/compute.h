@@ -28,6 +28,9 @@ def_EHelper(slt) {
   //else {rtl_li(s,ddest,0);}
   rtl_setrelop(s,4,ddest,dsrc1,dsrc2);
 }
+def_EHelper(slti) {
+  rtl_setrelopi(s,4,ddest,dsrc1,id_src2->imm);
+}
 def_EHelper(sltu) {
   //if(rtl_setrelop(s,8,dsrc1,dsrc2)) {
   //  rtl_li(s,ddest,1);
@@ -38,10 +41,11 @@ def_EHelper(sltu) {
 def_EHelper(sltiu) {
   //rtl_li(s,ddest,id_src2->imm);
   //rtl_sext(s,ddest,ddest,12);
-  if(*dsrc1<id_src2->imm) {
-    rtl_li(s,ddest,1);
-  }
-  else {rtl_li(s,ddest,0);}
+  //if(*dsrc1<id_src2->imm) {
+   // rtl_li(s,ddest,1);
+  //}
+  //else {rtl_li(s,ddest,0);}
+  rtl_setrelopi(s,8,ddest,dsrc1,id_src2->imm);
 }
 def_EHelper(xor) {
   *ddest=*dsrc1^*dsrc2;
