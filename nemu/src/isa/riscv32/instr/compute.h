@@ -62,3 +62,6 @@ def_EHelper(and){
 def_EHelper(srai) {
    rtl_srai(s,ddest,dsrc1,id_src2->imm);
 }
+def_EHelper(xori) {
+  rtl_xori(s,ddest,dsrc1,id_src2->imm);
+}
