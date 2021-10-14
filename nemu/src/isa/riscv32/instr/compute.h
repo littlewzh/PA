@@ -28,6 +28,12 @@ def_EHelper(slt) {
   //else {rtl_li(s,ddest,0);}
   rtl_setrelop(s,4,ddest,dsrc1,dsrc2);
 }
+def_EHelper(srl){
+   rtl_srl(s,ddest,dsrc1,dsrc2);
+}
+def_EHelper(sra){
+   rtl_sra(s,ddest,dsrc1,dsrc2);
+}
 def_EHelper(slti) {
   rtl_setrelopi(s,4,ddest,dsrc1,id_src2->imm);
 }
