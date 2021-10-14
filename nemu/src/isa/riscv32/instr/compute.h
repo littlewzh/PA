@@ -31,6 +31,9 @@ def_EHelper(slt) {
 def_EHelper(slti) {
   rtl_setrelopi(s,4,ddest,dsrc1,id_src2->imm);
 }
+def_EHelper(andi){
+  rtl_andi(s,ddest,dsrc1,id_src2->imm);
+}
 def_EHelper(sltu) {
   //if(rtl_setrelop(s,8,dsrc1,dsrc2)) {
   //  rtl_li(s,ddest,1);
@@ -52,6 +55,9 @@ def_EHelper(xor) {
 }
 def_EHelper(or) {
   *ddest=*dsrc1|*dsrc2;
+}
+def_EHelper(and){
+  rtl_and(s,ddest,dsrc1,dsrc2);
 }
 def_EHelper(srai) {
    rtl_srai(s,ddest,dsrc1,id_src2->imm);
