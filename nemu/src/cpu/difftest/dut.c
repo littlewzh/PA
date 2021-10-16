@@ -15,7 +15,13 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 static bool is_skip_ref = false;
 static int skip_dut_nr_instr = 0;
-
+ bool isa_difftest_checkregs(CPU_state *ref, vaddr_t pc){
+  bool diff=true;
+  for(int i=0;i<32;i++){
+    if(ref->gpr[i]._32!=cpu.gpr[i]._32){diff=false;}
+  }
+  return diff;
+}
 // this is used to let ref skip instructions which
 // can not produce consistent behavior with NEMU
 void difftest_skip_ref() {
@@ -36,6 +42,7 @@ void difftest_skip_ref() {
 // The semantic is
 //   Let REF run `nr_ref` instructions first.
 //   We expect that DUT will catch up with REF within `nr_dut` instructions.
+
 void difftest_skip_dut(int nr_ref, int nr_dut) {
   skip_dut_nr_instr += nr_dut;
 
