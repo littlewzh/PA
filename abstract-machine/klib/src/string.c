@@ -97,7 +97,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   char *ps1=(char *)s1;
   char *ps2=(char *)s2;
   if(ps1==NULL||ps2==NULL||n<0){
-    return false;
+    return 0;
   }
   while(n--){
     if(*ps1==*ps2){
