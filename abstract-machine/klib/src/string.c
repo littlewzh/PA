@@ -17,12 +17,33 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  panic("Not implemented");
+  char *tmp=dst;
+  while(*dst){
+    dst++;
+
+  }
+  while((*dst++==*src++)!='\0');
+  return tmp;
+  //panic("Not implemented");
 }
 
 int strcmp(const char *s1, const char *s2) {
-
-  panic("Not implemented");
+  int ret = 0;  
+    while(!(ret=*(unsigned char*)s1-*(unsigned char*)s2) && *s1)  
+    {  
+        s1++;  
+        s2++;
+    }  
+    if (ret < 0)  
+    {  
+        return -1;  
+    }  
+    else if (ret > 0)  
+    {  
+        return 1;
+    }  
+    return 0;
+  //panic("Not implemented");
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
