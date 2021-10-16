@@ -21,6 +21,7 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
+
   panic("Not implemented");
 }
 
@@ -37,11 +38,43 @@ void *memmove(void *dst, const void *src, size_t n) {
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  panic("Not implemented");
+  if(out==NULL||in==NULL) {return NULL;}
+  char *pout=(char *)out;
+  char *pin=(char *)in;
+  if(pout>pin&&pout<pin+n){
+    pout=pout+n-1;
+    pin=pin+n-1;
+    while(n--){
+    *pout=*pin;
+    pout--;
+    pin--;
+    }
+  }
+  else {
+    while(n--){
+      *pout=*pin;
+      pout++;
+      pin++;
+    }
+  }
+  return out;
+  //panic("Not implemented");
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  panic("Not implemented");
+  char *ps1=(char *)s1;
+  char *ps2=(char *)s2;
+  if(ps1==NULL||ps2==NULL||n<0){
+    return false;
+  }
+  while(n--){
+    if(*ps1==*ps2&&*ps1&&*ps2){
+      continue;
+    }
+    else {break;}
+  }
+  return (*ps1-*ps2);
+  //panic("Not implemented");
 }
 
 #endif
