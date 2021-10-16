@@ -30,7 +30,15 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  panic("Not implemented");
+  char *ps=(char *)s;
+  char pc=(char)c;
+  while(n--){
+    *ps=pc;
+    ps++;
+
+  }
+  return s;
+  //nic("Not implemented");
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
@@ -68,7 +76,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
     return false;
   }
   while(n--){
-    if(*ps1==*ps2&&*ps1&&*ps2){
+    if(*ps1==*ps2){
       continue;
     }
     else {break;}
