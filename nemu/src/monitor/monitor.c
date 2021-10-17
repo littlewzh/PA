@@ -26,7 +26,7 @@ void sdb_set_batch_mode();
 
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
-static char *img_file ="/home/wang/ics2021/am-kernels/tests/cpu-tests/tests/add.c";
+static char *img_file ="/home/wang/ics2021/am-kernels/tests/cpu-tests/tests/dummy.c";
 //"add";
 static int difftest_port = 1234;
 
