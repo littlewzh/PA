@@ -2,6 +2,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <stdarg.h>
+#include<stdio.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
@@ -22,8 +23,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       fmt++;
       if(*fmt=='d'){
         n=va_arg(ap,int);
-        //while(n){
-        //}
+        while(n){
+
+        }
         *str++=n-'0';
       }
       else if(*fmt=='s'){
