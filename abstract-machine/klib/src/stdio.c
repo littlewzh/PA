@@ -10,7 +10,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  /*char *str=out;
+  char *str=out;
   int n;
   char *s;
   while(*fmt){
@@ -31,8 +31,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         strcat(str,s);
       }
     }
-  }*/
-  panic("Not implemented");
+  }
+  return (str-out);
+  //panic("Not implemented");
 }
 
 int sprintf(char *out, const char *fmt, ...) {
