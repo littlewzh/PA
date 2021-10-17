@@ -25,7 +25,7 @@ char *strcat(char *dst, const char *src) {
     dst++;
 
   }
-  while((*dst++==*src++)!='\0');
+  while((*dst++=*src++)!='\0');
   return tmp;
   //panic("Not implemented");
 }
