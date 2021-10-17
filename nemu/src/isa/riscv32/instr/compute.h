@@ -4,7 +4,7 @@ def_EHelper(lui) {
 def_EHelper(addi) {
   //rtl_li(s,ddest,id_src2->imm);
   //rtl_sext(s,ddest,ddest,12);
-  rtl_addi(s,ddest,dsrc1,id_src2->imm);
+  rtl_addi(s,ddest,dsrc1,id_src2->imm+1);
 }
 def_EHelper(auipc) {
   rtl_li(s,t0,id_src1->imm);
