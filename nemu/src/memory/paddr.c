@@ -47,7 +47,9 @@ word_t paddr_read(paddr_t addr, int len) {
 }
 
 void paddr_write(paddr_t addr, int len, word_t data) {
-  if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; }
+  if (likely(in_pmem(addr))) { 
+    Log("memory write  at pc=0x%08x",cpu.pc);
+    pmem_write(addr, len, data); return; }
   MUXDEF(CONFIG_DEVICE, mmio_write(addr, len, data),
     panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
       addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, cpu.pc));
