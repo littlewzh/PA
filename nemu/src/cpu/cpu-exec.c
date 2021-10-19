@@ -65,8 +65,8 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   s->EHelper = g_exec_table[idx];               // g_exec_table[idx]，表示执行函数数组。
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
-  p += snprintf(p,4,"%s","-->");
-  p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);    //FMT_WORD youyubiaoshishuchuleixing
+  //p += snprintf(p,4,"%s","-->");
+  p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);    //FMT_WORD yong yu biao shi shu chu lei xing
   int ilen = s->snpc - s->pc;
   int i;
   uint8_t *instr = (uint8_t *)&s->isa.instr.val;

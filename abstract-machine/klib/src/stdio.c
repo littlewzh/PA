@@ -10,32 +10,46 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-  /*char *str=out;
-  int n;
-  char *s;
-  while((*fmt)!='\0'){
+  char *str=out;
+  int ret=0;
+  while(*fmt){
     if(*fmt!='%'){
-      *str++=*fmt++;
+      *str=*fmt;
+      str++;
 
     }
     else {
       fmt++;
       if(*fmt=='d'){
-        n=va_arg(ap,int);
-        while(n){
-
+        int32_t val=va_arg(ap,int32_t);
+        int32_t n[10];
+        int32_t k=0;
+        while(val){
+           k++;
+           n[k]=val%10;
+           val/=10;
         }
-        *str++=n-'0';
+        while(k){
+          *str=n[k]+'0';
+          str++;
+          k--;
+        }
+        
       }
       else if(*fmt=='s'){
-        s=va_arg(ap,char *);
-        strcat(str,s);
+        char *s=va_arg(ap,char *);
+        while(*s){
+          *str++=*s++;
+        }
       }
     }
+    fmt++;
+    *str='\0';
   }
-  return (str-out);*/
-
-  panic("Not implemented");
+  ret=str-out;
+  return ret;
+  //return vsnprintf(out,-1,fmt,ap);
+  //panic("Not implemented");
 }
 
 int sprintf(char *out, const char *fmt, ...) {
@@ -53,6 +67,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 }
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
+
   panic("Not implemented");
 }
 
