@@ -26,8 +26,8 @@ void sdb_set_batch_mode();
 
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
-static char *img_file = "/home/wang/ics2021/am-kernels/tests/cpu-tests/build/hello-str-riscv32-nemu.bin";
-//NULL;
+static char *img_file = NULL;
+//"/home/wang/ics2021/am-kernels/tests/cpu-tests/build/hello-str-riscv32-nemu.bin";
 //"/home/wang/ics2021/am-kernels/tests/cpu-tests/tests/dummy.c";
 //"add";
 static int difftest_port = 1234;
