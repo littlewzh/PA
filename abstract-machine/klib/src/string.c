@@ -73,6 +73,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
+  assert(s!=NULL);
   char *ps=(char *)s;
   char pc=(char)c;
   while(n--){
