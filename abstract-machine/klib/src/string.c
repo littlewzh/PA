@@ -76,8 +76,7 @@ void *memset(void *s, int c, size_t n) {
   char *ps=(char *)s;
   char pc=(char)c;
   while(n--){
-    *ps=pc;
-    ps++;
+    *ps++=pc;
 
   }
   return s;
