@@ -85,7 +85,8 @@ void *memset(void *s, int c, size_t n) {
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
-  panic("Not implemented");
+  return memcpy(dst,src,n);
+  //panic("Not implemented");
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
@@ -117,7 +118,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   
   char *ps1=(char *)s1;
   char *ps2=(char *)s2;
-  assert(ps1!=NULL||ps2!=NULL);
+  //assert(ps1!=NULL||ps2!=NULL);
   if(ps1==NULL||ps2==NULL||n<0){
     return 0;
   }
