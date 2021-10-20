@@ -6,8 +6,6 @@ include $(NEMU_HOME)/tools/difftest.mk
 compile_git:
 	$(call git_commit, "compile")
 $(BINARY): compile_git
-count:
-	$(find . | grep '\.c$\|\.h$' | xargs wc -l)
 # Some convenient rules
 
 override ARGS ?= --log=$(BUILD_DIR)/nemu-log.txt
@@ -24,8 +22,7 @@ run: run-env
 
 gdb: run-env
 	$(call git_commit, "gdb")
-	gdb -s $(BINARY) --args $(NEMU_EXEC)
-
+	gdb -s $(BINARY) --args $(NEMU_EXE)
 clean-tools = $(dir $(shell find ./tools -name "Makefile"))
 $(clean-tools):
 	-@$(MAKE) -s -C $@ clean
