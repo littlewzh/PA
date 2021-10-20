@@ -116,7 +116,7 @@ int memcmp(const void *s1, const void *s2, size_t n) {
   
   char *ps1=(char *)s1;
   char *ps2=(char *)s2;
-  assert(ps1!=NULL&&ps2!=NULL&&n<0);
+  //assert(ps1!=NULL&&ps2!=NULL&&n<0);
   if(ps1==NULL||ps2==NULL||n<0){
     return 0;
   }
