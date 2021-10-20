@@ -113,9 +113,10 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  //assert(s1!=NULL&&s2!=NULL&&n<0);
+  
   char *ps1=(char *)s1;
   char *ps2=(char *)s2;
+  assert(ps1!=NULL&&ps2!=NULL&&n<0);
   if(ps1==NULL||ps2==NULL||n<0){
     return 0;
   }
