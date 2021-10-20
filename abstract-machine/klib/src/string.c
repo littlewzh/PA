@@ -4,19 +4,39 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-size_t strlen(const char *s) {
-  panic("Not implemented");
+size_t strlen(const char *s) {           //不包括‘\0’
+  assert(s!=NULL);
+  char *ps=(char *)s;
+  int ret=0;
+  while(*ps++){
+    ret++;
+  }
+  return ret;
+  //panic("Not implemented");
 }
 
-char *strcpy(char *dst, const char *src) {
+char *strcpy(char *dst, const char *src) {       //会拷贝’\0’
   assert(dst != NULL && src != NULL);
     char *ret = dst; 
     while ((*dst++=*src++)!='\0');
     return ret;
 }
 
-char *strncpy(char *dst, const char *src, size_t n) {
-  panic("Not implemented");
+char *strncpy(char *dst, const char *src, size_t n) {               //目前无论是对与strcpy，还是strncpy，我都没有去考虑内存区重叠这种情况。
+  assert(dst!=NULL&&src!=NULL&&n<=0);
+  int size=strlen(src);
+  if(n>size) {return strncpy(dst,src,size);}
+  else {
+    int cnt=n;
+    char *ret=dst;
+    while(cnt--){
+      *dst++=*src++;
+    }
+    *dst++='\0';                    //strncpy不会去帮你管最后的‘\0’,所以需要我们手动加上
+    return ret;                  
+  }
+  
+  //panic("Not implemented");
 }
 
 char *strcat(char *dst, const char *src) {
@@ -48,6 +68,7 @@ int strcmp(const char *s1, const char *s2) {
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
+
   panic("Not implemented");
 }
 
