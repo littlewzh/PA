@@ -118,8 +118,9 @@ config CC_ASAN
 endmenu
 
 menu "Testing and Debugging"
-
-
+config MTRACE
+  bool "Enable Mtrace"
+  default 0
 config TRACE
   bool "Enable tracer"
   default y
