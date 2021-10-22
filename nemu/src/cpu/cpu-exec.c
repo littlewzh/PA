@@ -78,6 +78,7 @@ void fetch_decode(Decode *s, vaddr_t pc) {
   if (space_len < 0) space_len = 0;
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
+  printf("%s\n",p);
   p += space_len;
  printf("%s\n",p);
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
