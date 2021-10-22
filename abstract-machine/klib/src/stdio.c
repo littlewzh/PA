@@ -6,7 +6,18 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
+  char *s;
+  va_list args;
+  int len;
+  va_start(args,fmt);
+  len=vsprintf(s,fmt,args);
+  va_end(args);
+  while(*s){
+    putch(*s);
+    s++;
+  }
+  return len; 
+  //panic("Not implemented");
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
