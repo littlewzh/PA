@@ -13,7 +13,7 @@ int printf(const char *fmt, ...) {
   len=vsprintf(s,fmt,args);
   va_end(args);
   for(int i=0;i<len;i++){
-    putch(*s);
+    putch(s[i]);
   
   }
     
@@ -24,6 +24,10 @@ int printf(const char *fmt, ...) {
 int vsprintf(char *out, const char *fmt, va_list ap) {
   char *str=out;
   int ret=0;
+  char nums[20];
+  int flag;
+  uint32_t width;
+  int len;
   while(*fmt){
     if(*fmt!='%'){
       *str=*fmt;
@@ -32,17 +36,35 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     else {
       fmt++;
+      flag=0;
+      while(*fmt=='0'){
+         flag=1;
+         fmt++;
+      }
+      width=0;
+     if(*fmt>='0'&&*fmt<='9'){
+       while(*fmt>='0'&&*fmt<='9'){
+         width=width*10+*fmt-'0';
+         fmt++;
+       }
+     }
       if(*fmt=='d'){
         int32_t val=va_arg(ap,int32_t);
-        int32_t n[10];
+        //int32_t n[20];
         int32_t k=0;
         while(val){
            k++;
-           n[k]=val%10;
+           nums[k]=val%10+'0';
            val/=10;
         }
+        if(k<width&&flag==1){
+           len=width-k;
+           while(len--){
+             *str++='0';
+           }
+        }
         while(k){
-          *str=n[k]+'0';
+          *str=nums[k];
           str++;
           k--;
         }
@@ -56,8 +78,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       }
     }
     fmt++;
-    *str='\0';
+    
   }
+  *str='\0';
   ret=str-out;
   return ret;
   //return vsnprintf(out,-1,fmt,ap);
