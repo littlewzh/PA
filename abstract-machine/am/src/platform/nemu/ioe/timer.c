@@ -13,10 +13,9 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  //uptime->us = 0;
-  while(1){
-    uptime->us++;
-  }
+  uptime->us = 0;
+  uptime->us++;
+ 
   /*struct timeval now;
   gettimeofday(&now,NULL);
   //clock_gettime(CLOCK_MONOTONIC_COARSE, &now);
