@@ -24,7 +24,7 @@ int printf(const char *fmt, ...) {
 int vsprintf(char *out, const char *fmt, va_list ap) {
   char *str=out;
   int ret=0;
-  char nums[20];
+  char nums[100];
   int flag;
   uint32_t width;
   int len;
