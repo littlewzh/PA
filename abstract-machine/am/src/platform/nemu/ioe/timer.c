@@ -40,10 +40,10 @@ static uint64_t boot_time = 0;
 #define taddr 0xa0000048
 
 static uint64_t read_time() {
-  uint32_t lo = inl(taddr);
-  uint32_t hi = inl(taddr+4);
-  uint64_t time = ((uint64_t)hi << 32) | lo;
-  return time ;
+  //uint32_t lo = inl(taddr);
+  //uint32_t hi = inl(taddr+4);
+  uint64_t time = ((uint64_t)inl(taddr+4)<< 32) | inl(taddr);
+  return time-boot_time;
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
