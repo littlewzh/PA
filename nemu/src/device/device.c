@@ -16,7 +16,7 @@ void init_sdcard();
 void init_alarm();
 
 void send_key(uint8_t, bool);
-void vga_update_screen();
+void update_screen();
 
 void device_update() {
   static uint64_t last = 0;
@@ -26,7 +26,7 @@ void device_update() {
   }
   last = now;
 
-  IFDEF(CONFIG_HAS_VGA, vga_update_screen());
+  IFDEF(CONFIG_HAS_VGA, update_screen());
 
 #ifndef CONFIG_TARGET_AM
   SDL_Event event;
