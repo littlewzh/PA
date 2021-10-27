@@ -5,9 +5,9 @@
 static int W;
 static int H;
 void __am_gpu_init() {
- /* W=(int)inw(VGACTL_ADDR+2);
+  W=(int)inw(VGACTL_ADDR+2);
   H=(int)inw(VGACTL_ADDR);
-  int i;
+  /*int i;
   //int w = W;  // TODO: get the correct width
   //int h = H;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
