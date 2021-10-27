@@ -8,10 +8,10 @@
 static uint8_t *io_space = NULL;
 static uint8_t *p_space = NULL;
 
-uint8_t* new_space(int size) {
+uint8_t* new_space(int size) {       //它的作用是为了获得一块新空间。但这个获得的新空间为size%2的12次方
   uint8_t *p = p_space;
   // page aligned;
-  size = (size + (PAGE_SIZE - 1)) & ~PAGE_MASK;
+  size = (size + (PAGE_SIZE - 1)) & ~PAGE_MASK;//PAGE_MASK一个12位的111111111111
   p_space += size;
   assert(p_space - io_space < IO_SPACE_MAX);
   return p;
