@@ -33,15 +33,15 @@ void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
   rtc->year   = 1900;
 }*/
 #include <am.h>
-
+#include <amdev.h>
+#include <nemu.h>
 static uint64_t boot_time = 0;
 
-#define CLINT_MMIO 0xa0000000
-#define TIME_BASE 0x48
+#define taddr 0xa0000048
 
 static uint64_t read_time() {
-  uint32_t hi = *(volatile uint32_t *)(CLINT_MMIO + TIME_BASE + 0);
-  uint32_t lo = *(volatile uint32_t *)(CLINT_MMIO + TIME_BASE + 4);
+  uint32_t lo = inl(taddr);
+  uint32_t hi = inl(taddr+4);
   uint64_t time = ((uint64_t)hi << 32) | lo;
   return time ;
 }
