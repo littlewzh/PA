@@ -6,10 +6,7 @@
 uint64_t k;
 void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   k=inl(kaddr);
-  kbd->keycode=k;
-  if(kbd->keycode!=AM_KEY_NONE){
-      kbd->keydown=!(kbd->keydown);
-  }
-  //kbd->keydown = (inl(kaddr)& KEYDOWN_MASK ? false: true);
-  //kbd->keycode = inl(kaddr)&~KEYDOWN_MASK;
+  //kbd->keycode=k;
+  kbd->keydown = (k& KEYDOWN_MASK ? true: false);
+  kbd->keycode = k&~KEYDOWN_MASK;
 }
