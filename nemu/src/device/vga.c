@@ -18,7 +18,7 @@ static uint32_t screen_size() {
 
 static void *vmem = NULL;
 static uint32_t *vgactl_port_base = NULL;
-static uint32_t sync;
+//static uint32_t sync;
 
 #ifdef CONFIG_VGA_SHOW_SCREEN
 #ifndef CONFIG_TARGET_AM
@@ -57,10 +57,10 @@ static inline void update_screen() {
 #endif
 
 void vga_update_screen() {
-  //if(sync!=0){
+  if(map_read(0xa0000104,4,NULL)!=0){
     update_screen();
-    //sync=0;
-  //}
+    //AM_GPU_FBDRAW.sync=0;
+  }
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
 }
@@ -73,7 +73,7 @@ void init_vga() {
 #else
   add_mmio_map("vgactl", CONFIG_VGA_CTL_MMIO, vgactl_port_base, 8, NULL);
 #endif
-  sync=1;
+  //sync=1;
   vmem = new_space(screen_size());
   add_mmio_map("vmem", CONFIG_FB_ADDR, vmem, screen_size(), NULL);
   IFDEF(CONFIG_VGA_SHOW_SCREEN, init_screen());
