@@ -2,6 +2,7 @@
 #include <nemu.h>
 #include <string.h>
 #define SYNC_ADDR (VGACTL_ADDR + 4)
+#define IMG 0xa1000000
 int min(int a, int b){
 	if(a <= b) return a;
 	else return b;
@@ -43,7 +44,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 			//int cp_bytes = sizeof(uint32_t) * min(w, W - x);
 			for(int j = 0; j < h  && y + j < H; ++j){{
         for(int i=0;i+x<W&&i<w;++i){
-          outl(SYNC_ADDR+(y + j) * W + x+i ,*pixels);
+          outl(IMG+(y + j) * W + x+i ,*pixels);
           pixels ++;
     }
         }
