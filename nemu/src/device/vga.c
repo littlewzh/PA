@@ -57,7 +57,7 @@ static inline void update_screen() {
 #endif
 
 void vga_update_screen() {
-  if(mmio_read(0xa0000104,4)!=0){
+  if(mmio_read(0xa0000104,4)==1){
     update_screen();
     mmio_write(0xa0000104,4,0);//AM_GPU_FBDRAW.sync=0;
   }
