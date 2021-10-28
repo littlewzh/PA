@@ -8,11 +8,11 @@ int min(int a, int b){
 	else return b;
 }
 //static uint32_t* fb =(uint32_t *)(uintptr_t)FB_ADDR;
-static int W;
-static int H;
+int W=400;//(int)inw(VGACTL_ADDR+2);
+int H=300;//(int)inw(VGACTL_ADDR);
 void __am_gpu_init() {
-  W=(int)inw(VGACTL_ADDR+2);
-  H=(int)inw(VGACTL_ADDR);
+  //W=(int)inw(VGACTL_ADDR+2);
+  //H=(int)inw(VGACTL_ADDR);
   /*int i;
   //int w = W;  // TODO: get the correct width
   //int h = H;  // TODO: get the correct height
@@ -31,14 +31,6 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if (ctl->sync) {
-    /*int x=ctl->x,y=ctl->y,w=ctl->w,h=ctl->h;
-    //uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-    uint32_t *pixels = ctl->pixels;
-    uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
-    //for (i = 0; i < W* H; i ++) fb[i] = i;
-    for(int j = 0; j < h  && y + j < H; ++j){
-      outl(SYNC_ADDR, *pixels);
-      pixels+=w;*/
       int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
 			uint32_t *pixels = ctl->pixels;
 			//int cp_bytes = sizeof(uint32_t) * min(w, W - x);
