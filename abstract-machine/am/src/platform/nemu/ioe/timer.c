@@ -42,12 +42,12 @@ static uint64_t boot_time = 0;
 static uint64_t read_time() {
   //uint32_t lo = inl(taddr);
   //uint32_t hi = inl(taddr+4);
-  uint64_t time = ((uint64_t)inl(taddr+4)<< 32) | inl(taddr);
-  return time-boot_time;
+  uint64_t time = ((uint64_t)inl(taddr+4)<< 32) |(uint64_t)inl(taddr);
+  return time;
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uptime->us = read_time();
+  uptime->us = read_time()-boot_time;
 }
 
 void __am_timer_init() {
