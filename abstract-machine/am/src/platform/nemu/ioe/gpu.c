@@ -6,7 +6,7 @@ int min(int a, int b){
 	if(a <= b) return a;
 	else return b;
 }
-static uint32_t* fb =(uint32_t *)(uintptr_t)FB_ADDR;
+//static uint32_t* fb =(uint32_t *)(uintptr_t)FB_ADDR;
 static int W;
 static int H;
 void __am_gpu_init() {
@@ -38,13 +38,18 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     for(int j = 0; j < h  && y + j < H; ++j){
       outl(SYNC_ADDR, *pixels);
       pixels+=w;*/
-      			int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
+      int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
 			uint32_t *pixels = ctl->pixels;
-			int cp_bytes = sizeof(uint32_t) * min(w, W - x);
-			for(int j = 0; j < h  && y + j < H; ++j){
-				memcpy(&fb[(y + j) * W + x], pixels, cp_bytes);
-				pixels += w;
+			//int cp_bytes = sizeof(uint32_t) * min(w, W - x);
+			for(int j = 0; j < h  && y + j < H; ++j){{
+        for(int i=0;i+x<W&&i<w;++i){
+          outl(SYNC_ADDR+(y + j) * W + x+i ,*pixels);
+          pixels ++;
     }
+        }
+      }
+				
+				
     
   }
 }
