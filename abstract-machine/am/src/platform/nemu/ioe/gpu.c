@@ -34,16 +34,13 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
 			uint32_t *pixels = ctl->pixels;
 			//int cp_bytes = sizeof(uint32_t) * min(w, W - x);
-			for(int j = 0; j < h  && y + j < H; ++j){{
+			for(int j = 0; j < h  && y + j < H; ++j){
         for(int i=0;i+x<W&&i<w;++i){
           outl(IMG+(y + j) * W + x+i ,*pixels);
           pixels ++;
-    }
         }
       }
-				
-				
-    
+      outl(SYNC_ADDR,1);
   }
 }
 
