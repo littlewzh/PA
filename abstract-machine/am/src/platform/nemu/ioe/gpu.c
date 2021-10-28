@@ -8,8 +8,8 @@ int min(int a, int b){
 	else return b;
 }
 //static uint32_t* fb =(uint32_t *)(uintptr_t)FB_ADDR;
-int W=400;//(int)inw(VGACTL_ADDR+2);
-int H=300;//(int)inw(VGACTL_ADDR);
+int W=800;//(int)inw(VGACTL_ADDR+2);
+int H=600;//(int)inw(VGACTL_ADDR);
 void __am_gpu_init() {
   //W=(int)inw(VGACTL_ADDR+2);
   //H=(int)inw(VGACTL_ADDR);
