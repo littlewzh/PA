@@ -28,7 +28,8 @@ int atoi(const char* nptr) {
   }
   return x;
 }
-static uint32_t *addr=(uint32_t *)heap.start;
+static uint32_t *addr=NULL;
+static uint32_t *p=NULL;
 void *malloc(size_t size) {
     // On native, malloc() will be called during initializaion of C runtime.
   // Therefore do not call panic() here, else it will yield a dead recursion:
@@ -36,8 +37,10 @@ void *malloc(size_t size) {
 #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
   panic("Not implemented");
 #endif
-
-  return NULL;
+  addr=heap.start;
+  p+=size;
+  //addr+=size;
+  return p-(uint32_t *)size+addr;
   //return NULL;
   //panic("Not implemented");
 }
