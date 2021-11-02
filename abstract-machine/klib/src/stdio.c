@@ -49,7 +49,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
        }
      }
       if(*fmt=='d'){
-        memset(nums,'0',100);
+        //memset(nums,'0',100);
         int32_t val=va_arg(ap,int32_t);
         //int32_t n[20];
         int32_t k=0;
@@ -71,7 +71,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
       else if(*fmt=='x'||*fmt=='p'){
-        uint32_t valx=va_arg(ap,uint32_t);
+        uint32_t valx=(uintptr_t)va_arg(ap,void *);
         int32_t k=0;
         while(valx){
           k++;
@@ -91,7 +91,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
       else if(*fmt=='u'){
-        memset(nums,'0',100);
+        //memset(nums,'0',100);
         uint32_t valu=va_arg(ap,uint32_t);
         int32_t k=0;
         while(valu){
