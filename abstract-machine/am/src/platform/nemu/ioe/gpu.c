@@ -1,6 +1,6 @@
 #include <am.h>
 #include <nemu.h>
-#include <string.h>
+//#include <string.h>
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 #define IMG 0xa1000000
 int W=400;//(int)inw(VGACTL_ADDR+2);
