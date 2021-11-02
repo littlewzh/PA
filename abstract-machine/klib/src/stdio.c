@@ -69,7 +69,26 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           str++;
           k--;
         }
-        
+      }
+      else if(*fmt=='x'||*fmt=='p'){
+        uint32_t valx=va_arg(ap,uint32_t);
+        int32_t k=0;
+        while(valx){
+          k++;
+          nums[k]=valx%16+'0';
+          valx/=16;
+        }
+        if(k<width&&flag==1){
+           len=width-k;
+           while(len--){
+             *str++='0';
+           }
+        }
+        while(k){
+          *str=nums[k];
+          str++;
+          k--;
+        }
       }
       else if(*fmt=='u'){
         memset(nums,'0',100);
