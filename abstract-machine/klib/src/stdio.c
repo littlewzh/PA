@@ -49,6 +49,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
        }
      }
       if(*fmt=='d'){
+        memset(nums,'0',100);
         int32_t val=va_arg(ap,int32_t);
         //int32_t n[20];
         int32_t k=0;
@@ -69,6 +70,27 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           k--;
         }
         
+      }
+      else if(*fmt=='u'){
+        memset(nums,'0',100);
+        uint32_t valu=va_arg(ap,uint32_t);
+        int32_t k=0;
+        while(valu){
+           k++;
+           nums[k]=valu%10+'0';
+           valu/=10;
+        }
+        if(k<width&&flag==1){
+          len=width-k;
+          while(len--){
+            *str++='0';
+          }
+        }
+        while(k){
+          *str=nums[k];
+          str++;
+          k--;
+        }
       }
       else if(*fmt=='s'){
         char *s=va_arg(ap,char *);
