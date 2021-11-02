@@ -30,10 +30,10 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   
-  int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
+  uint32_t x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
 	uint32_t *pixels = ctl->pixels;
-	for(int j=0; j<h&&y+j<H;++j){
-    for(int i=0;i+x<W&&i<w;++i){
+	for(uint32_t j=0; j<h&&y+j<H;++j){
+    for(uint32_t i=0;i+x<W&&i<w;++i){
       outl(IMG+((y+j)*W + x+i)*4,*pixels);
       pixels ++;
     }
