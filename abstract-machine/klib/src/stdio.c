@@ -48,8 +48,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
          fmt++;
        }
      }
-      if(*fmt=='d'){
-        //memset(nums,'0',100);
+     switch(*fmt){
+       case 'd':
+       {
+         //memset(nums,'0',100);
         int32_t val=va_arg(ap,int32_t);
         //int32_t n[20];
         int32_t k=0;
@@ -69,8 +71,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           str++;
           k--;
         }
-      }
-      else if(*fmt=='x'||*fmt=='p'){
+       }
+        
+      
+      case 'x':
+      {
         int32_t valx=(uintptr_t)va_arg(ap,int32_t);
         int32_t k=0;
         while(valx){
@@ -91,7 +96,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           k--;
         }
       }
-        else if(*fmt=='X'){
+        
+      case 'X':
+      {
         int32_t valx=va_arg(ap,int32_t);
         int32_t k=0;
         while(valx){
@@ -112,9 +119,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           k--;
         }
       }
-      else if(*fmt=='u'){
-        //memset(nums,'0',100);
-        uint32_t valu=va_arg(ap,uint32_t);
+        
+      case 'u':
+      { uint32_t valu=va_arg(ap,uint32_t);
         int32_t k=0;
         while(valu){
            k++;
@@ -132,17 +139,24 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           str++;
           k--;
         }
+
       }
-      else if(*fmt=='s'){
+        //memset(nums,'0',100);
+       
+      case 's':
+      {
         char *s=va_arg(ap,char *);
         while(*s){
           *str++=*s++;
         }
       }
+        
     }
     fmt++;
     
+   }
   }
+      
   *str='\0';
   ret=str-out;
   return ret;
