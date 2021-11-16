@@ -91,6 +91,27 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           k--;
         }
       }
+        else if(*fmt=='X'){
+        uint32_t valx=(uintptr_t)va_arg(ap,uint32_t);
+        int32_t k=0;
+        while(valx){
+          k++;
+          if(valx%16<10)  nums[k]=valx%16+'0';
+          else nums[k]=valx%16+'A'-10;
+          valx/=16;
+        }
+        if(k<width&&flag==1){
+           len=width-k;
+           while(len--){
+             *str++='0';
+           }
+        }
+        while(k){
+          *str=nums[k];
+          str++;
+          k--;
+        }
+      }
       else if(*fmt=='u'){
         //memset(nums,'0',100);
         uint32_t valu=va_arg(ap,uint32_t);
