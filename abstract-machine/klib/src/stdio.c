@@ -75,7 +75,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         int32_t k=0;
         while(valx){
           k++;
-          nums[k]=valx%16+'0'+7;
+          if(valx%16<10)  nums[k]=valx%16+'0';
+          else nums[k]=valx%16+'a'-10;
           valx/=16;
         }
         if(k<width&&flag==1){
