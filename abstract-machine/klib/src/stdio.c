@@ -150,6 +150,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
           *str++=*s++;
         }
       }
+      default: assert(0);
         
     }
     fmt++;
