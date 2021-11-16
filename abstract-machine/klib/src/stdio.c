@@ -71,7 +71,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
       else if(*fmt=='x'||*fmt=='p'){
-        uint32_t valx=(uintptr_t)va_arg(ap,uint32_t);
+        int32_t valx=(uintptr_t)va_arg(ap,int32_t);
         int32_t k=0;
         while(valx){
           k++;
@@ -92,7 +92,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
       }
         else if(*fmt=='X'){
-        uint32_t valx=(uintptr_t)va_arg(ap,uint32_t);
+        int32_t valx=va_arg(ap,int32_t);
         int32_t k=0;
         while(valx){
           k++;
