@@ -99,7 +99,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         
       case 'X':
       {
-        int32_t valx=va_arg(ap,int32_t);
+        uint32_t valx=va_arg(ap,uint32_t);
         int32_t k=0;
         while(valx){
           k++;
