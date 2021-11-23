@@ -75,7 +75,7 @@ typedef struct {
       uint32_t rd        : 5;
       uint32_t funct3    : 3;
       uint32_t rs1       : 5;
-      uint32_t csr       :12;
+      uint32_t csr       : 4;
     } cs;
     uint32_t val;
   } instr;

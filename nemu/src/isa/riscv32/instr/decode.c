@@ -32,7 +32,7 @@ static def_DopHelper(c) {
 }
 static def_DHelper(CS) {
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, false);
-  decode_op_c(s, id_src2, s->isa.instr.cs.csr&15, false);
+  decode_op_c(s, id_src2, s->isa.instr.cs.csr, false);
   decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
 }
 static def_DHelper(R) {
