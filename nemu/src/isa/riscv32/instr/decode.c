@@ -23,16 +23,16 @@ static def_DopHelper(r) {                                //指令译码，用于
 }
 static def_DopHelper(c) {
   switch(val){
-    case 0x300: op->preg=&cpu.mstatus;
-    case 0x341: op->preg=&cpu.mepc;
-    case 0x342: op->preg=&cpu.mcause;
-    case 0x305: op->preg=&cpu.mtvec;
+    case 0: op->preg=&cpu.mstatus;
+    case 1: op->preg=&cpu.mepc;
+    case 2: op->preg=&cpu.mcause;
+    case 5: op->preg=&cpu.mtvec;
     default: assert(0);
   }
 }
 static def_DHelper(CS) {
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, false);
-  decode_op_c(s, id_src2, s->isa.instr.cs.csr, false);
+  decode_op_c(s, id_src2, s->isa.instr.cs.csr&15, false);
   decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
 }
 static def_DHelper(R) {
