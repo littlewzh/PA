@@ -27,6 +27,7 @@ static def_DopHelper(c) {
     case 0x341: op->preg=&cpu.mepc;
     case 0x342: op->preg=&cpu.mcause;
     case 0x305: op->preg=&cpu.mtvec;
+    default: assert(0);
   }
 }
 static def_DHelper(CS) {
