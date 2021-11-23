@@ -22,6 +22,7 @@ static def_DopHelper(r) {                                //指令译码，用于
   op->preg = (is_write && val == 0) ? &zero_null : &gpr(val);
 }
 static def_DopHelper(c) {
+  printf("%u\n",val);
   switch(val){
     case 0: op->preg=&cpu.mstatus;
     case 1: op->preg=&cpu.mepc;
