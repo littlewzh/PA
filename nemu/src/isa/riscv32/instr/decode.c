@@ -32,6 +32,7 @@ static def_DopHelper(c) {
 }
 static def_DHelper(CS) {
   word_t imm=s->isa.instr.cs.csr;
+  printf("%d",imm);
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, true);
   decode_op_c(s, id_src2, imm, false);
   decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
