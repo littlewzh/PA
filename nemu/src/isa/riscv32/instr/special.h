@@ -7,22 +7,22 @@ def_EHelper(nemu_trap) {
 }
 def_EHelper(ecall){
    s->dnpc=isa_raise_intr(1, s->pc);
-   printf("%08x\n",s->dnpc);
+   //printf("%08x\n",s->dnpc);
 }
 def_EHelper(csrrs){
    *ddest=*dsrc2;
    *dsrc2=(*dsrc2)|(*dsrc1);
-   printf("%08x\n",*dsrc2);
+   //printf("%08x\n",*dsrc2);
 }
 def_EHelper(csrrc){
    *ddest=*dsrc2;
    *dsrc2=(*dsrc2)&(*dsrc1);
-   printf("%08x\n",*dsrc2);
+   //printf("%08x\n",*dsrc2);
 }
 def_EHelper(csrrw){
    *ddest=*dsrc2;
    *dsrc2=*dsrc1;
-   printf("%08x\n",*dsrc2);
+   //printf("%08x\n",*dsrc2);
 }
 def_EHelper(mret){
   s->dnpc=cpu.mepc+4;
