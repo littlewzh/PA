@@ -12,7 +12,6 @@ typedef struct {
   rtlreg_t mepc;
   rtlreg_t mcause;
   rtlreg_t mtvec;
-  
 } riscv32_CPU_state;
 
 // decode
