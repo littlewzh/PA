@@ -36,7 +36,7 @@ static def_DHelper(CS) {
   //printf("%u\n",imm);
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, false);
   decode_op_c(s, id_src2, imm, false);
-  decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
+  decode_op_r(s, id_dest, s->isa.instr.cs.rd, false);
 }
 static def_DHelper(R) {
   decode_op_r(s, id_dest, s->isa.instr.r.rd, true);
