@@ -28,7 +28,7 @@ static def_DopHelper(c) {
     case 1: op->preg=&cpu.mepc;printf("%u\n",*op->preg);
     case 2: op->preg=&cpu.mcause;printf("%u\n",*op->preg);
     case 5: op->preg=&cpu.mtvec;printf("%u\n",*op->preg);
-    default: assert(0);
+    //default: assert(0);
   }
 }
 static def_DHelper(CS) {
