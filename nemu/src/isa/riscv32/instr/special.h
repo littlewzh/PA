@@ -9,11 +9,14 @@ def_EHelper(ecall){
    
 }
 def_EHelper(csrrs){
-   
+   *ddest=*dsrc2;
+   *dsrc2=*dsrc2|*dsrc1;
 }
 def_EHelper(csrrc){
-
+   *ddest=*dsrc2;
+   *dsrc2=*dsrc2&*dsrc1;
 }
 def_EHelper(csrrw){
-
+   *ddest=*dsrc2;
+   *dsrc2=*dsrc1;
 }
