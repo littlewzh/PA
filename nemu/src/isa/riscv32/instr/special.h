@@ -7,6 +7,7 @@ def_EHelper(nemu_trap) {
 }
 def_EHelper(ecall){
    s->dnpc=isa_raise_intr(1, s->pc);
+   printf("%08x\n",s->dnpc);
 }
 def_EHelper(csrrs){
    *ddest=*dsrc2;
