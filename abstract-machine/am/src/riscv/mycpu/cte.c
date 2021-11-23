@@ -13,7 +13,7 @@ Context* __am_irq_handle(Context *c) {
       case 4:ev.event = EVENT_ERROR;break;
       case 5:ev.event = EVENT_IRQ_TIMER;break;
       case 6:ev.event = EVENT_IRQ_IODEV;break;
-      default: ev.event = c->mcause; break;
+      default: ev.event = c->mcause;
     }
 
     c = user_handler(ev, c);
