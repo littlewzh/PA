@@ -27,12 +27,13 @@ static def_DopHelper(c) {
     case 1: op->preg=&cpu.mepc;
     case 2: op->preg=&cpu.mcause;
     case 5: op->preg=&cpu.mtvec;
-    //default: assert(0);
+    default: assert(0);
   }
 }
 static def_DHelper(CS) {
+  word_t imm=s->isa.instr.cs.csr;
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, false);
-  decode_op_c(s, id_src2, s->isa.instr.cs.csr, false);
+  decode_op_c(s, id_src2, imm, false);
   decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
 }
 static def_DHelper(R) {
