@@ -7,7 +7,10 @@ typedef struct {
   struct {
     rtlreg_t _32;
   } gpr[32];
-
+  rtlreg_t mepc;
+  rtlreg_t mstatus;
+  rtlreg_t mcause;
+  rtlreg_t mtvec;
   vaddr_t pc;
 } riscv32_CPU_state;
 
@@ -66,6 +69,14 @@ typedef struct {
       uint32_t imm10_5   : 6;
       int32_t  simm12    : 1;
     } b;
+     struct {
+      uint32_t opcode1_0 : 2;
+      uint32_t opcode6_2 : 5;
+      uint32_t rd        : 5;
+      uint32_t funct3    : 3;
+      uint32_t rs1       : 5;
+      uint32_t csr       :12;
+    } cs;
     uint32_t val;
   } instr;
 } riscv32_ISADecodeInfo;
