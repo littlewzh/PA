@@ -37,7 +37,7 @@ __am_asm_trap:
   sd t2, OFFSET_EPC(sp)
 
   mv a0, sp
-  jal __am_irq_handle
+  //jal __am_irq_handle
 
   ld t1, OFFSET_STATUS(sp)
   ld t2, OFFSET_EPC(sp)
