@@ -22,18 +22,18 @@ static def_DopHelper(r) {                                //指令译码，用于
   op->preg = (is_write && val == 0) ? &zero_null : &gpr(val);
 }
 static def_DopHelper(c) {
-  printf("%u\n",val);
+  printf("val=%u\n",val);
   switch(val){
     case 0: op->preg=&cpu.mstatus;printf("%u\n",*op->preg);
     case 1: op->preg=&cpu.mepc;printf("%u\n",*op->preg);
     case 2: op->preg=&cpu.mcause;printf("%u\n",*op->preg);
-    case 5: op->preg=&cpu.mtvec;printf("%08x\n",*op->preg);
+    case 5: op->preg=&cpu.mtvec;printf("op=%08x\n",*op->preg);
     //default: assert(0);
   }
 }
 static def_DHelper(CS) {
   word_t imm=s->isa.instr.cs.csr;
-  printf("%u\n",imm);
+  //printf("%u\n",imm);
   decode_op_r(s, id_src1, s->isa.instr.cs.rs1, true);
   decode_op_c(s, id_src2, imm, false);
   decode_op_r(s, id_dest, s->isa.instr.cs.rd, true);
