@@ -22,11 +22,11 @@ static def_DopHelper(r) {                                //指令译码，用于
   op->preg = (is_write && val == 0) ? &zero_null : &gpr(val);
 }
 static def_DopHelper(c) {
-  switch(val&15){
-    case 0: op->preg=&cpu.mstatus;
-    case 1: op->preg=&cpu.mepc;
-    case 2: op->preg=&cpu.mcause;
-    case 5: op->preg=&cpu.mtvec;
+  switch(val){
+    case 0x300: op->preg=&cpu.mstatus;
+    case 0x341: op->preg=&cpu.mepc;
+    case 0x342: op->preg=&cpu.mcause;
+    case 0x305: op->preg=&cpu.mtvec;
   }
 }
 static def_DHelper(CS) {
