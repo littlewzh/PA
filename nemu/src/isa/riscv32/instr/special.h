@@ -25,5 +25,5 @@ def_EHelper(csrrw){
    printf("%08x\n",*dsrc2);
 }
 def_EHelper(mret){
-  s->dnpc=cpu.mepc;
+  s->dnpc=cpu.mepc+4;
 }
