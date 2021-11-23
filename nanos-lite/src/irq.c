@@ -2,6 +2,10 @@
 
 static Context* do_event(Event e, Context* c) {
   switch (e.event) {
+      case 1:panic("ev.event = EVENT_YIELD"); break;
+      case 2:panic("ev.event = EVENT_SYSCALL");break;
+      case 3:panic("ev.event = EVENT_PAGEFAULT"); break;
+      case 4:panic("ev.event = EVENT_ERROR");break;
     default: panic("Unhandled event ID = %d", e.event);
   }
 
