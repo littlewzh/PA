@@ -27,7 +27,7 @@ static def_DopHelper(c) {
     case 0: op->preg=&cpu.mstatus;
     case 1: op->preg=&cpu.mepc;
     case 2: op->preg=&cpu.mcause;
-    case 5: op->preg=&cpu.mtvec;
+    case 5: op->preg=&cpu.mtvec;printf("%u\n",*op->preg);
     default: assert(0);
   }
 }
