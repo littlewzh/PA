@@ -58,7 +58,7 @@ static long load_img() {
   return size;
 }
 
-static int parse_args(int argc, char *argv[]) {
+static int parse_args(int argc, char *argv[]) {                                 //这个函数是肝肾末用的？
   const struct option table[] = {
     {"batch"    , no_argument      , NULL, 'b'},
     {"log"      , required_argument, NULL, 'l'},
