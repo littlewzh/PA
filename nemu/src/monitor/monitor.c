@@ -11,6 +11,10 @@ void init_disasm(const char *triple);
 
 static void welcome() {
   Log("Trace: %s", MUXDEF(CONFIG_TRACE, ASNI_FMT("ON", ASNI_FG_GREEN), ASNI_FMT("OFF", ASNI_FG_RED)));
+  Log("Etrace: %s", MUXDEF(CONFIG_ETRACE, ASNI_FMT("ON", ASNI_FG_GREEN), ASNI_FMT("OFF", ASNI_FG_RED)));
+  Log("Dtrace: %s", MUXDEF(CONFIG_DTRACE, ASNI_FMT("ON", ASNI_FG_GREEN), ASNI_FMT("OFF", ASNI_FG_RED)));
+  Log("Mrace: %s", MUXDEF(CONFIG_MTRACE, ASNI_FMT("ON", ASNI_FG_GREEN), ASNI_FMT("OFF", ASNI_FG_RED)));
+  Log("Watchpoint: %s", MUXDEF(CONFIG_WATCHPOINT, ASNI_FMT("ON", ASNI_FG_GREEN), ASNI_FMT("OFF", ASNI_FG_RED)));
   IFDEF(CONFIG_TRACE, Log("If trace is enabled, a log file will be generated "
         "to record the trace. This may lead to a large log file. "
         "If it is not necessary, you can disable it in menuconfig"));
