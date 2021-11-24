@@ -118,11 +118,14 @@ config CC_ASAN
 endmenu
 
 menu "Testing and Debugging"
+config ETRACE
+  bool "Enable etrace"
+  default 0
 config DTRACE
   bool "Enable dtrace"
   default 0
 config WATCHPOINT
-  bool "Enabke watchpoint"
+  bool "Enable watchpoint"
   default 0
 config MTRACE
   bool "Enable Mtrace"
