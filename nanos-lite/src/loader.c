@@ -14,7 +14,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   ramdisk_read((void *)addr, 0x0, get_ramdisk_size());
 
-  return addr;
+  return addr+4;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
