@@ -13,8 +13,8 @@ extern size_t get_ramdisk_size();
 //extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  //assert(*(uint32_t *)elf->e_ident == 0xBadC0de);
-  ramdisk_read((void *)addr, 0x3dc, get_ramdisk_size()-0x3dc);
+  //assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
+  ramdisk_read((void *)addr, 0, get_ramdisk_size());
 
   return addr;
 }
