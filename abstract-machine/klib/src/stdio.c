@@ -266,7 +266,7 @@ static inline int _print(char **out, const char *fmt, va_list ap) {
         case 'u':
           cnt += _printi(out, va_arg(ap, int), 10, 0, 0);
           break;
-        case 'x':
+        case 'x':case 'p':
           cnt += _printi(out, va_arg(ap, int), 16, 0, 0);
           break;
         case 'X':
