@@ -7,7 +7,7 @@
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
 #endif
-#define addr 0x83000000
+#define addr 0x80300000
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
 //extern uint8_t ramdisk_start;
