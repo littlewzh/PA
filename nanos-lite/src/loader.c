@@ -10,12 +10,12 @@
 #define addr 0x83000000
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
-extern uint8_t ramdisk_start;
+//extern uint8_t ramdisk_start;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   ramdisk_read((void *)addr, 0x0, get_ramdisk_size());
 
-  return ramdisk_start;
+  return addr;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
