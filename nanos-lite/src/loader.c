@@ -1,12 +1,12 @@
 #include <proc.h>
 #include <elf.h>
-//#ifdef __LP64__
-//# define Elf_Ehdr Elf64_Ehdr
-//# define Elf_Phdr Elf64_Phdr
-//#else
+#ifdef __LP64__
+# define Elf_Ehdr Elf64_Ehdr
+# define Elf_Phdr Elf64_Phdr
+#else
 # define Elf_Ehdr Elf32_Ehdr
 # define Elf_Phdr Elf32_Phdr
-//#endif
+#endif
 #define addr 0x83000000
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
