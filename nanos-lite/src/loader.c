@@ -14,7 +14,7 @@ extern size_t get_ramdisk_size();
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   //assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
-  ramdisk_read((void *)addr, 0, get_ramdisk_size());
+  ramdisk_read((void *)addr, 0x100, get_ramdisk_size()-0x100);
 
   return addr;
 }
