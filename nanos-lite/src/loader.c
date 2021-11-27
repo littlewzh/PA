@@ -16,7 +16,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
   ramdisk_read((void *)addr, 0, get_ramdisk_size());
 
-  return addr+0x500;
+  return addr+0x50;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
