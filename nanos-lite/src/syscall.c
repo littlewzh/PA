@@ -1,4 +1,4 @@
-#include <common.h>
+/*#include <common.h>
 #include "syscall.h"
 void do_syscall(Context *c) {
   uintptr_t a[4];
@@ -7,8 +7,8 @@ void do_syscall(Context *c) {
   switch (a[0]) {
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
-}
-/*#include <common.h>
+}*/
+#include <common.h>
 #include "syscall.h"
 void do_syscall(Context *c) {
   uintptr_t a[4];
@@ -26,4 +26,4 @@ void do_syscall(Context *c) {
        break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
-}*/
+}
