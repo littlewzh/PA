@@ -14,7 +14,7 @@ extern size_t get_ramdisk_size();
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
-  return ADDR+0x3dc;
+  return ADDR+0x34;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
