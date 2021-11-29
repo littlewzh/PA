@@ -8,7 +8,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
     Log("error %d at 0x%08x",NO,epc);
   #endif
   cpu.mcause=NO;
-  cpu.mepc=epc+4;
+  cpu.mepc=epc;
   return cpu.mtvec;
 }
 
