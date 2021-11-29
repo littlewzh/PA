@@ -28,8 +28,8 @@ struct diff_context_t {
   word_t pc;
   rtlreg_t mcause;
   rtlreg_t mstatus;
-  //rtlreg_t mepc;
-  //rtlreg_t mtvec;
+  rtlreg_t mepc;
+  rtlreg_t mtvec;
 };
 
 static sim_t* s = NULL;
