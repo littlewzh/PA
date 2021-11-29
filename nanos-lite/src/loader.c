@@ -24,8 +24,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //ramdisk_read((void *)elf, 0,sizeof(Elf_Ehdr));
   
   //ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
-  for (size_t i = 0; i < elf.e_phnum; ++i) {
+  for (size_t i = 0; i < 2; ++i) {
     ramdisk_read((void *)phlf.p_vaddr,phlf.p_offset,phlf.p_memsz);
+    memset((void *)phlf.p_filesz,0,phlf.p_memsz-phlf.p_filesz);
   }
   return elf.e_entry;
 }
