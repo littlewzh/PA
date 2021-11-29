@@ -24,7 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for (size_t i = 0; i < 2; ++i) {
     Elf_Phdr phlf;
     ramdisk_read(&phlf,elf.e_phoff+elf.e_phentsize * i,elf.e_phentsize);
-    ramdisk_read((void *)phlf.p_vaddr,phlf.p_offset,phlf.p_filesz);
+    ramdisk_read((void *)phlf.p_vaddr,phlf.p_offset,phlf.p_memsz);
     memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
   }
   return elf.e_entry;
