@@ -20,9 +20,9 @@ int main() {
   init_ramdisk();
 
 #ifdef HAS_CTE
- 
-#endif
  init_irq();
+#endif
+ 
   init_fs();
 
   init_proc();
@@ -30,7 +30,7 @@ int main() {
   Log("Finish initialization");
 
 #ifdef HAS_CTE
- // yield();
+  yield();
 #endif
 
   panic("Should not reach here");
