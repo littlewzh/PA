@@ -15,8 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   //Elf_Ehdr * ehdr=(Elf_Ehdr *)ADDR;
   ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
-
-  return ADDR+0x3dc;
+  return ADDR+0x94;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
