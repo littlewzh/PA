@@ -18,14 +18,16 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr elf;
   ramdisk_read(&elf,0,sizeof(Elf_Ehdr));
   assert(*(uint32_t *)elf.e_ident == 0x7f454c46);
+  Elf_Phdr phlf;
+  ramdisk_read(&phlf,elf.e_phoff,elf.e_phentsize);
+
   //ramdisk_read((void *)elf, 0,sizeof(Elf_Ehdr));
   
   //ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
-  //for (size_t i = 0; i < elf->e_phnum; ++i) {
-   // Elf_Phdr phdr;
-    //ramdisk_read((void *)ADDR,phdr.p_offset,phdr.p_memsz);
-  //}
-  return ADDR;
+  for (size_t i = 0; i < elf.e_phnum; ++i) {
+    ramdisk_read((void *)phlf.p_vaddr,phlf.p_offset,phlf.p_memsz);
+  }
+  return elf.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
