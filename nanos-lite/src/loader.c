@@ -11,13 +11,21 @@
 #define ADDR 0x83000000
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
+extern uint8_t ramdisk_start;
+extern uint8_t ramdisk_end;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
-  //Elf_Ehdr * elf=(Elf_Ehdr *)ADDR;
-  //assert(*(uint32_t *)elf->e_ident == 0x7f454c46);
-  ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
+  Elf_Ehdr elf;
+  ramdisk_read(&elf,0,sizeof(Elf_Ehdr));
+  assert(*(uint32_t *)elf.e_ident == 0x7f454c46);
+  //ramdisk_read((void *)elf, 0,sizeof(Elf_Ehdr));
   
-  return ADDR+0x3dc;
+  //ramdisk_read((void *)ADDR, 0,get_ramdisk_size());
+  //for (size_t i = 0; i < elf->e_phnum; ++i) {
+   // Elf_Phdr phdr;
+    //ramdisk_read((void *)ADDR,phdr.p_offset,phdr.p_memsz);
+  //}
+  return ADDR;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
