@@ -6,7 +6,7 @@ def_EHelper(nemu_trap) {
   rtl_hostcall(s, HOSTCALL_EXIT, NULL, &gpr(10), NULL, 0); // gpr(10) is $a0
 }
 def_EHelper(ecall){
-   s->dnpc=isa_raise_intr(2, s->pc);
+   s->dnpc=isa_raise_intr(gpr(17), s->pc);
    //rtl_addi(s,&gpr(1),rz,(s->pc)+4);
    //printf("%08x\n",s->dnpc);
 }
