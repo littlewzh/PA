@@ -1,6 +1,5 @@
 #include <proc.h>
 #include <elf.h>
-#define _LP64_ 1
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
