@@ -20,9 +20,9 @@ int main() {
   init_ramdisk();
 
 #ifdef HAS_CTE
-  init_irq();
+ 
 #endif
-
+ init_irq();
   init_fs();
 
   init_proc();
