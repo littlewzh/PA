@@ -7,8 +7,8 @@ Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
-      case 0xb:ev.event = EVENT_YIELD; break;
-      case 0:case 1:case 2:ev.event = EVENT_SYSCALL;break;
+      case 0xb:ev.event = 1; break;
+      case 1:ev.event = 2;break;
       //case 3:ev.event = EVENT_PAGEFAULT; break;
       //case 4:ev.event = EVENT_ERROR;break;
       //case 5:ev.event = EVENT_IRQ_TIMER;break;
