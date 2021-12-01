@@ -17,9 +17,10 @@ int32_t syswrite(int fd, const void *buf, size_t len){
     for(int i=0;i<len;i++){
       putch(*(s+i));
     }
-    return len;
+    //return len;
   }
-  return -1;
+  //return -1;
+  return len;
 }
 void do_syscall(Context *c) {
   uintptr_t a[4];
