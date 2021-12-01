@@ -11,7 +11,7 @@ void do_syscall(Context *c) {
 #include <common.h>
 #include "syscall.h"
 #include "../include/fs.h"
-static int32_t syswrite(int fd, const void *buf, size_t len){
+int32_t syswrite(int fd, const void *buf, size_t len){
   if(fd==1){
     char *s=(char *)buf;
     for(int i=0;i<len;i++){
