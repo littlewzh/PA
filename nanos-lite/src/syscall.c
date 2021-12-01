@@ -10,6 +10,7 @@ void do_syscall(Context *c) {
 }*/
 #include <common.h>
 #include "syscall.h"
+#include "../include/fs.h"
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -30,7 +31,8 @@ void do_syscall(Context *c) {
        c->GPRx=0;
        break;
     case SYS_write:
-      
+       //c->GPRx=fs_write(a[1], (void*)a[2], a[3]);
+       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
