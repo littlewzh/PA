@@ -15,7 +15,7 @@ int32_t syswrite(int fd, const void *buf, size_t len){
   if(fd==1){
     char *s=(char *)buf;
     for(int i=0;i<len;i++){
-      putch(*(s+i));
+      printf("%c",*(s+i));
     }
     //return len;
   }
