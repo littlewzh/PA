@@ -5,8 +5,9 @@ def_EHelper(jal) {
   rtl_addi(s,ddest,rz,(s->pc)+4);
 }
 def_EHelper(jalr){
-  rtl_addi(s,ddest,rz,(s->pc)+4);
+  
   s->dnpc=(*dsrc1+id_src2->imm)&0xfffffffe;
+  rtl_addi(s,ddest,rz,(s->pc)+4);
 }
 def_EHelper(ret) {
   s->dnpc=cpu.gpr[1]._32;
