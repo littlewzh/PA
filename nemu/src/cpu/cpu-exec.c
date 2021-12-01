@@ -61,7 +61,7 @@ void assert_fail_msg() {
 
 void fetch_decode(Decode *s, vaddr_t pc) {
   s->pc = pc;
-  printf("%08x\n",s->pc);
+  //printf("%08x\n",s->pc);
   s->snpc = pc;
   int idx = isa_fetch_decode(s);                //从内存中取指令，并更新pc，返回一个索引，指示执行函数。
   s->dnpc = s->snpc;
