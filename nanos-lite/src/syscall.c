@@ -15,12 +15,11 @@ int32_t syswrite(int fd, const void *buf, size_t len){
   if(fd==1){
     char *s=(char *)buf;
     for(int i=0;i<len;i++){
-      printf("%c",*(s+i));
+      putch(*(s+i));
     }
-    //return len;
+    return len;
   }
-  //return -1;
-  return len;
+  return -1;
 }
 void do_syscall(Context *c) {
   uintptr_t a[4];
