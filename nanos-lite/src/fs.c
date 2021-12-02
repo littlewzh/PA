@@ -6,7 +6,7 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 extern size_t events_read(void *buf, size_t offset, size_t len);
-
+size_t dispinfo_read(void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
@@ -35,6 +35,8 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},                //?????????shenmoguiyisi
 #include "files.h"
   {"/dev/events", 0, 0, 0, events_read, invalid_write},
+  {"/proc/dispinfo", 0, 0, 0, dispinfo_read, invalid_write},
+  {"/dev/fb", 0, 0, 0, invalid_read, serial_write},
 };
 #define fs_number (sizeof(file_table)/sizeof(Finfo))
 void init_fs() {
@@ -54,7 +56,6 @@ size_t fs_read(int fd, void *buf, size_t len){
   size_t size;
   size= (file_table[fd].offset+len<=file_table[fd].size) ? len : (file_table[fd].size-file_table[fd].offset);
   if(file_table[fd].read==NULL){
-
     size=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
   }
   else {

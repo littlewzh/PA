@@ -10,7 +10,7 @@
   [AM_KEY_##key] = #key,
 
 #define KEYDOWN_MASK 0x8000
-
+extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 static const char *keyname[256] __attribute__((used)) = {
   [AM_KEY_NONE] = "NONE",
   AM_KEYS(NAME)
@@ -23,7 +23,6 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
     }
   return len;
 }
-
 size_t events_read(void *buf, size_t offset, size_t len) {
   AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
   //int keycode=io_read(AM_INPUT_KEYBRD).keycode;
@@ -41,7 +40,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  ramdisk_read(buf,offset,len);
+  return len;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
