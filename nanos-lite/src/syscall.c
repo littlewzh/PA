@@ -13,7 +13,9 @@ void do_syscall(Context *c) {
 #include <fs.h>
 #include <sys/time.h>
 #include <time.h> 
+extern uint64_t read_time();
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
+  tv->tv_usec=read_time();
   return 0;
 }
 int32_t syswrite(int fd, const void *buf, size_t len){
