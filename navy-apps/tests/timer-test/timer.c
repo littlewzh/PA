@@ -5,7 +5,7 @@
 int main() {
    struct timeval * t1;
    struct timezone *t2;
-   t1->tv_usec; 
+   //t1->tv_usec=; 
    int sec = 1;
    while (1) {
   //printf("hello\n");
