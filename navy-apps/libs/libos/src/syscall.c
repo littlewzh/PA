@@ -77,9 +77,9 @@ void *_sbrk(intptr_t increment) {
   if(_syscall_(SYS_brk,program_break+increment,0,0)==0){
     uint32_t old_break=program_break;
     program_break+=increment;
-    return (void *)old_break;
+    return old_break;
   }
-  else {return (void *)-1;}
+  else {return -1;}
   //return (void *)-1;
 }
 
