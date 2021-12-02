@@ -17,7 +17,7 @@ int32_t syswrite(int fd, const void *buf, size_t len){
     for(int i=0;i<len;i++){
       putch(*(s+i));
     }
-    return len;
+    return fs_write(fd,buf,len);
   }
   return -1;
 }
@@ -47,7 +47,7 @@ void do_syscall(Context *c) {
       c->GPRx=fs_read(a[1],(void *)a[2],a[3]);
       break;
     case SYS_write:
-       c->GPRx=fs_write(a[1], (void *)a[2], a[3]);
+       c->GPRx=syswrite(a[1], (void *)a[2], a[3]);
        break;
     case SYS_close:
        c->GPRx=fs_close(a[1]);
