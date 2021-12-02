@@ -54,11 +54,11 @@ size_t fs_read(int fd, void *buf, size_t len){
   size_t size;
   size= (file_table[fd].offset+len<=file_table[fd].size) ? len : (file_table[fd].size-file_table[fd].offset);
   if(file_table[fd].read==NULL){
-    ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
+
+    size=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
   }
   else {
-    file_table[fd].offset+=size;
-    return file_table[fd].read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
+    size=file_table[fd].read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
   }
   file_table[fd].offset+=size;
   return size;
