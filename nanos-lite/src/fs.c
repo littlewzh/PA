@@ -40,6 +40,7 @@ void init_fs() {
 int fs_open(const char *pathname, int flags, int mode){
   for(int i=3;i<fs_number;i++){
      if(strcmp(pathname,file_table[i].name)==0){
+       file_table[i].offset = 0;
        return i;
      }
   }
@@ -49,12 +50,14 @@ size_t fs_read(int fd, void *buf, size_t len){
   size_t size;
   size= (file_table[fd].offset+len<=file_table[fd].size) ? len : (file_table[fd].size-file_table[fd].offset);
   ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
+  file_table[fd].offset+=size;
   return size;
 }
 size_t fs_write(int fd, const void *buf, size_t len){
   size_t size;
   size= (file_table[fd].offset+len<=file_table[fd].size) ? len : (file_table[fd].size-file_table[fd].offset);
   ramdisk_write(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
+  file_table[fd].offset+=size;
   return size;
 }
 int fs_close(int fd){
