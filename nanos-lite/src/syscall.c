@@ -18,6 +18,9 @@ int32_t syswrite(int fd, const void *buf, size_t len){
       putch(*(s+i));
     }
   }
+  else if(fd==2){
+    return -1;
+  }
     return fs_write(fd,buf,len);
   //}
   //return -1;
