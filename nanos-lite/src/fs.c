@@ -2,7 +2,9 @@
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
-
+extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
+extern size_t get_ramdisk_size();
+extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 typedef struct {
   char *name;
   size_t size;
@@ -27,10 +29,27 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
   [FD_STDOUT] = {"stdout", 0, 0, invalid_read, invalid_write},
-  [FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write},
+  [FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write},                //?????????shenmoguiyisi
 #include "files.h"
 };
-
+#define fs_number (sizeof(file_table)/sizeof(Finfo))
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+}
+int fs_open(const char *pathname, int flags, int mode){
+  for(int i=3;i<fs_number;i++){
+     if(strcmp(pathname,file_table[i].name)==0){
+       return i;
+     }
+  }
+  panic("do not find %s",pathname);
+}
+size_t fs_read(int fd, void *buf, size_t len){
+  size_t size;
+  size= (len<=file_table[fd].size) ? len : file_table[fd].size;
+  ramdisk_read(buf,file_table[fd].disk_offset,len);
+  return size;
+}
+int fs_close(int fd){
+  return 0;             //always return close
 }

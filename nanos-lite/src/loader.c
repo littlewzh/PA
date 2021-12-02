@@ -1,5 +1,6 @@
 #include <proc.h>
 #include <elf.h>
+#include <fs.h>
 #ifdef __LP64__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
@@ -28,6 +29,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
   }
   return elf.e_entry;
+  //Elf_Ehdr elf;
+
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
