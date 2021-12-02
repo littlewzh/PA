@@ -10,7 +10,7 @@ void do_syscall(Context *c) {
 }*/
 #include <common.h>
 #include "syscall.h"
-#include "../include/fs.h"
+#include <fs.h>
 int32_t syswrite(int fd, const void *buf, size_t len){
   if(fd==1){
     char *s=(char *)buf;
@@ -40,8 +40,20 @@ void do_syscall(Context *c) {
        //halt(0);
        c->GPRx=0;
        break;
+    case SYS_open:
+      c->GPRx=fs_open((char *)a[1],a[2],a[3]);
+      break;
+    case SYS_read:
+      c->GPRx=fs_read(a[1],(void *)a[2],a[3]);
+      break;
     case SYS_write:
        c->GPRx=syswrite(a[1], (void*)a[2], a[3]);
+       break;
+    case SYS_close:
+       c->GPRx=fs_close(a[1]);
+       break;
+    case SYS_lseek:
+       c->GPRx=fs_lseek(a[1],a[2],a[3]);
        break;
     case SYS_brk:
        c->GPRx=0;
