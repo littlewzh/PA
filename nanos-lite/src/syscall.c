@@ -12,7 +12,7 @@ void do_syscall(Context *c) {
 #include "syscall.h"
 #include <fs.h>
 int32_t syswrite(int fd, const void *buf, size_t len){
-  if(fd==1){
+  /*if(fd==1){
     char *s=(char *)buf;
     for(int i=0;i<len;i++){
       putch(*(s+i));
@@ -20,7 +20,7 @@ int32_t syswrite(int fd, const void *buf, size_t len){
   }
   else if(fd==2){
     return -1;
-  }
+  }*/
     return fs_write(fd,buf,len);
   //}
   //return -1;
