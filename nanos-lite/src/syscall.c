@@ -13,11 +13,10 @@ void do_syscall(Context *c) {
 #include <fs.h>
 #include <sys/time.h>
 #include <time.h> 
-extern uint64_t read_time();
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
-  tv->tv_usec=read_time();
+  tv->tv_usec=io_read(AM_TIMER_UPTIME).us;
   return 0;
 }
 int32_t syswrite(int fd, const void *buf, size_t len){

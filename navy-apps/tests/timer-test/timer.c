@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/time.h>
-#include <time.h>
 int main() {
    struct timeval * t1;
    struct timezone *t2;
