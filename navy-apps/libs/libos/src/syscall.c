@@ -69,17 +69,17 @@ int _write(int fd, void *buf, size_t count) {
 
 void *_sbrk(intptr_t increment) {
   extern uint32_t _end;
-  static uint32_t program_break=0;
-  if(program_break==0){
-    program_break=(uint32_t)&_end;
-    _syscall_(SYS_brk,program_break,0,0);
-  }
+  static uint32_t program_break=(uint32_t)&_end;
+  /*if(program_break==0){
+    program_break=_end;
+    //_syscall_(SYS_brk,program_break,0,0);
+  }*/
   if(_syscall_(SYS_brk,program_break+increment,0,0)==0){
     uint32_t old_break=program_break;
     program_break+=increment;
-    return old_break;
+    return (void *)old_break;
   }
-  else {return -1;}
+  else {return (void *)-1;}
   //return (void *)-1;
 }
 
