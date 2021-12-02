@@ -11,6 +11,11 @@ void do_syscall(Context *c) {
 #include <common.h>
 #include "syscall.h"
 #include <fs.h>
+#include <sys/time.h>
+#include <time.h> 
+int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
+  return 0;
+}
 int32_t syswrite(int fd, const void *buf, size_t len){
   /*if(fd==1){
     char *s=(char *)buf;
@@ -61,6 +66,9 @@ void do_syscall(Context *c) {
        break;
     case SYS_brk:
        c->GPRx=0;
+       break;
+    case SYS_gettimeofday:
+       c->GPRx=sys_gettimeofday((struct timeval *) a[1], (struct timezone *) a[2]);
        break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
