@@ -21,11 +21,11 @@ int SDL_WaitEvent(SDL_Event *event) {
   
   NDL_PollEvent(buf, 32);
   sscanf(buf,"%d",num);
-  int f=*num;
-  printf("%d",f);
+  //int f=*num;
+  //printf("%d",f);
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
-    event->key.keysym.sym=buf[3]-'0';
+    event->key.keysym.sym=*num;
     printf("%d",event->key.keysym.sym);
   }
   else if(buf[1]=='u'){
