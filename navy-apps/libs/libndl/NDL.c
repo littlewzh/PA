@@ -23,7 +23,6 @@ int NDL_PollEvent(char *buf, int len) {
   return read(fd,(void *)buf,len);
   //if(f==0) return 0;
   //return 1;
-  
 }
 
 void NDL_OpenCanvas(int *w, int *h) {
