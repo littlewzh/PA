@@ -67,7 +67,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
         canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
       }
     }
-    write(fd,(void *)canvas,400*300*4);
+    write(fd,(void *)canvas,400*300);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
