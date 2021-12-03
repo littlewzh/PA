@@ -44,22 +44,22 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-  char s[128];
-  int fd=open("/proc/dispinfo",0,0);
-  read(fd,(void*)s,128);
+  //char s[128];
+  //int fd=open("/proc/dispinfo",0,0);
+  //read(fd,(void*)s,128);
   *w=400;
   *h=300;
   //sscanf(s,"%d %d",w,h);
-  printf("%s\n",s);
+  //printf("%s\n",s);
   //printf("%d %d\n",*w,*h);
   //TODO()
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   int fd=open("/dev/fb",0,0);
-  for(int i=0;i<h;i++){
-    write(fd,(void *)pixels,w);
-  }
+  //for(int i=0;i<h;i++){
+    write(fd,(void *)pixels,w*h);
+  //}
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
