@@ -60,7 +60,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   //for(int i=0;i<h;i++){
     
   //}
-    uint32_t  canvas[400*300];
+    uint32_t  canvas[400*300]={0};
     //memset(canvas,0,sizeof(canvas));
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
