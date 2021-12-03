@@ -44,9 +44,9 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-  char s[128];
+  char s[64];
   int fd=open("/proc/dispinfo",0,0);
-  read(fd,(void*)s,128);
+  read(fd,(void*)s,64);
   //*w=128;
   //*h=128;
   sscanf(s,"%d %d",w,h);
@@ -61,7 +61,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     
   //}
     uint32_t  canvas[400*300];
-    //memset(canvas,0,sizeof(canvas));
+    memset(canvas,0,sizeof(canvas));
       for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
         canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
