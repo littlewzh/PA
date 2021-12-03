@@ -35,7 +35,7 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},                //?????????shenmoguiyisi
 #include "files.h"
   {"/dev/events", 0, 0, 0, events_read, invalid_write},
-  {"/proc/dispinfo", 0, 0, 0, dispinfo_read, invalid_write},
+  {"/proc/dispinfo", 0, 0, 0, NULL, invalid_write},
   {"/dev/fb", 0, 0, 0, invalid_read, serial_write},
 };
 #define fs_number (sizeof(file_table)/sizeof(Finfo))
