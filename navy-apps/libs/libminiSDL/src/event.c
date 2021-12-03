@@ -22,6 +22,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
     event->key.keysym.sym=buf[3]-'0';
+    printf("%d",event->key.keysym.sym);
   }
   else if(buf[1]=='u'){
     event->type=SDL_KEYUP;
