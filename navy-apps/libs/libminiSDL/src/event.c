@@ -18,8 +18,16 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
   char *buf;
-  NDL_PollEvent(buf, 64);
-
+  NDL_PollEvent(buf, 8);
+  if(*(buf+1)=='d'){
+    event->type=SDL_KEYDOWN;
+    event->key->keysym->sym=*(buf+3)-'0';
+  }
+  else if(*(buf+1)=='u'){
+    event->type=SDL_KEYUP;
+    
+  }
+  else {event->type=2;}
   return 1;
 }
 
