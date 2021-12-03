@@ -7,7 +7,7 @@ static const char *keyname[] = {
   "NONE",
   _KEYS(keyname)
 };
-static char *buf;
+static char buf[32];
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
 }
@@ -18,12 +18,12 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
   
-  NDL_PollEvent(buf, 8);
-  if(*(buf+1)=='d'){
+  NDL_PollEvent(buf, 32);
+  if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
-    event->key.keysym.sym=*(buf+3)-'0';
+    event->key.keysym.sym=buf[3]-'0';
   }
-  else if(*(buf+1)=='u'){
+  else if(buf[1]=='u'){
     event->type=SDL_KEYUP;
     
   }
