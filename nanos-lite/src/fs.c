@@ -35,11 +35,12 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDERR] = {"stderr", 0, 0, 0, invalid_read, invalid_write},                //?????????shenmoguiyisi
 #include "files.h"
   {"/dev/events", 0, 0, 0, events_read, invalid_write},
-  {"/proc/dispinfo", 0, 0, 0, NULL, invalid_write},
+  {"/proc/dispinfo", 0, 0, 0,dispinfo_read, invalid_write},
   {"/dev/fb", 0, 0, 0, invalid_read, serial_write},
 };
 #define fs_number (sizeof(file_table)/sizeof(Finfo))
 void init_fs() {
+  file_table[fs_number-1].size = 300*400*4;//screen_size();
   // TODO: initialize the size of /dev/fb
 }
 int fs_open(const char *pathname, int flags, int mode){
@@ -59,7 +60,7 @@ size_t fs_read(int fd, void *buf, size_t len){
     size=ramdisk_read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
   }
   else {
-    size=file_table[fd].read(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
+    size=file_table[fd].read(buf,file_table[fd].offset,size);
   }
   file_table[fd].offset+=size;
   return size;
@@ -71,7 +72,7 @@ size_t fs_write(int fd, const void *buf, size_t len){
     ramdisk_write(buf,file_table[fd].disk_offset+file_table[fd].offset,size);
   }
   else {
-    return file_table[fd].write(buf,file_table[fd].disk_offset+file_table[fd].offset,len);/// len or size?????
+    return file_table[fd].write(buf,file_table[fd].offset,len);/// len or size?????
   }
   file_table[fd].offset+=size;
   return size;

@@ -45,7 +45,14 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  return 0;
+  //AM_GPU_FBDRAW_T *ctl;
+  int screen_w = io_read(AM_GPU_CONFIG).width;
+  //int screen_h = io_read(AM_GPU_CONFIG).height;
+  int x,y;
+  x=(offset/4)%screen_w;
+  y=(offset/4)/screen_w;
+  io_write(AM_GPU_FBDRAW, x, y,(char *)buf, len, 1, true);
+  return len;
 }
 
 void init_device() {
