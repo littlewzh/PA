@@ -60,11 +60,12 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   //for(int i=0;i<h;i++){
     
   //}
-    uint32_t  canvas[400*300]={0};
+    uint32_t  canvas[300][400]={0};
     //memset(canvas,0,sizeof(canvas));
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
-        canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
+        canvas[i+y][j+x]=pixels[i*w+j];
+        //canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
       }
     }
     write(fd,(void *)canvas,400*300*4);
