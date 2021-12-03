@@ -68,6 +68,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
         //canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
       }
     }
+    printf("reach here");
     write(fd,(void *)canvas,400*300*4);
 }
 
