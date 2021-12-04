@@ -19,7 +19,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
   
-  if(NDL_PollEvent(buf, 64)){
+  if(NDL_PollEvent(buf, sizeof(buf))){
       //sscanf(buf,"%d",(int *)&num);
   //int f=*num;
   //printf("%d",f);
@@ -27,11 +27,11 @@ int SDL_WaitEvent(SDL_Event *event) {
     event->type=SDL_KEYDOWN;
     event->key.keysym.sym=num;
     //printf("%d\n",event->key.keysym.sym);
-    //printf("%d\n",event->type);
+    printf("%d\n",event->type);
   }
   else if(buf[1]=='u'){
     event->type=SDL_KEYUP;
-    //printf("%d\n",event->type);
+    printf("%d\n",event->type);
   }
   else {event->type=2;}
   return 1;
