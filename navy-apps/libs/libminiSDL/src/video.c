@@ -18,7 +18,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
       }
     }*/
    // d=s;
-   dst->pixels=src->pixels;
+   *dst->pixels=*(src->pixels);
   }
   else{assert(0);}
 }
