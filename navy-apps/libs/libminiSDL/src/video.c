@@ -13,8 +13,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 
   if(srcrect==NULL){
      printf("reach here\n");
-    for(int i=dstrect->y;i<300;i++){
-      for(int j=dstrect->x;j<400;j++){
+    for(int i=(dstrect->y);i<300;i++){
+      for(int j=(dstrect->x);j<400;j++){
         *(dst->pixels+i*400+j)=*(src->pixels+i*400+j);
         //*d=*s;
       }
