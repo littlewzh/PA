@@ -6,19 +6,20 @@
 #include <stdio.h>
 
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  //assert(dst && src);
-  //assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+  assert(dst && src);
+  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   //uint32_t* d=dst->pixels;
   //uint32_t* s=src->pixels;
 
   if(srcrect==NULL){
      printf("reach here\n");
-    for(int i=(dstrect->y);i<300;i++){
-      for(int j=(dstrect->x);j<400;j++){
-        *(dst->pixels+i*400+j)=*(src->pixels+i*400+j);
+
+    //for(int i=(dstrect->y);i<300;i++){
+    //  for(int j=(dstrect->x);j<400;j++){
+    //    *(dst->pixels+i*400+j)=*(src->pixels+i*400+j);
         //*d=*s;
-      }
-    }
+      //}
+   // }
    // d=s;
    //*dst->pixels=*(src->pixels);
   }
