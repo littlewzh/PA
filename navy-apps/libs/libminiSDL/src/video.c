@@ -16,7 +16,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
       *d++=*s++;
     }
   }
-  NDL_DrawRect(dst->pixels, dstrect->x, dstrect->y, dstrect->w, dstrect->h);
+  //NDL_DrawRect(dst->pixels, dstrect->x, dstrect->y, dstrect->w, dstrect->h);
   //NDL_DrawRect(src->pixels, dstrect->x, dstrect->y,dstrect->w,dstrect->h);
 }
 
