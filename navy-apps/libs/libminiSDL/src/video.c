@@ -9,7 +9,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   for(int i=0;i<srcrect->h;i++){
     for(int j=0;j<srcrect->w;j++){
-      *(dst->pixels)=*(dst->pixels);
+      *dst->pixels++=*dst->pixels++;
     }
   }
   //NDL_DrawRect(src->pixels, dstrect->x, dstrect->y,dstrect->w,dstrect->h);
