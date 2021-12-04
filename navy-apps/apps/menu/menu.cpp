@@ -70,12 +70,13 @@ static void clear_display(void) {
 int main(int argc, char *argv[], char *envp[]) {
   SDL_Init(0);
   screen = SDL_SetVideoMode(0, 0, 32, SDL_HWSURFACE);
-  printf("reach here");
+  printf("reach here1\n");
   font = new BDF_Font(font_fname);
   logo_sf = SDL_LoadBMP("/share/pictures/projectn.bmp");
   assert(logo_sf);
+  printf("reach here2\n");
   set_i_max();
-  printf("reach here");
+  printf("reach here3\n");
   while (1) {
     display_menu(i_max);
 
