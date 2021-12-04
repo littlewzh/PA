@@ -7,7 +7,7 @@ static const char *keyname[] = {
   "NONE",
   _KEYS(keyname)
 };
-static char buf[32];
+static char buf[64];
 static int num;
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
@@ -19,7 +19,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 
 int SDL_WaitEvent(SDL_Event *event) {
   
-  NDL_PollEvent(buf, 32);
+  NDL_PollEvent(buf, 64);
   sscanf(buf,"%d",(int *)&num);
   //int f=*num;
   //printf("%d",f);
