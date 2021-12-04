@@ -17,7 +17,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
         *d=*s;
       }
     }*/
-    d=s;
+   // d=s;
   }
   else{assert(0);}
 }
