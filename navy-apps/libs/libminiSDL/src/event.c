@@ -8,7 +8,7 @@ static const char *keyname[] = {
   _KEYS(keyname)
 };
 static char buf[32];
-static uint32_t *num;
+static int *num;
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
 }
