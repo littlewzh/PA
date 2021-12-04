@@ -14,12 +14,32 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
+  if(NDL_PollEvent(buf, sizeof(buf))){
+    //char *arg=strtok(NULL," ");
+    //arg=strtok(NULL," ");
+    num=0;
+    for(int i=3;i<64&&buf[i]!=' ';i++){
+      num=num*10+buf[i]-'0';
+    }
+  if(buf[1]=='d'){
+    ev->type=SDL_KEYDOWN;
+    ev->key.keysym.sym=num;
+    printf("%d\n",ev->key.keysym.sym);
+    printf("%d\n",ev->type);
+  }
+  else if(buf[1]=='u'){
+    ev->type=SDL_KEYUP;
+    printf("%d\n",ev->type);
+  }
+  else {ev->type=2;}
+  return 1;
+  }
   return 0;
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
   
-  if(NDL_PollEvent(buf, sizeof(buf))){
+  while(NDL_PollEvent(buf, sizeof(buf))==0);
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
     num=0;
@@ -38,8 +58,6 @@ int SDL_WaitEvent(SDL_Event *event) {
   }
   else {event->type=2;}
   return 1;
-  }
-  return 0;
 }
 
 int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
