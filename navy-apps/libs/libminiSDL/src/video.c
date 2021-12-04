@@ -9,8 +9,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   uint32_t *s=src->pixels;
   uint32_t *d=dst->pixels;
-  for(int i=0;i<srcrect->h;i++){
-    for(int j=0;j<srcrect->w;j++){
+  for(int i=0;i<dstrect->h;i++){
+    for(int j=0;j<dstrect->w;j++){
       *d++=*s++;
     }
   }
