@@ -20,7 +20,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 int SDL_WaitEvent(SDL_Event *event) {
   
   if(NDL_PollEvent(buf, sizeof(buf))){
-      //sscanf(buf,"%d",(int *)&num);
+    sscanf(buf,"%d",(int *)&num);
   //int f=*num;
   //printf("%d",f);
   if(buf[1]=='d'){
