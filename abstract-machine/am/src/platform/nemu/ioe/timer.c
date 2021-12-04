@@ -39,7 +39,7 @@ static uint64_t boot_time = 0;
 
 #define taddr 0xa0000048
 
-uint64_t read_time() {
+static uint64_t read_time() {
   //uint32_t lo = inl(taddr);
   //uint32_t hi = inl(taddr+4);教学
   uint64_t time = ((uint64_t)inl(taddr+4)<< 32) |(uint64_t)inl(taddr);
