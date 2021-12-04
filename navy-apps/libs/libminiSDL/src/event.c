@@ -22,8 +22,8 @@ int SDL_WaitEvent(SDL_Event *event) {
   if(NDL_PollEvent(buf, sizeof(buf))){
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
-    for(int i=3;i<64&&char[i]!=' ';i++){
-      num=num*10+char[i]-'0';
+    for(int i=3;i<64&&buf[i]!=' ';i++){
+      num=num*10+buf[i]-'0';
     }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
