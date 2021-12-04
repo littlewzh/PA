@@ -22,6 +22,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   if(NDL_PollEvent(buf, sizeof(buf))){
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
+    num=0;
     for(int i=3;i<64&&buf[i]!=' ';i++){
       num=num*10+buf[i]-'0';
     }
