@@ -8,7 +8,7 @@ static const char *keyname[] = {
   _KEYS(keyname)
 };
 static char buf[64];
-static int num;
+static int num=0;
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
 }
@@ -20,12 +20,14 @@ int SDL_PollEvent(SDL_Event *ev) {
 int SDL_WaitEvent(SDL_Event *event) {
   
   if(NDL_PollEvent(buf, sizeof(buf))){
-    //sscanf(buf,"%d",(int *)&num);
-  //int f=*num;
-  //printf("%d",f);
+    //char *arg=strtok(NULL," ");
+    //arg=strtok(NULL," ");
+    for(int i=3;i<64&&char[i]!=' ';i++){
+      num=num*10+char[i]-'0';
+    }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
-    event->key.keysym.sym=buf[3]-'0';
+    event->key.keysym.sym=num;
     printf("%d\n",event->key.keysym.sym);
     printf("%d\n",event->type);
   }
