@@ -75,7 +75,7 @@ int main(int argc, char *argv[], char *envp[]) {
   //printf("reach here1\n");
   font = new BDF_Font(font_fname);
   logo_sf = SDL_LoadBMP("/share/pictures/projectn.bmp");
-  SDL_UpdateRect(logo_sf, 0, 0, 0, 0);
+  SDL_UpdateRect(logo_sf, 0, 0, logo_sf->w,logo_sf->h );
   while(1);
   assert(logo_sf);
   //printf("reach here2\n");
