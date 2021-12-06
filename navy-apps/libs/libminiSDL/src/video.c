@@ -14,11 +14,11 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   if(srcrect==NULL){
      printf("reach here\n");
 
-    for(int i=0;i<src->h;i++){
-      for(int j=0;j<src->w;j++){
+    for(int i=0;i<300;i++){
+      for(int j=0;j<400;j++){
         //*(d+(i+dstrect->y)*400+j+dstrect->x)=*s;
         //s++;
-        *d=*s;
+        *d++=*s++;
         //*d++=*s++;
       }
    }
