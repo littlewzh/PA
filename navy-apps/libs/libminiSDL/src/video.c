@@ -4,12 +4,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+static uint32_t *d;
+static uint32_t *s;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   //assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  uint32_t* d=dst->pixels;
-  uint32_t* s=src->pixels;
+  d=dst->pixels;
+  s=src->pixels;
 
   if(srcrect==NULL){
      printf("reach here\n");
