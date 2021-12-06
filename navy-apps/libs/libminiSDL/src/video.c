@@ -4,21 +4,27 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-static uint32_t *d=0;
-static uint32_t *s=0;
+//static uint32_t *d=0;
+//static uint32_t *s=0;
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
-  //assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  //d=dst->pixels;
+  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+  uint32_t *d;
+  uint32_t *s;
+  d=dst->pixels;
   s=src->pixels;
-  dst->pixels=s;
+  for(int i=0;i<(src->h);i++){
+    for(int j=0;j<(src->w);j++){
+      *(d+(i+dstrect->y)*400+j+dstrect->x)=*(s+i*(src->w)+j);
+    }
+  }
 }
 //static uint32_t *d;
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   //d=dst->pixels;
  if(dstrect==NULL){
-   for(int i=0;i<300;i++){
-     for(int j=0;j<400;j++){
+   for(int i=0;i<dst->h;i++){
+     for(int j=0;j<dst->w;j++){
         *(uint32_t *)(dst->pixels+i*400+j)=color;
      }
    }
