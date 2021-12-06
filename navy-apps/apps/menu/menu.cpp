@@ -65,6 +65,8 @@ static void prev() {
 
 static void clear_display(void) {
   SDL_FillRect(screen, NULL, 0xffffff);
+  SDL_UpdateRect(screen, 0, 0, 0, 0);
+  while(1);
 }
 
 int main(int argc, char *argv[], char *envp[]) {
