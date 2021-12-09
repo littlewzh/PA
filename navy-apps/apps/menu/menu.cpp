@@ -75,8 +75,8 @@ int main(int argc, char *argv[], char *envp[]) {
   //printf("reach here1\n");
   font = new BDF_Font(font_fname);
   logo_sf = SDL_LoadBMP("/share/pictures/projectn.bmp");
-  //SDL_UpdateRect(logo_sf, 0, 0, logo_sf->w,logo_sf->h );
-  //while(1);
+  SDL_UpdateRect(logo_sf, 0, 0, logo_sf->w,logo_sf->h );
+  while(1);
   assert(logo_sf);
   //printf("reach here2\n");
   set_i_max();
@@ -150,8 +150,8 @@ static void display_menu(int n) {
    //printf("reach here4\n");
   SDL_Rect rect = { .x = screen->w - logo_sf->w, .y = 0 };
   //printf("reach here5\n");
-  SDL_BlitSurface(logo_sf,NULL  ,screen, &rect);
-  SDL_UpdateRect(screen, 0, 0, 0, 0);
+  //SDL_BlitSurface(logo_sf,NULL  ,screen, &rect);
+  //SDL_UpdateRect(screen, 0, 0, 0, 0);
   while(1);
   //printf("Available applications:\n");
   char buf[80];
