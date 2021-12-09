@@ -16,7 +16,7 @@
 
 typedef struct {
 	int32_t x, y;   //int8_t
-	uint16_t w, h;
+	uint32_t w, h;
 } SDL_Rect;
 
 typedef union {
