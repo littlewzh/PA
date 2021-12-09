@@ -41,7 +41,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 static char dispinfo[128] __attribute__((used)) = {};
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  sprintf(buf,"%s",dispinfo);
+  sprintf(buf,"WIDTH");
   //strncpy((char *)buf,(char *)(dispinfo),len);
   //ramdisk_read(buf,offset,len);
   return len;
