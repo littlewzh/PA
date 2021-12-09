@@ -51,8 +51,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     *(delim = strchr(buf, ':')) = '\0';
     sscanf(buf, "%s", key);
     sscanf(delim + 1, "%s", value);
-    if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", &screen_w);
-    if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", &screen_h);
+    if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", w);
+    if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", h);
   }
   printf("%d %d\n",*w,*h);
   //TODO()
