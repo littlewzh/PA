@@ -1,10 +1,17 @@
 #define SDL_malloc  malloc
 #define SDL_free    free
 #define SDL_realloc realloc
-
 #define SDL_STBIMAGE_IMPLEMENTATION
 #include "SDL_stbimage.h"
-
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
   assert(src->type == RW_TYPE_MEM);
   assert(freesrc == 0);
@@ -12,7 +19,13 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
 }
 
 SDL_Surface* IMG_Load(const char *filename) {
-  return NULL;
+  int fd=open(filename,0,0);
+  char *buf;
+  uint32_t size=300*400*10;
+  buf= malloc(size);
+  size=read(fd,(void *)buf,size);
+  return STBIMG_LoadFromMemory(buf,size);
+  //return NULL;
 }
 
 int IMG_isPNG(SDL_RWops *src) {
