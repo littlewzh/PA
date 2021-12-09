@@ -23,7 +23,7 @@ char *strcpy(char *dst, const char *src) {       //会拷贝’\0’
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {               //目前无论是对与strcpy，还是strncpy，我都没有去考虑内存区重叠这种情况。
-  //assert(dst!=NULL&&src!=NULL&&n<=0);
+  assert(dst!=NULL&&src!=NULL&&n<=0);
   int size=strlen(src);
   if(n>size) {return strncpy(dst,src,size);}
   else {
