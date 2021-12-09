@@ -46,8 +46,10 @@ void NDL_OpenCanvas(int *w, int *h) {
   char s[128];
   int fd=open("/proc/dispinfo",0,0);
   read(fd,(void*)s,64);
- 
-  printf("%s\n",s);
+  for(int i=0;i<128;i++){
+    printf("%c\n",s[i]);
+  }
+  
   printf("%d %d\n",*w,*h);
   //TODO()
 }
