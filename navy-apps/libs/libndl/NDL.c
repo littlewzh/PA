@@ -46,14 +46,24 @@ void NDL_OpenCanvas(int *w, int *h) {
   char s[128];
   int fd=open("/proc/dispinfo",0,0);
   read(fd,(void*)s,128);
-   char buf[128], key[128], value[128], *delim;
-  while (fgets(buf, 128, s)) {
-    *(delim = strchr(buf, ':')) = '\0';
-    sscanf(buf, "%s", key);
-    sscanf(delim + 1, "%s", value);
-    if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", w);
-    if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", h);
+   char buf[128], key[128], value[128];
+   char *dem=(char *)s;
+  while ((*dem++)!=':');
+  *w=0;
+  for(int i=0;i<3;i++){
+    *w=*w*10+*(dem+i)-'0';
   }
+  dem++;
+  while ((*dem++)!=':');
+  *h=0;
+  for(int i=0;i<3;i++){
+    *h=(*h)*10+*(dem+i)-'0';
+  }
+    //sscanf(buf, "%s", key);
+    //sscanf(delim + 1, "%s", value);
+    //if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", w);
+    //if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", h);
+  //}
   //*w=128;
   //*h=128;
   //*w=400;
