@@ -150,7 +150,7 @@ static void display_menu(int n) {
    //printf("reach here4\n");
   SDL_Rect rect = { .x = screen->w - logo_sf->w, .y = 0 };
   //printf("reach here5\n");
-  //SDL_BlitSurface(logo_sf,NULL  ,screen, &rect);
+  SDL_BlitSurface(logo_sf,NULL  ,screen, &rect);
   //SDL_UpdateRect(screen, 0, 0, 0, 0);
   while(1);
   //printf("Available applications:\n");
