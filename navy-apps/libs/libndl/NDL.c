@@ -47,7 +47,9 @@ void NDL_OpenCanvas(int *w, int *h) {
   int fd=open("/proc/dispinfo",0,0);
   read(fd,(void*)s,128);
   char buf[128], key[128], value[128], *delim;
-  while (fgets(buf, 128, (char *)s)) {
+  int k=0;
+  while (k++<128) {
+    while(*(s+k)!='\n') *(buf+k)=*(s+k);
     *(delim = strchr(buf, ':')) = '\0';
     sscanf(buf, "%s", key);
     sscanf(delim + 1, "%s", value);
