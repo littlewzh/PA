@@ -21,7 +21,7 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
 SDL_Surface* IMG_Load(const char *filename) {
   int fd=open(filename,0,0);
   char *buf;
-  uint32_t size=300*400*200;
+  uint32_t size=300*400*20000;
   buf= malloc(size);
   size=read(fd,(void *)buf,size);
   return STBIMG_LoadFromMemory(buf,size);
