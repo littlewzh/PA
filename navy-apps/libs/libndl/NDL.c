@@ -61,10 +61,10 @@ void NDL_OpenCanvas(int *w, int *h) {
     if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", h);
     k++;
   }*/
-  for(int i=0;i<128;i++){
+  /*for(int i=0;i<128;i++){
     printf("%c",s[i]);
-  }
-  printf("\n");
+  }*/
+  printf("%s\n",s);
  *w=400;
  *h=300;
   //TODO()
