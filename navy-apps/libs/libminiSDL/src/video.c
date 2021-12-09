@@ -13,17 +13,17 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   uint32_t *s;
   d=dst->pixels;
   s=src->pixels;
-  /*for(int i=0;i<src->h;i++){
+  for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
       *(d+(i+dstrect->y)*400+j+dstrect->x)=*(s+i*src->w+j);
     }
-  }*/
-  for(int i=dstrect->y;i<300;i++){
+  }
+  /*for(int i=dstrect->y;i<300;i++){
     for(int j=dstrect->x;j<400;j++){
       *(d+i*400+j)=*s;
       s++;
     }
-  }
+  }*/
 }
 //static uint32_t *d;
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
