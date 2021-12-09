@@ -152,7 +152,7 @@ static void display_menu(int n) {
   //printf("reach here5\n");
   SDL_BlitSurface(logo_sf,NULL  ,screen, &rect);
   //SDL_UpdateRect(screen, 0, 0, 0, 0);
-  while(1);
+  //while(1);
   //printf("Available applications:\n");
   char buf[80];
   int i;
