@@ -50,12 +50,14 @@ void NDL_OpenCanvas(int *w, int *h) {
    char *dem=(char *)s;
   while ((*dem++)!=':');
   *w=0;
+   while ((*dem++)==' ');
   for(int i=0;i<3;i++){
     *w=*w*10+*(dem+i)-'0';
   }
-  dem++;
+  //dem++;
   while ((*dem++)!=':');
   *h=0;
+  while ((*dem++)==' ');
   for(int i=0;i<3;i++){
     *h=(*h)*10+*(dem+i)-'0';
   }
