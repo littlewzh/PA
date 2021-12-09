@@ -61,8 +61,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", h);
     k++;
   }*/
- *w=128;
- *h=128;
+ *w=400;
+ *h=300;
   //TODO()
 }
 static uint32_t  canvas[300][400]={0};
