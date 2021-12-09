@@ -64,7 +64,7 @@ void NDL_OpenCanvas(int *w, int *h) {
   for(int i=0;i<128;i++){
     printf("%c",s[i]);
   }
-  
+  printf("\n");
  *w=400;
  *h=300;
   //TODO()
