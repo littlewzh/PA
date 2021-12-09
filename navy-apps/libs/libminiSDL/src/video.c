@@ -11,13 +11,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   uint32_t *d;
   uint32_t *s;
-  d=dst->pixels;
+  d=dst->pixels+dstrect->y*400+dstrect->x;
   s=src->pixels;
-  for(int i=0;i<src->h;i++){
+  /*for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
       *(d+(i+dstrect->y)*400+j+dstrect->x)=*(s+i*src->w+j);
     }
-  }
+  }*/
+  while(*s!='\0') *d++=*s++;
   /*for(int i=dstrect->y;i<300;i++){
     for(int j=dstrect->x;j<400;j++){
       *(d+i*400+j)=*s;
