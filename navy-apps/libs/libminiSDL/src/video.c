@@ -15,7 +15,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   s=src->pixels;
   for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
-      *(d+(i+dstrect->y)*400+j+dstrect->x)=*(s+i*400+j);
+      *(d+(i+dstrect->y)*400+j+dstrect->x)=*(s+i*src->w+j);
     }
   }
 }
