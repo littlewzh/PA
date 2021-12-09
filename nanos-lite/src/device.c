@@ -5,7 +5,7 @@
 #else
 # define MULTIPROGRAM_YIELD()
 #endif
-
+extern uint8_t ramdisk_start;
 #define NAME(key) \
   [AM_KEY_##key] = #key,
 
@@ -40,7 +40,8 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  ramdisk_read(buf,offset,len);
+  strncpy((char *)buf,(char *)(&ramdisk_start+offset),len);
+  //ramdisk_read(buf,offset,len);
   return len;
 }
 
