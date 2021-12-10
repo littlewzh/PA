@@ -1,6 +1,6 @@
 #include <NDL.h>
 #include <SDL.h>
-
+#include <string.h>
 #define keyname(k) #k,
 
 static const char *keyname[] = {
@@ -69,6 +69,9 @@ int SDL_WaitEvent(SDL_Event *event) {
       j++;
     }
     printf("%s\n",key);
+    for(int i=0;i<128;i++){
+      if(strcmp(key,keyname[i])==0) num=i;break;
+    }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
     event->key.keysym.sym=num;
