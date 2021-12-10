@@ -14,17 +14,17 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  //char key[32];
+  char key[32];
   if(NDL_PollEvent(buf, sizeof(buf))){
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
-    //printf("%s\n",buf);
+    printf("%s\n",buf);
     num=0;
     int i;
-    for(i=3;i<64&&buf[i]!=' ';i++){
-      num=num*10+buf[i]-'0';
-    }
-    /*i++;
+    //for(i=3;i<64&&buf[i]!=' ';i++){
+    //  num=num*10+buf[i]-'0';
+    //}
+    i=3;
     int j=0;
     while(buf[i]!='\n'){
       key[j]=buf[i];
@@ -35,7 +35,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     key[j]='\0';
     for(int j=0;j<83;j++){
       if(strncmp(key,keyname[j],5)==0) {num=j;break;}
-    }*/
+    }
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
     ev->key.keysym.sym=num;
@@ -55,13 +55,14 @@ int SDL_PollEvent(SDL_Event *ev) {
 int SDL_WaitEvent(SDL_Event *event) {
   
   while(NDL_PollEvent(buf, sizeof(buf))==0);
-    //char key[32];
+    char key[32];
+    printf("%s\n",buf);
     int i;
     num=0;
-    for(i=3;i<64&&buf[i]!=' ';i++){
-      num=num*10+buf[i]-'0';
-    }
-    /*i++;
+    //for(i=3;i<64&&buf[i]!=' ';i++){
+    //  num=num*10+buf[i]-'0';
+    //}
+    i=3;
     int j=0;
     while(buf[i]!='\n'){
       key[j]=buf[i];
@@ -72,7 +73,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     printf("%s\n",key);
     for(int j=0;j<83;j++){
       if(strcmp(key,keyname[j])==0) {num=j;break;}
-    }*/
+    }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
     event->key.keysym.sym=num;
