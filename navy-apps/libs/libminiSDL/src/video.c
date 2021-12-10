@@ -24,7 +24,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
      }
    }
   }
-  else{printf("should not reach here1\n");}
+  else{
+    //printf("should not reach here1\n");
+    for(int i=0;i<src->h;i++){
+    for(int j=0;j<src->w;j++){
+      *(d+(i+y)*400+j+x)=*(s+(i+srcrect->y)*src->w+j+srcrect->x);
+     }
+   }
+  }
   //while(*s!='\0') *d++=*s++;
   /*for(int i=dstrect->y;i<300;i++){
     for(int j=dstrect->x;j<400;j++){
