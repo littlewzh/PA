@@ -13,6 +13,8 @@ void do_syscall(Context *c) {
 #include <fs.h>
 #include <sys/time.h>
 #include <time.h> 
+#include <proc.h>
+extern void naive_uload(PCB *pcb, const char *filename);
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
@@ -45,7 +47,8 @@ void do_syscall(Context *c) {
     
     //#endif
     case SYS_exit:
-       halt(a[1]);
+       naive_uload(NULL,"/bin/menu");
+       //halt(a[1]);
        break;
     case SYS_yield:
        yield();
@@ -72,6 +75,10 @@ void do_syscall(Context *c) {
        break;
     case SYS_gettimeofday:
        c->GPRx=sys_gettimeofday((struct timeval *) a[1], (struct timezone *) a[2]);
+       break;
+    case SYS_execve:
+       naive_uload(NULL,(char *)a[1]);
+       c->GPRx=0;
        break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
