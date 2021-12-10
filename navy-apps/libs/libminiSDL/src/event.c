@@ -68,6 +68,7 @@ int SDL_WaitEvent(SDL_Event *event) {
       i++;
       j++;
     }
+    key[j]='\0';
     printf("%s\n",key);
     for(int i=0;i<128;i++){
       if(strcmp(key,keyname[i])==0) num=i;break;
