@@ -14,6 +14,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
+  char key[32];
   if(NDL_PollEvent(buf, sizeof(buf))){
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
@@ -21,6 +22,15 @@ int SDL_PollEvent(SDL_Event *ev) {
     for(int i=3;i<64&&buf[i]!=' ';i++){
       num=num*10+buf[i]-'0';
     }
+    i++;
+    int j=0;
+    while(buf[i]!='\n'){
+      key[j]=buf[i];
+      i++;
+      j++;
+    }
+    printf("%s\n",key);
+    //for(int j=0;j<)
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
     ev->key.keysym.sym=num;
