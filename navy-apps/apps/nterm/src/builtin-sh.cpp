@@ -24,7 +24,7 @@ static void sh_prompt() {
 
 static void sh_handle_cmd(const char *cmd) {
   //printf("%s",cmd);
-  char *arg=strtok(NULL," ");
+  char *arg=strtok((char *)cmd," ");
   if(strcmp(arg,"run")){
     execve(cmd,NULL,NULL);
   }
