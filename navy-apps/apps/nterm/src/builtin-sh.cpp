@@ -24,10 +24,15 @@ static void sh_prompt() {
 
 static void sh_handle_cmd(const char *cmd) {
   //printf("%s",cmd);
-  char *arg=strtok((char *)cmd," ");
-  printf("%s",arg);
-  if(strcmp(arg,"run")==0){
-    execve(cmd,NULL,NULL);
+  //char *arg=strtok((char *)cmd," ");
+  //printf("%s",arg);
+  if(strncmp(cmd,"run",3)==0){
+    char arg[32];
+    int k=3;
+    while(*(cmd+k)==' ') k++;
+    sscanf(cmd+k,"%s",arg);
+    execve(arg,NULL,NULL);
+    
   }
   
 }
