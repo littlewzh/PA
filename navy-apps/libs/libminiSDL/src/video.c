@@ -17,11 +17,14 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int x,y;
   if((dstrect)==NULL) {x=0;y=0;}
   else {x=dstrect->x;y=dstrect->y;}
-  for(int i=0;i<src->h;i++){
+  if(srcrect==NULL){
+    for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
       *(d+(i+y)*400+j+x)=*(s+i*src->w+j);
-    }
+     }
+   }
   }
+  else{printf("should not reach here1\n");}
   //while(*s!='\0') *d++=*s++;
   /*for(int i=dstrect->y;i<300;i++){
     for(int j=dstrect->x;j<400;j++){
@@ -40,7 +43,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
      }
    }
  }
- else{assert(0);}
+ else{printf("should not reach here2\n");}
 }
 
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
