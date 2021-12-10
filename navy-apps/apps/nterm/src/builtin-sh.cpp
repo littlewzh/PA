@@ -23,8 +23,12 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
-  printf("%s",cmd);
-  execve(cmd,NULL,NULL);
+  //printf("%s",cmd);
+  char *arg=strtok(NULL," ");
+  if(strcmp(arg,"run")){
+    execve(cmd,NULL,NULL);
+  }
+  
 }
 
 void builtin_sh_run() {
