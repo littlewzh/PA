@@ -59,7 +59,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     int i;
     num=0;
     for(i=3;i<64&&buf[i]!=' ';i++){
-      num=num*10+buf[i]-'0';
+      num=0;//num*10+buf[i]-'0';
     }
     i++;
     int j=0;
