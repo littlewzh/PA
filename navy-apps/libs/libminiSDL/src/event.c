@@ -54,7 +54,7 @@ int SDL_WaitEvent(SDL_Event *event) {
   while(NDL_PollEvent(buf, sizeof(buf))==0);
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
-    printf("%s\n",buf);
+    //printf("%s\n",buf);
     char key[32];
     int i;
     num=0;
@@ -69,9 +69,9 @@ int SDL_WaitEvent(SDL_Event *event) {
       j++;
     }
     key[j]='\0';
-    printf("%s\n",key);
-    for(int i=0;i<128;i++){
-      if(strcmp(key,keyname[i])==0) num=i;break;
+    //printf("%s\n",key);
+    for(int j=0;j<83;j++){
+      if(strcmp(key,keyname[i])==0) num=j;break;
     }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
