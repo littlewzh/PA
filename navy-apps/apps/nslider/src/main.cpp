@@ -2,10 +2,10 @@
 #include <SDL_bmp.h>
 #include <stdio.h>
 #include <assert.h>
-
+//#include <stdint.h>
 #define W 400
 #define H 300
-
+//extern int _syscall_(int, uintptr_t, uintptr_t, uintptr_t);
 // USAGE:
 //   j/down - page down
 //   k/up - page up
@@ -59,7 +59,7 @@ int main() {
 
     if (e.type == SDL_KEYDOWN) {
       switch(e.key.keysym.sym) {
-        case SDLK_END: return 0;
+        case 1: return 0;
         case SDLK_0: rep = rep * 10 + 0; break;
         case SDLK_1: rep = rep * 10 + 1; break;
         case SDLK_2: rep = rep * 10 + 2; break;
