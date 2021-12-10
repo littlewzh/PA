@@ -34,7 +34,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     
     key[j]='\0';
     for(int j=0;j<83;j++){
-      if(strncmp(key,keyname[j],5)==0) {num=j;break;}
+      if(strcmp(key,keyname[j])==0) {num=j;break;}
     }
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
