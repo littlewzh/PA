@@ -71,7 +71,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     key[j]='\0';
     //printf("%s\n",key);
     for(int j=0;j<83;j++){
-      if(strcmp(key,keyname[i])==0) num=j;break;
+      if(strncmp(key,keyname[i],4)==0) num=j;break;
     }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
