@@ -28,11 +28,15 @@ static void sh_handle_cmd(const char *cmd) {
   //printf("%s",arg);
   if(strncmp(cmd,"run",3)==0){
     char arg[32];
+    arg[0]='/';
+    arg[1]='b';
+    arg[2]='i';
+    arg[3]='n';
+    arg[4]='/';
     int k=3;
     while(*(cmd+k)==' ') k++;
-    sscanf(cmd+k,"%s",arg);
+    sscanf(cmd+k,"%s",arg+5);
     execve(arg,NULL,NULL);
-    
   }
   
 }
