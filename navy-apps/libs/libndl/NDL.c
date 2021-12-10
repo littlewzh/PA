@@ -61,12 +61,12 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   //}
     //uint32_t  canvas[300][400];
      //printf("reach here\n");
-     for(int i=0;i<300;i++){
+    /* for(int i=0;i<300;i++){
        for(int j=0;j<400;j++){
          canvas[i][j]=0;
        }
-     }
-    //memset(canvas,0x00000,sizeof(canvas));
+     }*/
+    memset(canvas,0,sizeof(canvas));
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
         canvas[i+y][j+x]=pixels[i*w+j];
