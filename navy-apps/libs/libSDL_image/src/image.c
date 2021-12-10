@@ -17,13 +17,14 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
   assert(freesrc == 0);
   return NULL;
 }
-static char buf[300*400*4];
+static char buf[300*400*4]={0};
 SDL_Surface* IMG_Load(const char *filename) {
   printf("reach here\n");
   int fd=open(filename,0,0);
   //char *buf;
   uint32_t size=300*400*4;
   //buf= malloc(size);
+  
   size=read(fd,(void *)buf,size);
   return STBIMG_LoadFromMemory(buf,size);
   //return NULL;
