@@ -28,7 +28,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     //printf("should not reach here1\n");
     for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
-      *(d+(i+y)*287+j+x)=*(s+(i+srcrect->y)*srcrect->w+j+srcrect->x);
+      *(d+(i+y)*287+j+x)=*(s+(i+srcrect->y)*287+j+srcrect->x);
      }
    }
   }
