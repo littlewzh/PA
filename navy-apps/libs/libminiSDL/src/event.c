@@ -22,7 +22,7 @@ int SDL_PollEvent(SDL_Event *ev) {
     num=0;
     int i;
     for(i=3;i<64&&buf[i]!=' ';i++){
-      num=num*10+buf[i]-'0';
+      num=0;//num*10+buf[i]-'0';
     }
     i++;
     int j=0;
@@ -31,7 +31,13 @@ int SDL_PollEvent(SDL_Event *ev) {
       i++;
       j++;
     }
-    printf("%s\n",key);
+    
+    key[j]='\0';
+    //printf("%s\n",key);
+    //printf("%s\n",keyname[74]);
+    for(int j=0;j<83;j++){
+      if(strncmp(key,keyname[j],5)==0) {num=j;break;}
+    }
     //for(int j=0;j<)
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
@@ -70,19 +76,19 @@ int SDL_WaitEvent(SDL_Event *event) {
     }
     key[j]='\0';
     printf("%s\n",key);
-    printf("%s\n",keyname[74]);
+    //printf("%s\n",keyname[74]);
     for(int j=0;j<83;j++){
       if(strncmp(key,keyname[j],5)==0) {num=j;break;}
     }
   if(buf[1]=='d'){
     event->type=SDL_KEYDOWN;
     event->key.keysym.sym=num;
-    printf("%d\n",event->key.keysym.sym);
-    printf("%d\n",event->type);
+    //printf("%d\n",event->key.keysym.sym);
+    //printf("%d\n",event->type);
   }
   else if(buf[1]=='u'){
     event->type=SDL_KEYUP;
-    printf("%d\n",event->type);
+    //printf("%d\n",event->type);
   }
   else {event->type=2;}
   return 1;
