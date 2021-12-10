@@ -26,7 +26,7 @@ static void sh_handle_cmd(const char *cmd) {
   //printf("%s",cmd);
   char *arg=strtok((char *)cmd," ");
   printf("%s",arg);
-  if(strcmp(arg,"run")){
+  if(strcmp(arg,"run")==0){
     execve(cmd,NULL,NULL);
   }
   
