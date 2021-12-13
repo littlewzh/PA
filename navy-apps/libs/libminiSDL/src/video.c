@@ -20,7 +20,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   if(srcrect==NULL){
     for(int i=0;i<src->h;i++){
     for(int j=0;j<src->w;j++){
-      *(d+(i+y)*400+j+x)=*(s+i*src->w+j);
+      *(d+(i+y)*(dst->w)+j+x)=*(s+i*src->w+j);
      }
    }
   }
