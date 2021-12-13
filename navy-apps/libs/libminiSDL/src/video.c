@@ -63,13 +63,13 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       }
       printf("reach here11\n");
       NDL_DrawRect((uint32_t *)pix, 0, 0, 400, 300);
-      while(1);
+      //while(1);
       printf("reach here111\n");
     }
     else { 
       printf("reach here2\n");
-      for(int i=0;i<s->h;i++){
-        for(int j=0;j<s->w;j++){
+      for(int i=0;i<h;i++){
+        for(int j=0;j<w;j++){
         pix[i][j]=(s->format->palette->colors+(*(s->pixels+i*s->w+j)&0xff))->val;
         }
       }
