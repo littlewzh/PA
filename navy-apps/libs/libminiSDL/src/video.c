@@ -76,6 +76,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       printf("reach here22\n");
       //uint32_t pix[h][w];
       NDL_DrawRect((uint32_t *)pix, x, y, w, h);
+       printf("reach here222\n");
     }
   }
 }
