@@ -39,7 +39,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  if(dstrect==NULL){
    for(int i=0;i<dst->h;i++){
      for(int j=0;j<dst->w;j++){
-        *(dst->pixels+i*(dst->w)+j)=color>>24;
+        *(dst->pixels+i*(dst->w)+j)=color;
      }
    }
  }
@@ -59,7 +59,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       }
     }
     printf("reach here1\n");
-    if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
+    if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)pix, 0, 0, s->w, s->h);}
     else { 
       printf("reach here2\n");
       NDL_DrawRect(pix, x, y, w, h);}
