@@ -31,7 +31,6 @@ int SDL_PollEvent(SDL_Event *ev) {
       i++;
       j++;
     }
-    
     key[j]='\0';
     for(int j=0;j<83;j++){
       if(strcmp(key,keyname[j])==0) {num=j;break;}
