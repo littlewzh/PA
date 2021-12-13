@@ -45,7 +45,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  }
  else{printf("should not reach here2\n");}
 }
-static uint32_t pix[300][400];
+//static uint32_t pix[300][400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   if(s->format->BitsPerPixel==32){
     if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(s->pixels, 0, 0, s->w, s->h);}
@@ -54,11 +54,11 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   else{
     if(x==0&&y==0&&w==0&&h==0) {
       printf("reach here1\n");
-      
+      uint32_t pix[s->h][s->w];
       //pix=malloc((s->h)*(s->w));
       for(int i=0;i<s->h;i++){
         for(int j=0;j<s->w;j++){
-        pix[i][j]=0;//s->format->palette->colors->val;
+        pix[i][j]=(s->format->palette->colors+*(s->pixels+i*s->w+j))->val;
         }
       }
       printf("reach here11\n");
@@ -67,7 +67,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     }
     else { 
       printf("reach here2\n");
-      //uint32_t pix[h][w];
+      uint32_t pix[h][w];
       NDL_DrawRect((uint32_t *)pix, x, y, w, h);
     }
   }
