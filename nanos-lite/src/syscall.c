@@ -47,7 +47,7 @@ void do_syscall(Context *c) {
     
     //#endif
     case SYS_exit:
-       naive_uload(NULL,"/bin/nterm");
+       naive_uload(NULL,"/bin/menu");
        //halt(a[1]);
        break;
     case SYS_yield:
