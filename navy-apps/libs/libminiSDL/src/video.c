@@ -58,7 +58,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       //pix=malloc((s->h)*(s->w));
       for(int i=0;i<s->h;i++){
         for(int j=0;j<s->w;j++){
-        pix[i][j]=(s->format->palette->colors+*(s->pixels+i*s->w+j))->val;
+        pix[i][j]=(s->format->palette->colors+(*(s->pixels+i*s->w+j)&0xff))->val;
         }
       }
       printf("reach here11\n");
