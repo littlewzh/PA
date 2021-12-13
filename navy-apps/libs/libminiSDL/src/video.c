@@ -58,10 +58,10 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
         pix[i][j]=s->format->palette->colors->val;
       }
     }
-    printf("reach here\n");
+    printf("reach here1\n");
     if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
     else { 
-      printf("reach here\n");
+      printf("reach here2\n");
       NDL_DrawRect(pix, x, y, w, h);}
     
   }
