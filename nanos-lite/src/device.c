@@ -40,9 +40,9 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   return strlen(buf);
 }
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  sprintf(buf,"%s",(char *)offset);
+  //sprintf(buf,"%s",(char *)offset);
   //strncpy((char *)buf,(char *)(offset),len);
-  //ramdisk_read(buf,offset,len);
+  ramdisk_read(buf,offset,len);
   return len;
 }
 
