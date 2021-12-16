@@ -17,7 +17,7 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
   assert(freesrc == 0);
   return NULL;
 }
-//static char buf[400*300*4]={0};
+static char buf[400*300*4]={0};
 
 SDL_Surface* IMG_Load(const char *filename) {
   printf("reach img_load\n");
