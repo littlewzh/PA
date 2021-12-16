@@ -47,6 +47,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   else {ev->type=2;}
   return 1;
   }
+  printf("1\n");
   return 0;
 }
 
