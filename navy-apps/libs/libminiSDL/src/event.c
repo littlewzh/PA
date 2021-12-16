@@ -14,6 +14,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
+  printf("sdl_poll\n");
   char key[32];
   char buf[64];
   int num;
@@ -56,6 +57,7 @@ int SDL_PollEvent(SDL_Event *ev) {
 int SDL_WaitEvent(SDL_Event *event) {
   char buf[64];
    int num;
+   printf("sdl_wait\n");
   while(NDL_PollEvent(buf, sizeof(buf))==0);
     char key[32];
     
