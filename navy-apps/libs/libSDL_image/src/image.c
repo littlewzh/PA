@@ -19,7 +19,7 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
 }
 //static char buf[400*300*4]={0};
 
-/*SDL_Surface* IMG_Load(const char *filename) {
+SDL_Surface* IMG_Load(const char *filename) {
   printf("reach img_load\n");
   int fd=open(filename,0,0);
   //char *buf;
@@ -29,8 +29,8 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
   size=read(fd,(void *)buf,size);
   return STBIMG_LoadFromMemory(buf,size);
   //return NULL;
-}*/
-SDL_Surface* IMG_Load(const char *filename) {
+}
+/*SDL_Surface* IMG_Load(const char *filename) {
   printf("reach img_load\n");
   FILE* fp = fopen(filename,"r");
   fseek(fp,0,SEEK_END);
@@ -43,7 +43,7 @@ SDL_Surface* IMG_Load(const char *filename) {
   free(buf);
   fclose(fp);
   return sp;
-}
+}*/
 int IMG_isPNG(SDL_RWops *src) {
   return 0;
 }
