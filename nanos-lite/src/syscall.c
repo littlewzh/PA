@@ -15,9 +15,11 @@ void do_syscall(Context *c) {
 #include <time.h> 
 #include <proc.h>
 extern void naive_uload(PCB *pcb, const char *filename);
+
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
+  tv->tv_sec=io_read(AM_TIMER_UPTIME).us>>32;
   tv->tv_usec=io_read(AM_TIMER_UPTIME).us;
   return 0;
 }
