@@ -37,28 +37,30 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  if(dstrect==NULL){
    for(int i=0;i<dst->h;i++){
      for(int j=0;j<dst->w;j++){
-        *(d+i*(dst->w)+j)=color;
+       if(dst->format->BitsPerPixel==8){
+         *(dst->pixels+i*(dst->w)+j)=color;
+       }
+       else{*(d+i*(dst->w)+j)=color;}
      }
    }
  }
  else{printf("should not reach here2\n");}
 }
-//static uint32_t pix[300][400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t *pix;
-  if (s->format->BitsPerPixel == 8){
-    pix= malloc(sizeof(uint32_t) * s->w * s->h);
-    for (int i = 0; i < s->w * s->h; i++){
-      uint8_t *src_pixels = (uint8_t *)(s->pixels);
-      SDL_Color *colors = s->format->palette->colors;
-      pix[i] = colors[src_pixels[i]].val;
+  if (s->format->BitsPerPixel==8){
+    pix=malloc(sizeof(uint32_t) * s->w * s->h);
+    for(int i=0;i<s->w*s->h;i++){
+      uint8_t *src_pixels=(uint8_t *)(s->pixels);
+      SDL_Color *colors=s->format->palette->colors;
+      pix[i]=colors[src_pixels[i]].val;
     }
   }
   else{
-    pix = (uint32_t *)s->pixels;
+    pix=(uint32_t *)s->pixels;
   }
   if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
-    else {NDL_DrawRect(pix, x, y, w, h);}
+  else {NDL_DrawRect(pix, x, y, w, h);}
   /*else{
     if(x==0&&y==0&&w==0&&h==0) {
       printf("reach here1\n");
