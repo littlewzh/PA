@@ -14,7 +14,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   else {x=dstrect->x;y=dstrect->y;}
   if(srcrect==NULL){
     for(int i=0;i<src->h;i++){
-    for(int j=0;j<src->w;j++){
+     for(int j=0;j<src->w;j++){
       if(dst->format->BitsPerPixel==8){
         *(dst->pixels+(i+y)*(dst->w)+j+x)=*(src->pixels+i*src->w+j);
         printf("blits1\n");
@@ -27,7 +27,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   else{
     //printf("should not reach here1\n");
     for(int i=0;i<srcrect->h;i++){
-    for(int j=0;j<srcrect->w;j++){
+     for(int j=0;j<srcrect->w;j++){
       if(dst->format->BitsPerPixel==8){
         printf("blits2\n");
         *(dst->pixels+(i+y)*(dst->w)+j+x)=*(src->pixels+(i+srcrect->y)*src->w+j+srcrect->x);
@@ -56,13 +56,15 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t *pix;
   if (s->format->BitsPerPixel==8){
-    
     pix=malloc(4*300*400);
-    for(int i=0;i<(s->w)*(s->h);i++){
-      //uint8_t *src_pixels=(uint8_t *)(s->pixels);
-      SDL_Color *colors=s->format->palette->colors;
-      pix[i]=colors[*(s->pixels+i)].val;
+    for(int i=0;i<s->h;i++){
+      for(int j=0;j<(s->w);j++){
+        uint8_t *src_pixels=(uint8_t *)(s->pixels);
+        SDL_Color *colors=s->format->palette->colors;
+        pix[i*(s->w)+j]=colors[src_pixels[(j + y) * s->w + (i + x)]].val;
+      }
     }
+    
     
   }
   else{
