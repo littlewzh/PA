@@ -30,20 +30,35 @@ int atoi(const char* nptr) {
 }
 //static uint32_t *addr=NULL;
 //static uint32_t *p=NULL;
-void *malloc(size_t size) {
+/*void *malloc(size_t size) {
     // On native, malloc() will be called during initializaion of C runtime.
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
-/*#if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
+#if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
   panic("Not implemented");
-#endif*/
+#endif
 	static char* freep = 0;
 	if(freep == 0) {freep = heap.start;}
 		
 	freep += size;
   return freep - size;
-}
+}*/
+static char* old_addr;
 
+void *malloc(size_t size) {
+  
+  static int first = 1;
+  if(first){
+    extern Area heap;
+    old_addr = heap.start;
+    first = 0;
+  }
+
+  char* old = (void*)old_addr;
+  old_addr +=size;
+  assert((uintptr_t)heap.start <= (uintptr_t)old_addr && (uintptr_t)old_addr <(uintptr_t)heap.end);
+  return old;
+}
 void free(void *ptr) {
 }
 
