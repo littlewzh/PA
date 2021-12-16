@@ -15,7 +15,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  printf("sdl_poll\n");
+  //printf("sdl_poll\n");
   char buf[64];
   int len=NDL_PollEvent(buf, sizeof(buf));
   //printf("2\n");
@@ -54,10 +54,10 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-  printf("sdl_wait\n");
-  //while(!SDL_PollEvent(event));
+  //printf("sdl_wait\n");
+  while(!SDL_PollEvent(event));
   
-  char buf[64];
+  /*char buf[64];
    int num;
    printf("sdl_wait\n");
   while(NDL_PollEvent(buf, sizeof(buf))==0);
@@ -91,7 +91,7 @@ int SDL_WaitEvent(SDL_Event *event) {
     event->type=SDL_KEYUP;
     //printf("%d\n",event->type);
   }
-  else {event->type=2;}
+  else {event->type=2;}*/
   //while(!SDL_PollEvent(event));
   return 1;
 }
