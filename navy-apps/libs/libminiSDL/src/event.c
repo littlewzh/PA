@@ -51,6 +51,8 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
+  while(!SDL_PollEvent(event));
+  return 1;
   /*char buf[64];
    int num;
    printf("sdl_wait\n");
@@ -86,8 +88,8 @@ int SDL_WaitEvent(SDL_Event *event) {
     //printf("%d\n",event->type);
   }
   else {event->type=2;}*/
-  while(!SDL_PollEvent(event));
-  return 1;
+  //while(!SDL_PollEvent(event));
+  //return 1;
 }
 
 int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {

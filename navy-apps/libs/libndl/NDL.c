@@ -49,7 +49,7 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-  if(*w==0&&*h==0){
+  if(*w==0||*h==0){
    *w=400;
    *h=300;
   }
