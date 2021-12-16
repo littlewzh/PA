@@ -15,7 +15,7 @@
 #define DEFAULT_AMASK 0xff000000
 
 typedef struct {
-	int8_t x, y;   //int8_t
+	int32_t x, y;   //int8_t
 	uint32_t w, h;
 } SDL_Rect;
 
