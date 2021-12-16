@@ -51,8 +51,10 @@ void NDL_OpenCanvas(int *w, int *h) {
   printf("%d %d\n",*w,*h);
   //TODO()
 }
-static uint32_t  canvas[300][400];
+//static uint32_t  canvas[300][400];
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+  uint32_t *canvas;
+  canvas=malloc(4*300*400);
   int fd=open("/dev/fb",0,0);
   //for(int i=0;i<h;i++){
     //printf("reach here\n");
@@ -67,8 +69,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     memset(canvas,0,sizeof(canvas));
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
-        canvas[i+y][j+x]=pixels[i*w+j];
-        //canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
+        //canvas[i+y][j+x]=pixels[i*w+j];
+        canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
       }
     }
     //printf("reach here\n");
