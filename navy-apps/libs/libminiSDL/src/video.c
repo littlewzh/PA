@@ -17,7 +17,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
      for(int j=0;j<src->w;j++){
       if(dst->format->BitsPerPixel==8){
         *(dst->pixels+(i+y)*(dst->w)+j+x)=*(src->pixels+i*src->w+j);
-        printf("blits1\n");
+        //printf("blits1\n");
         //memcpy(dst->pixels+(y+i)*dst->w+(x+j),src->pixels+i*src->w+j,src->format->BytesPerPixel);
       }
       else {*(d+(i+y)*(dst->w)+j+x)=*(s+i*src->w+j);}
