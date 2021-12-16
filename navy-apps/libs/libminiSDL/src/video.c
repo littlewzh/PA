@@ -61,11 +61,9 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       for(int j=0;j<(s->w);j++){
         uint8_t *src_pixels=(uint8_t *)(s->pixels);
         SDL_Color *colors=s->format->palette->colors;
-        pix[i*(s->w)+j]=colors[src_pixels[(j + y) * s->w + (i + x)]].val;
+        pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
-    
-    
   }
   else{
     pix=(uint32_t *)s->pixels;
