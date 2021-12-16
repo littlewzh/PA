@@ -56,9 +56,9 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  //printf("reach fillrect\n");
 }
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  uint32_t *pix;
+  uint32_t pix[(s->w)*s->h];
   if (s->format->BitsPerPixel==8){
-    pix=malloc(4*300*400);
+    //pix=malloc(4*300*400);
     memset(pix,0,sizeof(pix));
     for(int i=0;i<s->h;i++){
       for(int j=0;j<(s->w);j++){
@@ -67,14 +67,15 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
         pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
+    if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
+    else {NDL_DrawRect(pix, x, y, w, h);}
   }
   else{
-    pix=(uint32_t *)s->pixels;
-     //if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)s->pixels, 0, 0, s->w, s->h);}
-     //else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
+    //pix=(uint32_t *)s->pixels;
+     if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)s->pixels, 0, 0, s->w, s->h);}
+     else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
   }
-  if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
-  else {NDL_DrawRect(pix, x, y, w, h);}
+  
   //printf("reach update\n");
   //free(pix);
   /*else{
