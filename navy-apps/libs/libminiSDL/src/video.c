@@ -37,6 +37,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
      }
    }
   }
+  printf("reach blit\n");
 }
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   uint32_t *d=(uint32_t *)dst->pixels;
@@ -52,6 +53,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
    }
  }
  else{printf("should not reach here2\n");}
+ printf("reach fillrect\n");
 }
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t *pix;
