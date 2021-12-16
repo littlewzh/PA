@@ -239,7 +239,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     ConvertPixelsARGB_ABGR(new_pixels,new_pixels,s->w*s->h);
     NDL_DrawRect(new_pixels,x,y,w,h); 
     
-    free(new_pixels);
+    //free(new_pixels);
   }
 }
 
