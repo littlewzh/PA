@@ -48,7 +48,7 @@ void init_fs() {
 int fs_open(const char *pathname, int flags, int mode){
   for(int i=3;i<fs_number;i++){
      if(strcmp(pathname,file_table[i].name)==0){
-       Log("open file = %s",file_table[i].name);
+       if(i!=fs_number-3) Log("open file = %s",file_table[i].name);
        file_table[i].offset = 0;
        return i;
      }
