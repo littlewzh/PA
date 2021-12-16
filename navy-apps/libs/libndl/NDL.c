@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
+static struct timeval boot_time;
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
@@ -15,8 +15,9 @@ static int screen_w = 0, screen_h = 0;
 uint32_t NDL_GetTicks() {
   struct timeval t;
   gettimeofday(&t,NULL);
+  uint32_t ticks = (t.tv_sec - boot_time.tv_sec)*1000 + (t.tv_usec - boot_time.tv_usec)/1000;
   //printf("%d\n",t.tv_usec/1000);
-  return t.tv_usec/1000;
+  return ticks;
 }
 
 int NDL_PollEvent(char *buf, int len) {
@@ -51,10 +52,10 @@ void NDL_OpenCanvas(int *w, int *h) {
   printf("%d %d\n",*w,*h);
   //TODO()
 }
-//static uint32_t  canvas[300][400];
+static uint32_t  canvas[300][400];
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
-  uint32_t *canvas;
-  canvas=malloc(4*300*400);
+  //uint32_t *canvas;
+  //canvas=malloc(4*300*400);
   int fd=open("/dev/fb",0,0);
   //for(int i=0;i<h;i++){
     //printf("reach here\n");
@@ -69,8 +70,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     memset(canvas,0,sizeof(canvas));
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
-        //canvas[i+y][j+x]=pixels[i*w+j];
-        canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
+        canvas[i+y][j+x]=pixels[i*w+j];
+        //canvas[(i + y) * 400 + (j + x)] = pixels[i * w + j];
       }
     }
     //printf("reach here\n");
@@ -95,6 +96,7 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+  gettimeofday(&boot_time, NULL);
   return 0;
 }
 
