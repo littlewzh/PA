@@ -57,6 +57,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   uint32_t *pix;
   if (s->format->BitsPerPixel==8){
     pix=malloc(4*300*400);
+    memset(pix,0,sizeof(0));
     for(int i=0;i<s->h;i++){
       for(int j=0;j<(s->w);j++){
         uint8_t *src_pixels=(uint8_t *)(s->pixels);
