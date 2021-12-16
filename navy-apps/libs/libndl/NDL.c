@@ -22,7 +22,7 @@ uint32_t NDL_GetTicks() {
 
 int NDL_PollEvent(char *buf, int len) {
   int fd=open("/dev/events",0,0);
-  printf("reach poll\n");
+  //printf("reach poll\n");
   return read(fd,(void *)buf,len);
   //if(f==0) return 0;
   //return 1;
@@ -77,6 +77,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     }
     //printf("reach here\n");
     write(fd,(void *)canvas,400*300*4);
+    close(fd);
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
