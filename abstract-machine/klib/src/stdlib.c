@@ -38,8 +38,8 @@ void *malloc(size_t size) {
   panic("Not implemented");
 #endif*/
 	static char* freep = 0;
-	if(freep == 0)
-		freep = heap.start;
+	if(freep == 0) {freep = heap.start;}
+		
 	freep += size;
   return freep - size;
 }
