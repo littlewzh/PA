@@ -19,8 +19,9 @@ extern void naive_uload(PCB *pcb, const char *filename);
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
-  tv->tv_sec=io_read(AM_TIMER_UPTIME).us>>32;
-  tv->tv_usec=io_read(AM_TIMER_UPTIME).us;
+  uint64_t tim=io_read(AM_TIMER_UPTIME).us;
+  tv->tv_sec=tim>>32;
+  tv->tv_usec=tim;
   return 0;
 }
 int32_t syswrite(int fd, const void *buf, size_t len){
