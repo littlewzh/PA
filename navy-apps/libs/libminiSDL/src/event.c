@@ -15,7 +15,7 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
-  //printf("sdl_poll\n");
+  printf("sdl_poll\n");
   char buf[64];
   int len=NDL_PollEvent(buf, sizeof(buf));
   //printf("2\n");
