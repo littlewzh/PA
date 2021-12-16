@@ -15,7 +15,7 @@
 #define DEFAULT_AMASK 0xff000000
 
 typedef struct {
-	int32_t x, y;   //int8_t
+	int8_t x, y;   //int8_t
 	uint32_t w, h;
 } SDL_Rect;
 
@@ -45,7 +45,7 @@ typedef struct {
 	SDL_PixelFormat *format;
 	int w, h;
 	uint16_t pitch;
-	uint32_t *pixels;         //////???????uint8_t
+	uint8_t *pixels;         //////???????uint8_t
 } SDL_Surface;
 
 SDL_Surface* SDL_CreateRGBSurfaceFrom(void *pixels, int width, int height, int depth,
