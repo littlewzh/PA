@@ -9,6 +9,7 @@ static const char *keyname[] = {
 };
 //static char buf[64];
 //static int num;
+static uint8_t keystate[83]={0};
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
 }
@@ -17,7 +18,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   //printf("sdl_poll\n");
   char buf[64];
   int len=NDL_PollEvent(buf, sizeof(buf));
-  printf("2\n");
+  //printf("2\n");
   if(len!=0){
     char key[32];
     int num;
@@ -48,7 +49,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   else {ev->type=2;}
   return 1;
   }
-  printf("1\n");
+  //printf("1\n");
   return 0;
 }
 
@@ -99,5 +100,5 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
-  return NULL;
+  return keystate;
 }
