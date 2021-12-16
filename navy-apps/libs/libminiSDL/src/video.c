@@ -55,8 +55,9 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  else{printf("should not reach here2\n");}
  //printf("reach fillrect\n");
 }
+static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  uint32_t pix[(s->w)*s->h];
+  
   if (s->format->BitsPerPixel==8){
     //pix=malloc(4*300*400);
     memset(pix,0,sizeof(pix));
