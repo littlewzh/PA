@@ -7,14 +7,16 @@ static const char *keyname[] = {
   "NONE",
   _KEYS(keyname)
 };
-static char buf[64];
-static int num;
+//static char buf[64];
+//static int num;
 int SDL_PushEvent(SDL_Event *ev) {
   return 0;
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
   char key[32];
+  char buf[64];
+  int num;
   if(NDL_PollEvent(buf, sizeof(buf))){
     //char *arg=strtok(NULL," ");
     //arg=strtok(NULL," ");
@@ -52,9 +54,11 @@ int SDL_PollEvent(SDL_Event *ev) {
 }
 
 int SDL_WaitEvent(SDL_Event *event) {
-  
+  char buf[64];
+   int num;
   while(NDL_PollEvent(buf, sizeof(buf))==0);
     char key[32];
+    
     printf("%s\n",buf);
     int i;
     num=0;
