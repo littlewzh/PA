@@ -9,11 +9,9 @@
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  uint32_t *d;
-  uint32_t *s;
+  uint32_t *d=(uint32_t *)dst->pixels;
+  uint32_t *s=(uint32_t *)src->pixels;
   //d=dst->pixels+dstrect->y*400+dstrect->x;
-  d=dst->pixels;
-  s=src->pixels;
   int x,y;
   if((dstrect)==NULL) {x=0;y=0;}
   else {x=dstrect->x;y=dstrect->y;}
@@ -35,23 +33,33 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
 }
 //static uint32_t *d;
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
-  //d=dst->pixels;
+  uint32_t *d=(uint32_t *)dst->pixels;
  if(dstrect==NULL){
    for(int i=0;i<dst->h;i++){
      for(int j=0;j<dst->w;j++){
-        *(dst->pixels+i*(dst->w)+j)=color;
+        *(d+i*(dst->w)+j)=color;
      }
    }
  }
  else{printf("should not reach here2\n");}
 }
-static uint32_t pix[300][400];
+//static uint32_t pix[300][400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  if(s->format->BitsPerPixel==32){
-    if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(s->pixels, 0, 0, s->w, s->h);}
-    else {NDL_DrawRect(s->pixels, x, y, w, h);}
+  uint32_t *pix;
+  if (s->format->BitsPerPixel == 8){
+    pix= malloc(sizeof(uint32_t) * s->w * s->h);
+    for (int i = 0; i < s->w * s->h; i++){
+      uint8_t *src_pixels = (uint8_t *)(s->pixels);
+      SDL_Color *colors = s->format->palette->colors;
+      pix[i] = colors[src_pixels[i]].val;
+    }
   }
   else{
+    pix = (uint32_t *)s->pixels;
+  }
+  if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
+    else {NDL_DrawRect(pix, x, y, w, h);}
+  /*else{
     if(x==0&&y==0&&w==0&&h==0) {
       printf("reach here1\n");
       //uint32_t pix[s->h][s->w];
@@ -78,7 +86,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       NDL_DrawRect((uint32_t *)pix, x, y, w, h);
        printf("reach here222\n");
     }
-  }
+  }*/
 }
 
 // APIs below are already implemented.
