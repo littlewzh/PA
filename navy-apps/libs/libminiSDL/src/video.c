@@ -62,6 +62,10 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   
+  if(w==0 || h==0){
+    w = s->w;
+    h = s->h;
+  }
   if (s->format->BitsPerPixel==8){
     printf("reach update\n");
     //uint32_t *pix=malloc(4*(s->w)*(s->h));
@@ -69,15 +73,16 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     uint8_t *src_pixels=(uint8_t *)(s->pixels);
     SDL_Color *colors=s->format->palette->colors;
     int n=0;
-    for(int i=0;i<s->h;i++){
-      for(int j=0;j<(s->w);j++){
+    for(int i=0;i<h&&(i+y)<s->h;i++){
+      for(int j=0;j<w&&(j+x)<(s->w);j++){
        //pix[n++]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
         pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
     ConvertPixelsARGB_ABGR(pix,pix,s->w*s->h);
-    if(w==0||h==0) {NDL_DrawRect(pix, x, y, s->w, s->h);}
-    else {NDL_DrawRect(pix, x, y, w, h);}
+    NDL_DrawRect(pix, x, y, w, h);
+    //if(w==0||h==0) {NDL_DrawRect(pix, x, y, s->w, s->h);}
+    //else {NDL_DrawRect(pix, x, y, w, h);}
   }
   else{
     printf("reach update2\n");
