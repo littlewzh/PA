@@ -20,7 +20,7 @@ SDL_Surface* IMG_Load_RW(SDL_RWops *src, int freesrc) {
 static char buf[400*300*4]={0};
 
 SDL_Surface* IMG_Load(const char *filename) {
-  printf("reach img_load\n");
+  //printf("reach img_load\n");
   int fd=open(filename,0,0);
   //char *buf;
   uint32_t size=300*400*4;
