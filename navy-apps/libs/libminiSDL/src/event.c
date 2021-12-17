@@ -22,7 +22,7 @@ int SDL_PollEvent(SDL_Event *ev) {
   if(len!=0){
     char key[32];
     int num;
-    printf("%s\n",buf);
+    //printf("%s\n",buf);
     num=0;
     int i;
     i=3;
@@ -40,13 +40,13 @@ int SDL_PollEvent(SDL_Event *ev) {
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
     keystate[num]=1;
-    printf("%d\n",ev->key.keysym.sym);
-    printf("%d\n",ev->type);
+    //printf("%d\n",ev->key.keysym.sym);
+   // printf("%d\n",ev->type);
   }
   else if(buf[1]=='u'){
     ev->type=SDL_KEYUP;
     keystate[num]=0;
-    printf("%d\n",ev->type);
+   // printf("%d\n",ev->type);
   }
   else {ev->type=2;}
   return 1;
