@@ -73,7 +73,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
       }
     }
     ConvertPixelsARGB_ABGR(pix,pix,s->w*s->h);
-    if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
+    if(w==0||h==0) {NDL_DrawRect(pix, x, y, s->w, s->h);}
     else {NDL_DrawRect(pix, x, y, w, h);}
   }
   else{
