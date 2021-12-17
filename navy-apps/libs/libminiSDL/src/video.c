@@ -59,16 +59,17 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  else{printf("should not reach here2\n");}
  //printf("reach fillrect\n");
 }
-/*static uint32_t pix[300*400];
+static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   printf("reach update\n");
   if (s->format->BitsPerPixel==8){
     //pix=malloc(4*300*400);
     memset(pix,0,sizeof(pix));
+    uint8_t *src_pixels=(uint8_t *)(s->pixels);
+    SDL_Color *colors=s->format->palette->colors;
     for(int i=0;i<s->h;i++){
       for(int j=0;j<(s->w);j++){
-        uint8_t *src_pixels=(uint8_t *)(s->pixels);
-        SDL_Color *colors=s->format->palette->colors;
+       
         pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
@@ -81,8 +82,8 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
      if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)s->pixels, 0, 0, s->w, s->h);}
      else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
   }
-}*/
-void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+}
+/*void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   
   if(w==0 || h==0){
     w = s->w;
@@ -110,7 +111,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     
     free(new_pixels);
   }
-}
+}*/
 // APIs below are already implemented.
 
 static inline int maskToShift(uint32_t mask) {
