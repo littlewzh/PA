@@ -2,7 +2,7 @@
 #include <SDL.h>
 #include <string.h>
 #define keyname(k) #k,
-
+#include <assert.h>
 static const char *keyname[] = {
   "NONE",
   _KEYS(keyname)
@@ -101,5 +101,6 @@ int SDL_PeepEvents(SDL_Event *ev, int numevents, int action, uint32_t mask) {
 }
 
 uint8_t* SDL_GetKeyState(int *numkeys) {
+  assert(0);
   return keystate;
 }

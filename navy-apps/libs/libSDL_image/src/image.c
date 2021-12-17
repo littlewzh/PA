@@ -30,20 +30,6 @@ SDL_Surface* IMG_Load(const char *filename) {
   return STBIMG_LoadFromMemory(buf,size);
   //return NULL;
 }
-/*SDL_Surface* IMG_Load(const char *filename) {
-  printf("reach img_load\n");
-  FILE* fp = fopen(filename,"r");
-  fseek(fp,0,SEEK_END);
-  size_t size = ftell(fp);   
-  char* buf = malloc(size);
-  memset(buf,0,size);
-  fseek(fp,0,SEEK_SET);
-  fread(buf,1,size,fp);
-  SDL_Surface* sp = STBIMG_LoadFromMemory(buf,size);
-  free(buf);
-  fclose(fp);
-  return sp;
-}*/
 int IMG_isPNG(SDL_RWops *src) {
   return 0;
 }

@@ -76,37 +76,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
      if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)s->pixels, 0, 0, s->w, s->h);}
      else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
   }
-  
-  //printf("reach update\n");
-  //free(pix);
-  /*else{
-    if(x==0&&y==0&&w==0&&h==0) {
-      printf("reach here1\n");
-      //uint32_t pix[s->h][s->w];
-      //pix=malloc((s->h)*(s->w));
-      for(int i=0;i<s->h;i++){
-        for(int j=0;j<s->w;j++){
-        pix[i][j]=(s->format->palette->colors+(*(s->pixels+i*s->w+j)&0xff))->val;
-        }
-      }
-      printf("reach here11\n");
-      NDL_DrawRect((uint32_t *)pix, 0, 0, 400, 300);
-      //while(1);
-      printf("reach here111\n");
-    }
-    else { 
-      printf("reach here2\n");
-      for(int i=0;i<h;i++){
-        for(int j=0;j<w;j++){
-        pix[i][j]=(s->format->palette->colors+(*(s->pixels+i*s->w+j)&0xff))->val;
-        }
-      }
-      printf("reach here22\n");
-      //uint32_t pix[h][w];
-      NDL_DrawRect((uint32_t *)pix, x, y, w, h);
-       printf("reach here222\n");
-    }
-  }*/
 }
 
 // APIs below are already implemented.
