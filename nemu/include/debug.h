@@ -1,6 +1,6 @@
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
-volatile static int dummy;
+
 #include <common.h>
 #include <stdio.h>
 #include <utils.h>
@@ -25,3 +25,4 @@ volatile static int dummy;
 #define TODO() panic("please implement me")
 
 #endif
+volatile static int dummy;
