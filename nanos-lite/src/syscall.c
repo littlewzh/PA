@@ -38,6 +38,8 @@ int32_t syswrite(int fd, const void *buf, size_t len){
   //}
   //return -1;
 }
+//extern size_t fb_write(const void *buf, size_t offset, size_t len);
+static uint32_t buf[300*400]={0};
 void do_syscall(Context *c) {
   uintptr_t a[4];
   a[0] = c->GPR1;
@@ -80,6 +82,7 @@ void do_syscall(Context *c) {
        c->GPRx=sys_gettimeofday((struct timeval *) a[1], (struct timezone *) a[2]);
        break;
     case SYS_execve:
+       io_write(AM_GPU_FBDRAW, 0, 0,(uint32_t *)buf, 400, 300, true);
        naive_uload(NULL,(char *)a[1]);
        c->GPRx=0;
        break;
