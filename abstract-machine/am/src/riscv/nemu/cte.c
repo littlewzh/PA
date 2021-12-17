@@ -2,7 +2,7 @@
 #include <riscv/riscv.h>
 #include <klib.h>
 
-static Context* (*user_handler)(Event, Context*) = NULL;
+static Context* (*user_handler)(Event, Context*) = NULL;         //定义了一个函数指针
 Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
@@ -24,7 +24,7 @@ Context* __am_irq_handle(Context *c) {
 
 extern void __am_asm_trap(void);
 
-bool cte_init(Context*(*handler)(Event, Context*)) {
+bool cte_init(Context*(*handler)(Event, Context*)) {            //其参数为一个函数类型，这样可以进行传递函数
   // initialize exception entry
   asm volatile("csrw mtvec, %0" : : "r"(__am_asm_trap));
 

@@ -20,7 +20,7 @@
     ioe_read(reg, &__io_param); \
     __io_param; })
 
-#define io_write(reg, ...) \
+#define io_write(reg, ...) \                                    //定义的非常的妙
   ({ reg##_T __io_param = (reg##_T) { __VA_ARGS__ }; \
     ioe_write(reg, &__io_param); })
 
