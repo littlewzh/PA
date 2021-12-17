@@ -4,6 +4,8 @@
 int main() {
   write(1, "Hello World!\n", 13);
   int i = 2;
+  uint32_t p=&i;
+  printf("0x%08x\n",p);
   volatile int j = 0;
   while (1) {
     j ++;
