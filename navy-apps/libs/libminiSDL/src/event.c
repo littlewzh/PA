@@ -36,15 +36,16 @@ int SDL_PollEvent(SDL_Event *ev) {
     for(int j=0;j<83;j++){
       if(strcmp(key,keyname[j])==0) {num=j;break;}
     }
+    ev->key.keysym.sym=num;
   if(buf[1]=='d'){
     ev->type=SDL_KEYDOWN;
-    ev->key.keysym.sym=num;
-    keystate[num]= (ev->type == SDL_KEYDOWN);
+    keystate[num]=1;
     printf("%d\n",ev->key.keysym.sym);
     printf("%d\n",ev->type);
   }
   else if(buf[1]=='u'){
     ev->type=SDL_KEYUP;
+    keystate[num]=0;
     printf("%d\n",ev->type);
   }
   else {ev->type=2;}
