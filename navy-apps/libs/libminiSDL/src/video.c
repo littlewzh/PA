@@ -14,6 +14,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   if((dstrect)==NULL) {x=0;y=0;}
   else {x=dstrect->x;y=dstrect->y;}
   if(srcrect==NULL){
+    printf("reach blit1\n");
     for(int i=0;i<src->h;i++){
      for(int j=0;j<src->w;j++){
       if(dst->format->BitsPerPixel==8){
@@ -26,7 +27,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
    }
   }
   else{
-    printf("reach blit\n");
+    printf("reach blit2\n");
     //printf("should not reach here1\n");
     for(int i=0;i<srcrect->h;i++){
      for(int j=0;j<srcrect->w;j++){
