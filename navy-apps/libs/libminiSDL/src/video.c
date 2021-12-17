@@ -38,16 +38,17 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
      }
    }
   }
-  //printf("reach blit\n");
+  printf("reach blit\n");
 }
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+  printf("fill\n");
   uint32_t *d=(uint32_t *)dst->pixels;
  if(dstrect==NULL){
    for(int i=0;i<dst->h;i++){
      for(int j=0;j<dst->w;j++){
        if(dst->format->BitsPerPixel==8){
          *(dst->pixels+i*(dst->w)+j)=color;
-         //printf("fill\n");
+         
        }
        else{*(d+i*(dst->w)+j)=color;}
      }
