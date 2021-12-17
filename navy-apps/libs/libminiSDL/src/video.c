@@ -67,10 +67,11 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     memset(pix,0,sizeof(pix));
     uint8_t *src_pixels=(uint8_t *)(s->pixels);
     SDL_Color *colors=s->format->palette->colors;
+    int n=0;
     for(int i=0;i<s->h;i++){
       for(int j=0;j<(s->w);j++){
-       
-        pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
+       pix[n++]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
+        //pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
     ConvertPixelsARGB_ABGR(pix,pix,s->w*s->h);
