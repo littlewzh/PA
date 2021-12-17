@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len);
-void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
+/*void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   uint32_t *d=(uint32_t *)dst->pixels;
@@ -41,6 +41,55 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
    }
   }
   
+}*/
+void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
+  assert(dst && src);
+  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+  //printf("srcrect x[%d],y[%d],w[%d],h[%d] \n",srcrect->x,srcrect->y,srcrect->w,srcrect->h);
+   SDL_Rect t_d ;
+   SDL_Rect t_s ;
+   if(dstrect == NULL){
+      t_d.x = 0;
+      t_d.y = 0;
+      t_d.h = dst->h;
+      t_d.w = dst->w;
+      dstrect = &t_d;
+   }
+   if(srcrect == NULL){
+      t_s.x = 0;
+      t_s.y = 0;
+      t_s.h = src->h;
+      t_s.w = src->w;
+      srcrect = &t_s;
+   }
+  
+
+   if(!src->format->palette ){
+
+
+
+     
+     uint32_t* pp_d = (uint32_t*)dst->pixels;
+     uint32_t* pp_s = (uint32_t*)src->pixels;
+    for (int i = 0; i < srcrect->h; i++) {
+  	for (int j = 0; j < srcrect->w; j++) {
+      int id_dst = ((i + dstrect->y) >= dst->h ? (dst->h-1) : (i + dstrect->y)) * dst->w +((j + dstrect->x) >= dst->w ? (dst->w-1) : (j + dstrect->x));
+	    int id_src = ((i + srcrect->y) >= src->h ? (src->h-1) : (i + srcrect->y)) * src->w +((j + srcrect->x) >= src->w ? (src->w-1) : (j + srcrect->x)); 
+          pp_d[id_dst] = pp_s[id_src];
+  }}
+   }
+  else{
+    uint8_t* pp_d = (uint8_t*)dst->pixels;
+    uint8_t* pp_s = (uint8_t*)src->pixels;
+  for (int i = 0; i < srcrect->h; i++) {
+	for (int j = 0; j < srcrect->w; j++) {
+  int id_dst = ((i + dstrect->y) >= dst->h ? (dst->h-1) : (i + dstrect->y)) * dst->w +((j + dstrect->x) >= dst->w ? (dst->w-1) : (j + dstrect->x));
+	int id_src = ((i + srcrect->y) >= src->h ? (src->h-1) : (i + srcrect->y)) * src->w +((j + srcrect->x) >= src->w ? (src->w-1) : (j + srcrect->x)); 
+        pp_d[id_dst] = pp_s[id_src];
+  }}
+   
+  }
+ //error here
 }
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   printf("fill\n");
