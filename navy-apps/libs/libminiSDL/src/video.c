@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len);
-/*void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
+void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
   uint32_t *d=(uint32_t *)dst->pixels;
@@ -41,55 +41,6 @@ static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len);
    }
   }
   
-}*/
-void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
-  assert(dst && src);
-  assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
-  //printf("srcrect x[%d],y[%d],w[%d],h[%d] \n",srcrect->x,srcrect->y,srcrect->w,srcrect->h);
-   SDL_Rect t_d ;
-   SDL_Rect t_s ;
-   if(dstrect == NULL){
-      t_d.x = 0;
-      t_d.y = 0;
-      t_d.h = dst->h;
-      t_d.w = dst->w;
-      dstrect = &t_d;
-   }
-   if(srcrect == NULL){
-      t_s.x = 0;
-      t_s.y = 0;
-      t_s.h = src->h;
-      t_s.w = src->w;
-      srcrect = &t_s;
-   }
-  
-
-   if(!src->format->palette ){
-
-
-
-     
-     uint32_t* pp_d = (uint32_t*)dst->pixels;
-     uint32_t* pp_s = (uint32_t*)src->pixels;
-    for (int i = 0; i < srcrect->h; i++) {
-  	for (int j = 0; j < srcrect->w; j++) {
-      int id_dst = ((i + dstrect->y) >= dst->h ? (dst->h-1) : (i + dstrect->y)) * dst->w +((j + dstrect->x) >= dst->w ? (dst->w-1) : (j + dstrect->x));
-	    int id_src = ((i + srcrect->y) >= src->h ? (src->h-1) : (i + srcrect->y)) * src->w +((j + srcrect->x) >= src->w ? (src->w-1) : (j + srcrect->x)); 
-          pp_d[id_dst] = pp_s[id_src];
-  }}
-   }
-  else{
-    uint8_t* pp_d = (uint8_t*)dst->pixels;
-    uint8_t* pp_s = (uint8_t*)src->pixels;
-  for (int i = 0; i < srcrect->h; i++) {
-	for (int j = 0; j < srcrect->w; j++) {
-  int id_dst = ((i + dstrect->y) >= dst->h ? (dst->h-1) : (i + dstrect->y)) * dst->w +((j + dstrect->x) >= dst->w ? (dst->w-1) : (j + dstrect->x));
-	int id_src = ((i + srcrect->y) >= src->h ? (src->h-1) : (i + srcrect->y)) * src->w +((j + srcrect->x) >= src->w ? (src->w-1) : (j + srcrect->x)); 
-        pp_d[id_dst] = pp_s[id_src];
-  }}
-   
-  }
- //error here
 }
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   printf("fill\n");
@@ -108,7 +59,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
  else{printf("should not reach here2\n");}
  //printf("reach fillrect\n");
 }
-static uint32_t pix[300*400];
+/*static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
   printf("reach update\n");
   if (s->format->BitsPerPixel==8){
@@ -130,8 +81,36 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
      if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect((uint32_t *)s->pixels, 0, 0, s->w, s->h);}
      else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
   }
-}
+}*/
+void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
+  
+  if(w==0 || h==0){
+    w = s->w;
+    h = s->h;
 
+  }
+  if(!s->format->palette ){
+   // printf("SDL_UP x[%d],y[%d],w[%d],h[%d] \n",x,y,w,h);
+      NDL_DrawRect((uint32_t*)s->pixels,x,y,w,h); 
+  }
+  else{
+    uint32_t* new_pixels = malloc(s->w*s->h*4);
+    memset(new_pixels,0,s->w*s->h*sizeof(uint32_t));
+    uint8_t* tmp = (uint8_t*)(s->pixels);
+  
+  int n = 0;
+	for(int j = 0; j < h && (j + y) < s->h; j++) {
+	for (int i = 0; i < w && (i + x < s->w); i++) {
+	new_pixels[n++] = s->format->palette->colors[tmp[(j + y) * s->w + (i + x)]].val;
+	}
+  }
+
+    ConvertPixelsARGB_ABGR(new_pixels,new_pixels,s->w*s->h);
+    NDL_DrawRect(new_pixels,x,y,w,h); 
+    
+    free(new_pixels);
+  }
+}
 // APIs below are already implemented.
 
 static inline int maskToShift(uint32_t mask) {
