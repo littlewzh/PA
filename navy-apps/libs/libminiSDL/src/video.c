@@ -26,6 +26,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
    }
   }
   else{
+    printf("reach blit\n");
     //printf("should not reach here1\n");
     for(int i=0;i<srcrect->h;i++){
      for(int j=0;j<srcrect->w;j++){
@@ -38,7 +39,7 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
      }
    }
   }
-  printf("reach blit\n");
+  
 }
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   printf("fill\n");
@@ -59,7 +60,7 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  
+  printf("reach update\n");
   if (s->format->BitsPerPixel==8){
     //pix=malloc(4*300*400);
     memset(pix,0,sizeof(pix));
