@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+static void ConvertPixelsARGB_ABGR(void *dst, void *src, int len);
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
@@ -68,6 +69,7 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
         pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
+    ConvertPixelsARGB_ABGR(pix,pix,s->w*s->h);
     if(x==0&&y==0&&w==0&&h==0) {NDL_DrawRect(pix, 0, 0, s->w, s->h);}
     else {NDL_DrawRect(pix, x, y, w, h);}
   }
