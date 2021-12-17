@@ -61,7 +61,6 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
 }
 static uint32_t pix[300*400];
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  
   if(w==0 || h==0){
     w = s->w;
     h = s->h;
@@ -72,11 +71,15 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
     memset(pix,0,sizeof(pix));
     uint8_t *src_pixels=(uint8_t *)(s->pixels);
     SDL_Color *colors=s->format->palette->colors;
-    int n=0;
-    for(int i=0;i<h&&(i+y)<s->h;i++){
+    int k=0;
+    /*for(int i=0;i<h&&(i+y)<s->h;i++){
       for(int j=0;j<w&&(j+x)<(s->w);j++){
-       pix[n++]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
-        //pix[i*(s->w)+j]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
+       pix[k++]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
+      }
+    }*/
+    for(int i=0;i<s->h;i++){
+      for(int j=0;j<(s->w);j++){
+       pix[k++]=colors[src_pixels[(i+y)*(s->w)+(j+x)]].val;
       }
     }
     ConvertPixelsARGB_ABGR(pix,pix,s->w*s->h);
@@ -91,35 +94,6 @@ void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
      else {NDL_DrawRect((uint32_t *)s->pixels, x, y, w, h);}
   }
 }
-/*void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  
-  if(w==0 || h==0){
-    w = s->w;
-    h = s->h;
-
-  }
-  if(!s->format->palette ){
-   // printf("SDL_UP x[%d],y[%d],w[%d],h[%d] \n",x,y,w,h);
-      NDL_DrawRect((uint32_t*)s->pixels,x,y,w,h); 
-  }
-  else{
-    uint32_t* new_pixels = malloc(s->w*s->h*4);
-    memset(new_pixels,0,s->w*s->h*sizeof(uint32_t));
-    uint8_t* tmp = (uint8_t*)(s->pixels);
-  
-  int n = 0;
-	for(int j = 0; j < h && (j + y) < s->h; j++) {
-	for (int i = 0; i < w && (i + x < s->w); i++) {
-	new_pixels[n++] = s->format->palette->colors[tmp[(j + y) * s->w + (i + x)]].val;
-	}
-  }
-
-    ConvertPixelsARGB_ABGR(new_pixels,new_pixels,s->w*s->h);
-    NDL_DrawRect(new_pixels,x,y,w,h); 
-    
-    free(new_pixels);
-  }
-}*/
 // APIs below are already implemented.
 
 static inline int maskToShift(uint32_t mask) {
