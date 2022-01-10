@@ -51,7 +51,18 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
      }
    }
  }
- else{printf("should not reach here2\n");}
+ else{
+   //printf("should not reach here2\n");
+   for(int i=0;i<dstrect->h;i++){
+     for(int j=0;j<dstrect->w;j++){
+       if(dst->format->BitsPerPixel==8){
+         *(dst->pixels+(i+dstrect->y)*(dst->w)+j+dstrect->x)=color;
+         
+       }
+       else{*(d+(i+dstrect->y)*(dst->w)+j+dstrect->x)=color;}
+     }
+   }
+   }
  //printf("reach fillrect\n");
 }
 static uint32_t pix[300*400];
