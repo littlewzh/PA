@@ -20,9 +20,9 @@
     ioe_read(reg, &__io_param); \
     __io_param; })
 
-#define io_write(reg, ...) \                                    //定义的非常的妙
+#define io_write(reg, ...) \
   ({ reg##_T __io_param = (reg##_T) { __VA_ARGS__ }; \
-    ioe_write(reg, &__io_param); })
+    ioe_write(reg, &__io_param); })                                                //定义的非常的妙
 
 #define static_assert(const_cond) \
   static char CONCAT(_static_assert_, __LINE__) [(const_cond) ? 1 : -1] __attribute__((unused))
