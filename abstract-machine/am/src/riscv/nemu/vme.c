@@ -72,6 +72,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
    Context *text=kstack.end-sizeof(Context);
    memset(text,0,sizeof(Context));
+   text->gpr[10]=(uintptr_t)heap.end;
    text->mepc=(uintptr_t)entry;
    return text;
   //return NULL;
