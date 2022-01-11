@@ -6,7 +6,7 @@ extern uintptr_t loader(PCB *pcb, const char *filename);
 static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
 PCB *current = NULL;
-
+extern Area heap;
 void switch_boot_pcb() {
   current = &pcb_boot;
 }
@@ -16,6 +16,8 @@ void context_uload(PCB *pcb,const char *filename){
   kstack.end = kstack.start + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,kstack,(void *)entry);
+  printf("%x\n",heap.start);
+  printf("%x\n",heap.end);
 }
 void context_kload(PCB *pcb,void (*entry)(void *), void *arg){
   Area kstack;
