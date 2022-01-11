@@ -38,7 +38,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context* text=(Context *)kstack.end-sizeof(Context);
   memset(text,0,sizeof(Context));
   text->mepc=(uintptr_t)entry;
-  text->gpr[10]=(uintptr_t)arg;
+  text->gpr[11]=(uintptr_t)arg;
   return text;
 }
 
