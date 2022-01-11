@@ -12,7 +12,8 @@ void switch_boot_pcb() {
 }
 void context_uload(PCB *pcb,const char *filename){
   Area kstack;
-  kstack.start= pcb->stack;
+  kstack.start= heap.end;//pcb->stack;
+  
   kstack.end = kstack.start + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,kstack,(void *)entry);
