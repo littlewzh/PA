@@ -38,6 +38,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context* text=(Context *)kstack.end-sizeof(Context);
   memset(text,0,sizeof(Context));
   text->mepc=(uintptr_t)entry;
+  
   return text;
 }
 

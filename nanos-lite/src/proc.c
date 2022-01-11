@@ -13,6 +13,8 @@ void context_kload(PCB *pcb,void (*entry)(void *), void *arg){
   Area kstack;
   kstack.start= pcb->stack;
   kstack.end = kstack.start + sizeof(pcb->stack);
+  printf("%x\n",kstack.start);
+  printf("%x\n",kstack.end);
   pcb->cp = kcontext(kstack,entry,arg);
 }
 void hello_fun(void *arg) {
@@ -39,8 +41,8 @@ Context* schedule(Context *prev) {
 current->cp = prev;
 
 // always select pcb[0] as the new process
-current = &pcb[0];
-
+//current = &pcb[0];
+current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
 // then return the new context
 return current->cp;
 }
