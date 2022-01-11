@@ -6,7 +6,7 @@ int main(int argc, char *argv[], char *envp[]);
 extern char **environ;
 void call_main(uintptr_t *args) {
   char *empty[] =  {NULL };
-  int argc;
+  /*int argc;
   argc=*args;
   char* argv[argc];
   for(int i=0;i<argc;i++){
@@ -17,8 +17,8 @@ void call_main(uintptr_t *args) {
   char* envp[num];
   for(int i=0;i<num;i++){
      envp[i]=(char *)*(args+4+4*argc+i*4);
-  }
-  environ = envp;
+  }*/
+  //environ = envp;
   exit(main(0, empty, empty));
   assert(0);
 }
