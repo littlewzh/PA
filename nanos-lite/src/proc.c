@@ -19,7 +19,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,ustack,(void *)entry);
 
-  pcb->cp->gpr[10]=(uintptr_t)heap.end;
+  pcb->cp->gpr[10]=(uintptr_t)heap.end-4;
   //printf("%x\n",&kstack.start);
   //printf("%x\n",&kstack.end);
   //printf("heap.start=%x\n",heap.start);
