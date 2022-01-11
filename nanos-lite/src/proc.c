@@ -16,6 +16,8 @@ void context_uload(PCB *pcb,const char *filename){
   kstack.end = kstack.start + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,kstack,(void *)entry);
+  printf("%x\n",&kstack.start);
+  printf("%x\n",&kstack.end);
   printf("heap.start=%x\n",heap.start);
   printf("heap.end=%x\n",heap.end);
 }
