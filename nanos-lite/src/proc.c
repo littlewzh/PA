@@ -11,13 +11,15 @@ void switch_boot_pcb() {
   current = &pcb_boot;
 }
 void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]){
-  Area kstack;
-  kstack.end=heap.end;
-  kstack.start=kstack.end-sizeof(pcb->stack);
-  //kstack.start= pcb->stack;
-  //kstack.end = kstack.start + sizeof(pcb->stack);
+  Area ustack;
+  //ustack.end=heap.end;
+  //ustack.start=ustack.end-sizeof(pcb->stack);
+  ustack.start= pcb->stack;
+  ustack.end = ustack.start + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
-  pcb->cp = ucontext(NULL,kstack,(void *)entry);
+  pcb->cp = ucontext(NULL,ustack,(void *)entry);
+
+  //pcb->cp->gpr[10]=
   //printf("%x\n",&kstack.start);
   //printf("%x\n",&kstack.end);
   //printf("heap.start=%x\n",heap.start);
