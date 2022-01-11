@@ -13,7 +13,7 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
 extern uint8_t ramdisk_start;
 extern uint8_t ramdisk_end;
-static uintptr_t loader(PCB *pcb, const char *filename) {
+uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   /*Elf_Ehdr elf;
   ramdisk_read(&elf,0,sizeof(Elf_Ehdr));

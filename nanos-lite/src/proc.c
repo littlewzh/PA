@@ -2,6 +2,7 @@
 
 #define MAX_NR_PROC 4
 extern void naive_uload(PCB *pcb, const char *filename);
+extern uintptr_t loader(PCB *pcb, const char *filename);
 static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
 PCB *current = NULL;
@@ -10,7 +11,11 @@ void switch_boot_pcb() {
   current = &pcb_boot;
 }
 void context_uload(PCB *pcb,const char *filename){
-
+  Area kstack;
+  kstack.start= pcb->stack;
+  kstack.end = kstack.start + sizeof(pcb->stack);
+  uintptr_t entry = loader(pcb, filename);
+  pcb->cp = ucontext(NULL,kstack,(void *)entry);
 }
 void context_kload(PCB *pcb,void (*entry)(void *), void *arg){
   Area kstack;
