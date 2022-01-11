@@ -10,12 +10,12 @@ extern Area heap;
 void switch_boot_pcb() {
   current = &pcb_boot;
 }
-void context_uload(PCB *pcb,const char *filename){
+void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]){
   Area kstack;
   kstack.end=heap.end;
   kstack.start=kstack.end-sizeof(pcb->stack);
-  /*kstack.start= pcb->stack;
-  kstack.end = kstack.start + sizeof(pcb->stack);*/
+  //kstack.start= pcb->stack;
+  //kstack.end = kstack.start + sizeof(pcb->stack);
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,kstack,(void *)entry);
   //printf("%x\n",&kstack.start);
@@ -43,7 +43,7 @@ void hello_fun(void *arg) {
 void init_proc() {
   //context_uload(&pcb[0], "/bin/hello");
   context_kload(&pcb[0], hello_fun, (void *)8000);
-  context_uload(&pcb[1], "/bin/pal");
+  context_uload(&pcb[1], "/bin/pal",NULL,NULL);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();
 
