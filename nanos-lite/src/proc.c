@@ -27,7 +27,12 @@ void init_proc() {
   //load program here
 
 }
-
+void context_kload(PCB *pcb,void (*entry)(void *), void *arg){
+  Area kstack;
+  kstack.start= pcb->stack;
+  kstack.end = kstack.start + sizeof(pcb->stack);
+  pcb->cp = kcontext(kstack,entry,arg);
+}
 Context* schedule(Context *prev) {
   return NULL;
 }

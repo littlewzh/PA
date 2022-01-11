@@ -35,7 +35,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {            //其参数为�
 }
 
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
-  Context* text=(Context *)kstack.end;
+  Context* text=(Context *)kstack.end-sizeof(Context);
   memset(text,0,sizeof(Context));
   text->mepc=(uintptr_t)entry;
   return text;
