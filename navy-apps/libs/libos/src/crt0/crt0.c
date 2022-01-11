@@ -10,13 +10,13 @@ void call_main(uintptr_t *args) {
   argc=*args;
   char* argv[argc];
   for(int i=0;i<argc;i++){
-     argv[i]=*(char *)(args+4+i*4);
+     argv[i]=(char *)*(args+4+i*4);
   }
   int num=0;
   while((*(args+4+4*argc+4*num))!=0) num++;
   char* envp[num];
   for(int i=0;i<num;i++){
-     envp[i]=*(char *)(args+4+4*argc+i*4);
+     envp[i]=(char *)*(args+4+4*argc+i*4);
   }
   environ = envp;
   exit(main(argc, argv, envp));
