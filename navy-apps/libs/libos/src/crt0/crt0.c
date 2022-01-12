@@ -11,7 +11,7 @@ void call_main(uintptr_t *args) {
   int argc;
   argc=*args;
   printf("argc = %d\n",argc);
-  char* argv[argc];
+  /*char* argv[argc];
   for(int i=0;i<argc;i++){
      argv[i]=(char *)*(args+4+i*4);
   }
@@ -22,7 +22,10 @@ void call_main(uintptr_t *args) {
   for(int i=0;i<num;i++){
      envp[i]=(char *)*(args+4+4*argc+i*4);
   }
-  environ = envp;
-  exit(main(argc, empty, empty));
+  environ = envp;*/
+  char **argv,**envp;
+  argv=args+4;
+  envp=args+(2+argc)*4;
+  exit(main(argc, argv, envp));
   assert(0);
 }
