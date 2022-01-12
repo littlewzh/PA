@@ -25,7 +25,9 @@ void call_main(uintptr_t *args) {
   environ = envp;*/
   char **argv,**envp;
   argv=args+4;
+  printf("argv = %p\n",argv);
   envp=args+(2+argc)*4;
+  printf("envp = %p\n",envp);
   exit(main(argc, argv, envp));
   assert(0);
 }
