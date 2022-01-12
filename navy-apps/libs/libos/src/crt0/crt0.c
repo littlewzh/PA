@@ -8,8 +8,8 @@ int main(int argc, char *argv[], char *envp[]);
 extern char **environ;
 void call_main(uintptr_t *args) {
   char *empty[] =  {NULL };
-  int argc=0;
-  //argc=*args;
+  int argc;
+  argc=*args;
   printf("argc = %d\n",argc);
   char* argv[argc];
   for(int i=0;i<argc;i++){

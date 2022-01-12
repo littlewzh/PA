@@ -2,5 +2,5 @@
 _start:
   move s0, zero
   move sp, a0
-  lw a0, (a0)
+  move s0, sp
   jal call_main
