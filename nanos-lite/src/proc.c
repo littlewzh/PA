@@ -50,6 +50,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   //ustack.start=ustack.end-sizeof(pcb->stack);
   ustack.start= pcb->stack;
   ustack.end = ustack.start + sizeof(pcb->stack);
+  assert(filename!=NULL);
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,ustack,(void *)entry);
   pcb->cp->gpr[10]=(uintptr_t)sp;
