@@ -35,10 +35,13 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	sp-=(num+1)*sizeof(uint32_t);
 	//sp-=sp % 16;
 	memcpy((void *)sp, (void *)uenvp, sizeof(uint32_t) * (num + 1));
+  printf("envp = %p\n",sp);
 	sp-=(argc + 1)*sizeof(uint32_t);
 	memcpy((void *)sp, (void *)uargv, sizeof(uint32_t) * (argc + 1));
+  printf("argv = %p\n",sp);
 	sp-=sizeof(uint32_t);
 	memcpy((void *)sp, (void *)&argc, sizeof(uint32_t));
+  printf("&argc = %p\n",sp);
   Area ustack;
   //ustack.end=heap.end;
   //ustack.start=ustack.end-sizeof(pcb->stack);
@@ -63,7 +66,7 @@ void context_kload(PCB *pcb,void (*entry)(void *), void *arg){
 void hello_fun(void *arg) {
   int j = 1;
   while (1) {
-    Log("Hello World from Nanos-lite with arg '%p' for the %dth time!", (uintptr_t)arg, j);
+    //Log("Hello World from Nanos-lite with arg '%p' for the %dth time!", (uintptr_t)arg, j);
     j ++;
     yield();
   }
