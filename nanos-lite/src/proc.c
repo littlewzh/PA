@@ -78,9 +78,9 @@ void init_proc() {
   context_kload(&pcb[1], hello_fun, (void *)8000);
   char* empty[] ={NULL};
   //char *environ[] ={NULL };
-	//char *args[] = {"--skip", NULL};
-  context_uload(&pcb[0], "/bin/exec-test",empty,empty);
-  //context_uload(&pcb[1], "/bin/pal",args,environ);
+	char *args[] = {"--skip", NULL};
+  //context_uload(&pcb[0], "/bin/exec-test",empty,empty);
+  context_uload(&pcb[1], "/bin/pal",args,empty);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();
 

@@ -81,7 +81,7 @@ void do_syscall(Context *c) {
     case SYS_execve:
        io_write(AM_GPU_FBDRAW, 0, 0,(uint32_t *)buf, 400, 300, true);
        //naive_uload(NULL,(char *)a[1]);
-       c->GPRx=sysexecve((char *)a[1],(char * const *)a[2],(char * const *)a[3]);
+       c->GPRx=sysexecve((char *)a[1],(char **)a[2],(char **)a[3]);
        break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
