@@ -15,6 +15,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   uint32_t start,sp;
   start=(uint32_t)new_page(8);  //表示用户栈的开始
   sp=start+31*1024;               //栈指针，并将最高的1KB设置为unspecified区域
+  if(argv!=NULL&&envp!=NULL){
   int num;
   char *uenvp[16];
   for(num=0;envp[num]!=0;num++) {
@@ -42,6 +43,8 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	sp-=sizeof(uint32_t);
 	memcpy((void *)sp, (void *)&argc, sizeof(uint32_t));
   printf("&argc = %p\n",sp);
+  }
+  
   Area ustack;
   //ustack.end=heap.end;
   //ustack.start=ustack.end-sizeof(pcb->stack);
