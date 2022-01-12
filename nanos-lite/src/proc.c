@@ -80,7 +80,7 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   //context_uload(&pcb[0], "/bin/hello");
-  context_kload(&pcb[1], hello_fun, (void *)8000);
+  context_kload(&pcb[1], hello_fun, NULL);
   char* empty[] ={NULL};
   //char *environ[] ={NULL };
 	char *args[] = {"--skip", NULL};

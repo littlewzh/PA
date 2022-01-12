@@ -41,7 +41,8 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   memset(text,0,sizeof(Context));
   assert(entry!=NULL);
   text->mepc=(uintptr_t)entry;
-  text->gpr[12]=(uintptr_t)arg;   //a0 register is function arg
+  //assert()
+  text->gpr[10]=(uintptr_t)arg;   //a0 register is function arg
   return text;
 }
 
