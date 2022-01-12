@@ -15,6 +15,7 @@ void call_main(uintptr_t *args) {
   for(int i=0;i<argc;i++){
      argv[i]=(char *)*(args+4+i*4);
   }
+  printf("reach here\n");
   int num=0;
   while((*(args+4+4*argc+4*num))!=0) num++;
   char* envp[num];
