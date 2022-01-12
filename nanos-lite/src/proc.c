@@ -77,12 +77,12 @@ void init_proc() {
   context_kload(&pcb[0], hello_fun, (void *)8000);
   char *environ[] ={NULL };
 	char *args[] = {"--skip", NULL};
-  context_uload(&pcb[1], "/bin/pal",args,environ);
+  context_uload(&pcb[1], "/bin/exec-test",args,environ);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();
 
   Log("Initializing processes...");
-  naive_uload(NULL,"/bin/exec-test");
+  //naive_uload(NULL,"/bin/exec-test");
   //load program here
 
 }
