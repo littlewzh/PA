@@ -33,7 +33,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	uargv[argc]=0;                  //
 	sp-=1024;                        //unspecified区域
 	sp-=(num+1)*sizeof(uint32_t);
-	sp-=sp % 4;
+	sp-=sp % 4;                      //对齐
 	memcpy((void *)sp, (void *)uenvp, sizeof(uint32_t) * (num + 1));
   printf("envp = %p\n",sp);
 	sp-=(argc + 1)*sizeof(uint32_t);
@@ -76,7 +76,7 @@ void init_proc() {
   //context_uload(&pcb[0], "/bin/hello");
   context_kload(&pcb[0], hello_fun, (void *)8000);
   char *environ[] ={NULL };
-	char *args[] = {"-skip", NULL};
+	char *args[] = {"--skip", NULL};
   context_uload(&pcb[1], "/bin/pal",args,environ);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();

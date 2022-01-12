@@ -1,13 +1,3 @@
-/*#include <common.h>
-#include "syscall.h"
-void do_syscall(Context *c) {
-  uintptr_t a[4];
-  a[0] = c->GPR1;
-
-  switch (a[0]) {
-    default: panic("Unhandled syscall ID = %d", a[0]);
-  }
-}*/
 #include <common.h>
 #include "syscall.h"
 #include <fs.h>
@@ -15,7 +5,7 @@ void do_syscall(Context *c) {
 #include <time.h> 
 #include <proc.h>
 extern void naive_uload(PCB *pcb, const char *filename);
-
+extern void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]);
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
@@ -37,6 +27,10 @@ int32_t syswrite(int fd, const void *buf, size_t len){
     return fs_write(fd,buf,len);
   //}
   //return -1;
+}
+uint32_t sysexecve(const char *filename, char *const argv[], char *const envp[]){
+   context_uload(current,filename,argv,envp);
+   return 0;
 }
 //extern size_t fb_write(const void *buf, size_t offset, size_t len);
 static uint32_t buf[300*400]={0};
@@ -83,8 +77,8 @@ void do_syscall(Context *c) {
        break;
     case SYS_execve:
        io_write(AM_GPU_FBDRAW, 0, 0,(uint32_t *)buf, 400, 300, true);
-       naive_uload(NULL,(char *)a[1]);
-       c->GPRx=0;
+       //naive_uload(NULL,(char *)a[1]);
+       c->GPRx=sysexecve((char *)a[1],(char * const *)a[2],(char * const *)a[3]);
        break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
