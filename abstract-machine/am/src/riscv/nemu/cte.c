@@ -35,13 +35,12 @@ bool cte_init(Context*(*handler)(Event, Context*)) {            //其参数为�
 }
 
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
-  Context* text=(Context *)(kstack.end-sizeof(Context));
+  Context* text=(Context *)(kstack.end-sizeof(Context)-4);
   printf("text = %p\n",text);
   printf("kstack.end = %p\n",kstack.end);
   memset(text,0,sizeof(Context));
   assert(entry!=NULL);
   text->mepc=(uintptr_t)entry;
-  //assert()
   text->gpr[10]=(uintptr_t)arg;   //a0 register is function arg
   return text;
 }
