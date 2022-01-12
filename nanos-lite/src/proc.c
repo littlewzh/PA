@@ -33,7 +33,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	uargv[argc]=0;                  //
 	sp-=1024;                        //unspecified区域
 	sp-=(num+1)*sizeof(uint32_t);
-	//sp-=sp % 16;
+	sp-=sp % 4;
 	memcpy((void *)sp, (void *)uenvp, sizeof(uint32_t) * (num + 1));
   printf("envp = %p\n",sp);
 	sp-=(argc + 1)*sizeof(uint32_t);
