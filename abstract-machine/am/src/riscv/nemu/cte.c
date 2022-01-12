@@ -37,6 +37,7 @@ bool cte_init(Context*(*handler)(Event, Context*)) {            //其参数为�
 Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   Context* text=(Context *)kstack.end-sizeof(Context);
   memset(text,0,sizeof(Context));
+  assert(entry!=NULL);
   text->mepc=(uintptr_t)entry;
   text->gpr[10]=(uintptr_t)arg;   //a0 register is function arg
   return text;
