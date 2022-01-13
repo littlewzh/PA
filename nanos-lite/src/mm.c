@@ -10,6 +10,8 @@ void* new_page(size_t nr_page) {
 
 #ifdef HAS_VME
 static void* pg_alloc(int n) {
+
+  
   return NULL;
 }
 #endif

@@ -38,6 +38,8 @@ void init_proc() {
 	char *args[] = {"--skip", NULL};
   //context_uload(&pcb[0], "/bin/exec-test",empty,empty);
   context_uload(&pcb[0], "/bin/pal",args,empty);
+  //context_uload(&pcb[0], "/bin/menu",args,empty);
+  //context_uload(&pcb[0], "/bin/nterm",args,empty);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();
 

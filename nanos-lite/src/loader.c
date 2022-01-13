@@ -80,13 +80,13 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	sp-=(num+1)*sizeof(uint32_t);
 	sp-=sp % 4;                      //对齐
 	memcpy((void *)sp, (void *)uenvp, sizeof(uint32_t) * (num + 1));
-  printf("envp = %p\n",sp);
+  //printf("envp = %p\n",sp);
 	sp-=(argc + 1)*sizeof(uint32_t);
 	memcpy((void *)sp, (void *)uargv, sizeof(uint32_t) * (argc + 1));
-  printf("argv = %p\n",sp);
+  //printf("argv = %p\n",sp);
 	sp-=sizeof(uint32_t);
 	memcpy((void *)sp, (void *)&argc, sizeof(uint32_t));
-  printf("&argc = %p\n",sp);
+  //printf("&argc = %p\n",sp);
   }
   
   Area ustack;
@@ -98,7 +98,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   uintptr_t entry = loader(pcb, filename);
   pcb->cp = ucontext(NULL,ustack,(void *)entry);
   pcb->cp->gpr[10]=(uintptr_t)sp;
-  printf("finish\n");
+  //printf("finish\n");
   //printf("%x\n",&kstack.start);
   //printf("%x\n",&kstack.end);
   //printf("heap.start=%x\n",heap.start);
