@@ -3,7 +3,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
-#include <memory/paddr.h>
+#include <memory/vaddr.h>
 static int is_batch_mode = false;
 void init_regex();
 void init_wp_pool();
@@ -68,13 +68,13 @@ static int cmd_x(char *args){
   address=expr(arg,&success);
   for(int i=0;i<number;i++){
     printf("0x%08x : ",address);
-    printf("%02x ",paddr_read(address,1));
+    printf("%02x ",vaddr_read(address,1));
     address++;
-    printf("%02x ",paddr_read(address,1));
+    printf("%02x ",vaddr_read(address,1));
     address++;
-    printf("%02x ",paddr_read(address,1));
+    printf("%02x ",vaddr_read(address,1));
     address++;
-    printf("%02x ",paddr_read(address,1));
+    printf("%02x ",vaddr_read(address,1));
     address++;
     printf("\n");
   }
