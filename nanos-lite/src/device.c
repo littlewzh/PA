@@ -17,7 +17,9 @@ static const char *keyname[256] __attribute__((used)) = {
 };
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
-    yield();
+  #ifndef HAS_TIMER_IRQ
+  yield();
+  #endif
     char *s=(char *)buf;
     for(int i=0;i<len;i++){
       putch(*(s+i));
@@ -26,7 +28,9 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
 }
 
 size_t events_read(void *buf, size_t offset, size_t len) {
+  #ifndef HAS_TIMER_IRQ
   yield();
+  #endif
   AM_INPUT_KEYBRD_T ev = io_read(AM_INPUT_KEYBRD);
   //int keycode=io_read(AM_INPUT_KEYBRD).keycode;
   //int keydown=io_read(AM_INPUT_KEYBRD).keydown;
@@ -50,7 +54,9 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   //AM_GPU_FBDRAW_T *ctl;
+  #ifndef HAS_TIMER_IRQ
   yield();
+  #endif
   int screen_w = 400;//io_read(AM_GPU_CONFIG).width;
   //int screen_h = io_read(AM_GPU_CONFIG).height;
   int x,y;

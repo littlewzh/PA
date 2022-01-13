@@ -10,6 +10,7 @@
  * You can modify this value as you want.
  */
 #define MAX_INSTR_TO_PRINT 1000
+#define HAS_TIMER_IRQ
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_instr = 0;
@@ -110,6 +111,13 @@ void cpu_exec(uint64_t n) {
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
+    #ifdef HAS_TIMER_IRQ
+    word_t intr = isa_query_intr();
+    if (intr != INTR_EMPTY) {
+    cpu.pc = isa_raise_intr(intr, cpu.pc);
+    #endif
+    //
+}
   }
 
   uint64_t timer_end = get_time();

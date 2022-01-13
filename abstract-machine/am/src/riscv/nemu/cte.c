@@ -8,6 +8,7 @@ Context* __am_irq_handle(Context *c) {
     Event ev = {0};
     switch (c->mcause) {
       case 0xb:ev.event = 1; break;
+      case 0x80000007: ev.event=3;break;
       case 0:case 2:case 1:case 3:case 4:case 7:case 8:case 9:case 13:case 19: ev.event = 2;break;
       //case 3:ev.event = EVENT_PAGEFAULT; break;
       //case 4:ev.event = EVENT_ERROR;break;
@@ -41,6 +42,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   memset(text,0,sizeof(Context));
   assert(entry!=NULL);
   text->mepc=(uintptr_t)entry;
+  text->mstatus=0x80;
   text->gpr[10]=(uintptr_t)arg;   //a0 register is function arg
   return text;
 }
