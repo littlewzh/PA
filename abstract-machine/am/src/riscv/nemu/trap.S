@@ -49,7 +49,7 @@ __am_asm_trap:
 
   mv a0, sp
   jal __am_irq_handle
-  mv sp, a0            //yongyufanhuixinde1jincheng
+  mv sp, a0            //用于返回新的context结构，并将当前的栈指针sp指向该上下文结构的地址，这样恢复上下文时，恢复的就是新的进程的上下文结构
 
   LOAD t1, OFFSET_STATUS(sp)
   LOAD t2, OFFSET_EPC(sp)
