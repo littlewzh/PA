@@ -14,6 +14,7 @@ extern size_t get_ramdisk_size();
 extern uint8_t ramdisk_start;
 extern uint8_t ramdisk_end;
 extern void* new_page(size_t nr_page);
+extern void map(AddrSpace *as, void *va, void *pa, int prot);
 extern Area heap;
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
