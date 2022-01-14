@@ -85,6 +85,7 @@ Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
    //text->gpr[10]=(uintptr_t)heap.end;
    text->mepc=(uintptr_t)entry;
    text->mstatus=0x80;
+   text->satp=(uintptr_t)as->ptr;
    return text;
   //return NULL;
 }
