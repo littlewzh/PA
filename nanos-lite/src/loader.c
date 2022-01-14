@@ -41,8 +41,37 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd,&phlf,elf.e_phentsize);
     if (phlf.p_type == PT_LOAD){
        fs_lseek(fd,phlf.p_offset,SEEK_SET);
+       #ifdef HAS_VME
+       int pagenum=(phlf.p_memsz+PGSIZE-1)/PGSIZE;
+       uint32_t vaddr = phlf.p_vaddr;
+       uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
+       for(int j=0;j<pagenum;j++){
+          uint32_t paddr = (uint32_t)new_page(1);              //shenqing1 ye de wulineicun
+          paddr = (paddr &0xfffff000) + (vaddr&0xfff);
+          if(vaddr < limit){
+            if((vaddr+PGSIZE)< limit){
+              size_t len = (vaddr&0xfffff000) + PGSIZE - vaddr;
+              fs_read(fd,(void*)paddr,len);
+            }
+            else{
+              size_t len=limit-vaddr ;
+              fs_read(fd,(void*)paddr,len);
+              memset((void*)(paddr+len),0,PGSIZE-len);
+            }
+          }
+          else{
+          memset((void*)paddr,0,PGSIZE);
+        }
+        map(&pcb->as,(void*)(vaddr&0xfffff000),(void*)paddr,0);
+        vaddr = (vaddr&0xfffff000) + PGSIZE;
+        pcb->max_brk = vaddr;
+      
+      }
+
+       #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
+       #endif
     }
   }
   return elf.e_entry;
