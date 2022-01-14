@@ -37,7 +37,7 @@ bool vme_init(void* (*pgalloc_f)(int), void (*pgfree_f)(void*)) {
       map(&kas, va, va, 0);                               //调用map()来填写内核虚拟地址空间(kas)的页目录和页表, 最后设置一个叫satp(Supervisor Address Translation and Protection)的CSR寄存器来开启分页机制. 
     }
   }
-  printf("%d\n",i);
+  //printf("%d\n",i);
   set_satp(kas.ptr);
   vme_enable = 1;
 

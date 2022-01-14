@@ -22,13 +22,13 @@ word_t vaddr_read(vaddr_t addr, int len) {
 }
 
 void vaddr_write(vaddr_t addr, int len, word_t data) {
-  printf("vaddr %x\n",addr);
+  //printf("vaddr %x\n",addr);
   //paddr_write(addr, len, data);
   if(isa_mmu_check(addr,len,1)==0){
     return paddr_write(addr, len,data);
   }
   else{
-    printf("paddr %x\n",isa_mmu_translate(addr,len,1));
+    //printf("paddr %x\n",isa_mmu_translate(addr,len,1));
     return paddr_write(isa_mmu_translate(addr,len,1),len,data);
   }
 }

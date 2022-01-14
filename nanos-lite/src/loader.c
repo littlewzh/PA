@@ -88,7 +88,8 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	memcpy((void *)sp, (void *)&argc, sizeof(uint32_t));
   //printf("&argc = %p\n",sp);
   }
-  
+  protect(&pcb->as);
+  AddrSpace *AS=&pcb->as;
   Area ustack;
   //ustack.end=heap.end;
   //ustack.start=ustack.end-sizeof(pcb->stack);
@@ -96,7 +97,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   ustack.end = ustack.start + sizeof(pcb->stack);
   assert(filename!=NULL);
   uintptr_t entry = loader(pcb, filename);
-  pcb->cp = ucontext(NULL,ustack,(void *)entry);      //初始化，使得当前的进程块的cp指向此程序保存context的地址
+  pcb->cp = ucontext(AS,ustack,(void *)entry);      //初始化，使得当前的进程块的cp指向此程序保存context的地址
   pcb->cp->gpr[10]=(uintptr_t)sp;
   //printf("finish\n");
   //printf("%x\n",&kstack.start);
