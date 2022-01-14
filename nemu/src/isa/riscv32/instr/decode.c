@@ -24,10 +24,11 @@ static def_DopHelper(r) {                                //指令译码，用于
 static def_DopHelper(c) {
   //printf("val=%u\n",val);
   switch(val){
-    case 0: op->preg=&cpu.mstatus;break;//printf("%u\n",*op->preg);
-    case 1: op->preg=&cpu.mepc;break;//printf("%u\n",*op->preg);
-    case 2: op->preg=&cpu.mcause;break;//printf("%u\n",*op->preg);
-    case 5: op->preg=&cpu.mtvec;break;//printf("op=%08x\n",*op->preg);
+    case 0x300: op->preg=&cpu.mstatus;break;//printf("%u\n",*op->preg);
+    case 0x341: op->preg=&cpu.mepc;break;//printf("%u\n",*op->preg);
+    case 0x342: op->preg=&cpu.mcause;break;//printf("%u\n",*op->preg);
+    case 0x305: op->preg=&cpu.mtvec;break;//printf("op=%08x\n",*op->preg);
+    case 0x180: op->preg=&cpu.satp;break;
     //default: assert(0);
   }
 }

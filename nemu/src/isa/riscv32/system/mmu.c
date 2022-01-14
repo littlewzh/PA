@@ -18,7 +18,7 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
   return MEM_RET_FAIL;
 }
 int isa_mmu_check(vaddr_t vaddr, int len, int type) {
-  if((cpu.satp&1) == 0){
+  if((cpu.satp>>31) == 0){
     return MMU_DIRECT;
   }
   else {return MMU_TRANSLATE;}
