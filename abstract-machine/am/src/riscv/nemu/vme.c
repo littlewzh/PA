@@ -2,7 +2,7 @@
 #include <nemu.h>
 #include <klib.h>
 
-static AddrSpace kas = {};
+static AddrSpace kas = {};                       //
 static void* (*pgalloc_usr)(int) = NULL;
 static void (*pgfree_usr)(void*) = NULL;
 static int vme_enable = 0;
@@ -37,7 +37,7 @@ bool vme_init(void* (*pgalloc_f)(int), void (*pgfree_f)(void*)) {
       map(&kas, va, va, 0);
     }
   }
-
+  printf("%d\n",i);
   set_satp(kas.ptr);
   vme_enable = 1;
 
@@ -45,10 +45,10 @@ bool vme_init(void* (*pgalloc_f)(int), void (*pgfree_f)(void*)) {
 }
 
 void protect(AddrSpace *as) {
-  PTE *updir = (PTE*)(pgalloc_usr(PGSIZE));
-  as->ptr = updir;
-  as->area = USER_SPACE;
-  as->pgsize = PGSIZE;
+  PTE *updir = (PTE*)(pgalloc_usr(PGSIZE));     //uintptr_t,
+  as->ptr = updir;                             //ptr是一个ISA相关的地址空间描述符指针, 用于指示具体的映射
+  as->area = USER_SPACE;                      //area表示虚拟地址空间中用户态的范围
+  as->pgsize = PGSIZE;               //4096
   // map kernel space
   memcpy(updir, kas.ptr, PGSIZE);
 }
@@ -67,6 +67,7 @@ void __am_switch(Context *c) {
 }
 
 void map(AddrSpace *as, void *va, void *pa, int prot) {
+
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {

@@ -3,16 +3,19 @@
 static void *pf = NULL;
 
 void* new_page(size_t nr_page) {
-  uint8_t *new = (uint8_t *)pf;
-  pf = (uint8_t *)pf + nr_page*PGSIZE;
-  return (void *)new;
+  void *new = pf;
+#ifdef HAS_VME
+  memset(new,0,PGSIZE*nr_page);
+#endif
+  pf = (void *)((int)pf + nr_page*PGSIZE);
+  return new;
 }
 
 #ifdef HAS_VME
 static void* pg_alloc(int n) {
-
-  
-  return NULL;
+  int page_num = (n + PGSIZE - 1) / PGSIZE;
+  return new_page(page_num);
+  //return NULL;
 }
 #endif
 
