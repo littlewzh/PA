@@ -12,6 +12,7 @@ typedef struct {
   rtlreg_t mstatus;
   rtlreg_t mepc;
   rtlreg_t mtvec;
+  rtlreg_t satp;
   bool INTR;                            //sdawdasdawdasdawda
 } riscv32_CPU_state;
 
