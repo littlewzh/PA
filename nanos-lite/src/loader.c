@@ -42,7 +42,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     if (phlf.p_type == PT_LOAD){
        fs_lseek(fd,phlf.p_offset,SEEK_SET);
        #ifdef HAS_VME
-       int pagenum=(phlf.p_memsz+PGSIZE-1)/PGSIZE;
+       int pagenum=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE +1;
        uint32_t vaddr = phlf.p_vaddr;
        uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
        for(int j=0;j<pagenum;j++){
