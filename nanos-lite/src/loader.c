@@ -98,7 +98,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
        memset((void*)(paddr+(limit&0xfff)),0,PGSIZE-(limit&0xfff));
-       for(int j=pagenum2;j<pagenum1-1;j++){
+       for(int j=pagenum2;j<pagenum1;j++){
          paddr = (uint32_t)new_page(1);
        vaddr = (vaddr&0xfffff000) + PGSIZE;
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
