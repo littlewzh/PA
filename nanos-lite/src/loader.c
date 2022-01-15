@@ -84,9 +84,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        printf("vaddr= %x\n",vaddr);
        uint32_t paddr = (uint32_t)new_page(1);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
-       size_t len = PGSIZE-(vaddr&0xfff);
-       fs_read(fd,(void*)(paddr+(vaddr&0xfff)),len);
-       uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
+       if(pagenum2==0){
+         size_t len=phlf.p_filesz;
+         fs_read(fd,(void*)(paddr+(vaddr&0xfff)),len);
+       }
+       else{
+         size_t len = PGSIZE-(vaddr&0xfff);
+         fs_read(fd,(void*)(paddr+(vaddr&0xfff)),len);
+         uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
        for(int j=0;j<pagenum2-1;j++){
           paddr = (uint32_t)new_page(1);              //shenqing1 ye de wulineicun
           vaddr = (vaddr&0xfffff000) + PGSIZE;
@@ -98,7 +103,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        printf("vaddr= %x\n",vaddr);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
+       }
+       
+       
        if(phlf.p_memsz>phlf.p_filesz){
+         uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
          if((phlf.p_memsz&0xfffff000)>(phlf.p_filesz&0xfffff000)){
            memset((void*)(paddr+(limit&0xfff)),0,PGSIZE-(limit&0xfff));
            for(int j=pagenum2;j<pagenum1-1;j++){
