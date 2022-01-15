@@ -11,9 +11,9 @@ paddr_t isa_mmu_translate(vaddr_t vaddr, int len, int type) {
   if((pte&1) == 0) {assert(0);}
   else {
     paddr_t pagebase = paddr_read((pte & 0xfffff000) + offsecond*4 , 4);
-    //if ((pagebase & 1)==0) {assert(0);}
-    //else {return ((pagebase & 0xfffff000) + offpage);}
-    return ((pagebase & 0xfffff000) + offpage);
+    if ((pagebase & 1)==0) {assert(0);}
+    else {return ((pagebase & 0xfffff000) + offpage);}
+    //return ((pagebase & 0xfffff000) + offpage);
   }
   
   return MEM_RET_FAIL;

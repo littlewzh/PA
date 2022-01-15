@@ -7,6 +7,7 @@
 extern void naive_uload(PCB *pcb, const char *filename);
 extern void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]);
 extern void switch_boot_pcb();
+extern int mm_brk(uintptr_t brk);
 //extern int gettimeofday(struct timeval * tv, struct timezone * tz);
 int sys_gettimeofday(struct timeval * tv, struct timezone * tz){
   //gettimeofday(tv, tz);
@@ -34,6 +35,13 @@ uint32_t sysexecve(const char *filename, char *const argv[], char *const envp[])
    switch_boot_pcb();
    yield();
    return -1;
+}
+int sysbrk(intptr_t x){
+  #ifdef HAS_VME
+  return mm_brk(x);
+  #endif 
+
+  return 0;
 }
 //extern size_t fb_write(const void *buf, size_t offset, size_t len);
 static uint32_t buf[300*400]={0};
@@ -73,7 +81,7 @@ void do_syscall(Context *c) {
        c->GPRx=fs_lseek(a[1],a[2],a[3]);
        break;
     case SYS_brk:
-       c->GPRx=0;
+       c->GPRx=sysbrk(a[1]);
        break;
     case SYS_gettimeofday:
        c->GPRx=sys_gettimeofday((struct timeval *) a[1], (struct timezone *) a[2]);
