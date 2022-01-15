@@ -129,7 +129,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
          
        }
        pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;
-
+       printf("maxbrak=%x\n",pcb->max_brk);
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
