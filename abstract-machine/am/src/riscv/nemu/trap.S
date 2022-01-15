@@ -38,12 +38,12 @@ __am_asm_trap:
   csrr t0, mcause
   csrr t1, mstatus
   csrr t2, mepc
-  csrr t3, satp
+  //csrr t3, satp
 
   STORE t0, OFFSET_CAUSE(sp)
   STORE t1, OFFSET_STATUS(sp)
   STORE t2, OFFSET_EPC(sp)
-  STORE t3, OFFSET_SATP(sp)
+  //STORE t3, OFFSET_SATP(sp)
 
   # set mstatus.MPRV to pass difftest
   li a0, (1 << 17)
@@ -56,10 +56,10 @@ __am_asm_trap:
 
   LOAD t1, OFFSET_STATUS(sp)
   LOAD t2, OFFSET_EPC(sp)
-  LOAD t3, OFFSET_SATP(sp)
+  //LOAD t3, OFFSET_SATP(sp)
   csrw mstatus, t1
   csrw mepc, t2
-  csrw satp, t3
+  //csrw satp, t3
 
   MAP(REGS, POP)
 

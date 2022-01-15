@@ -126,6 +126,7 @@ void naive_uload(PCB *pcb, const char *filename) {
 }
 
 void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]){
+  protect(&pcb->as);
   uint32_t start,sp;
   start=(uint32_t)new_page(8);  //表示用户栈的开始
   for(int i=0;i<8;i++){
@@ -162,7 +163,6 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	memcpy((void *)sp, (void *)&argc, sizeof(uint32_t));
   //printf("&argc = %p\n",sp);
   }
-  protect(&pcb->as);
   AddrSpace *AS=&pcb->as;
   Area ustack;
   //ustack.end=heap.end;
