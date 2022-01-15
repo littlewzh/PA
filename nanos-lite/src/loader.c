@@ -44,44 +44,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
 
        #ifdef HAS_VME
-
-     /*int pagenum = (((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE +1;
-     uint32_t vaddr = phlf.p_vaddr;
-     printf("vaddr= %x\n",vaddr);
-    uint32_t code_limit = phlf.p_vaddr + phlf.p_filesz;
-    //printf("code limit %x\n",proheader.p_vaddr + proheader.p_memsz);
-    for(int j=0;j<pagenum;j++){
-      uint32_t paddr = (uint32_t)new_page(1);
-      paddr = (paddr &0xfffff000) + (vaddr&0xfff);
-
-
-      if(vaddr < code_limit){
-        if((vaddr+PGSIZE)< code_limit){
-          
-          size_t len = (vaddr&0xfffff000) + PGSIZE - vaddr;
-          fs_read(fd,(void*)paddr,len);
-          }
-        else{
-        //printf("L2\n");
-        size_t len = code_limit - vaddr;
-        //fs_lseek(fd,PGSIZE*j+proheader.p_offset,SEEK_SET);
-        fs_read(fd,(void*)paddr,len);
-        memset((void*)(paddr+len),0,PGSIZE-len);
-           }
-      }
-      else{
-        //printf("L3\n");
-        memset((void*)paddr,0,PGSIZE);
-      }
-      
-      map(&pcb->as,(void*)(vaddr&0xfffff000),(void*)paddr,0);
-      vaddr = (vaddr&0xfffff000) + PGSIZE;
-      pcb->max_brk = vaddr;
-      }*/
        int pagenum1=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        int pagenum2=(((phlf.p_vaddr+phlf.p_filesz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        uint32_t vaddr = phlf.p_vaddr;                                           //由于第一页可能未对齐，故先处理第一页
-       printf("vaddr= %x\n",vaddr);
+       //printf("vaddr= %x\n",vaddr);
        uint32_t paddr = (uint32_t)new_page(1);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        if(pagenum2==0){
@@ -100,10 +66,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        }
        paddr = (uint32_t)new_page(1); 
        vaddr = (vaddr&0xfffff000) + PGSIZE;
-       printf("vaddr= %x\n",vaddr);
+       //printf("vaddr= %x\n",vaddr);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
-       printf("limit= %x\n",limit);
+       //printf("limit= %x\n",limit);
        }
        if(phlf.p_memsz>phlf.p_filesz){
          uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
@@ -117,11 +83,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
            }
            paddr = (uint32_t)new_page(1);
            vaddr = (vaddr&0xfffff000) + PGSIZE;
-           printf("vaddr= %x\n",vaddr);
+           //printf("vaddr= %x\n",vaddr);
           
            map(&pcb->as,(void*)vaddr,(void*)paddr,0);
            memset((void*)paddr,0,(phlf.p_vaddr+phlf.p_memsz)&0xfff);
-           printf("total= %x\n",phlf.p_vaddr+phlf.p_memsz);
+           //printf("total= %x\n",phlf.p_vaddr+phlf.p_memsz);
          }
          else{
            memset((void*)(paddr+(limit&0xfff)),0,phlf.p_memsz-phlf.p_filesz);
@@ -129,7 +95,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
          
        }
        pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;
-       printf("maxbrak=%x\n",pcb->max_brk);
+       //printf("maxbrak=%x\n",pcb->max_brk);
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
