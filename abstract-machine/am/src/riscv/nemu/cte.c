@@ -53,6 +53,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
   text->mepc=(uintptr_t)entry;
   text->mstatus=0x80;
   text->gpr[10]=(uintptr_t)arg;   //a0 register is function arg
+  text->pdir=NULL;
   return text;
 }
 
