@@ -79,7 +79,7 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {            //它用于�
   }
   /*uint32_t *addr=(uint32_t*)((int)(*pte & 0xfffff000)+ off_second*4);
   *addr=((uint32_t)pa & 0xfffff000) | 1;*/
-  *(uint32_t*)((int)(*pte & 0xfffff000)+ off_second*4) = ((uint32_t)pa & 0xfffff000) | 1;
+  *(uint32_t*)((int)(*pte & 0xfffff000)+ off_second*4) = (((uint32_t)pa & 0xfffff000) | 1);
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
