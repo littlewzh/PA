@@ -41,6 +41,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_read(fd,&phlf,elf.e_phentsize);
     if (phlf.p_type == PT_LOAD){
        fs_lseek(fd,phlf.p_offset,SEEK_SET);
+
+
        #ifdef HAS_VME
        int pagenum=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        uint32_t vaddr = phlf.p_vaddr;                                           //由于第一页可能未对齐，故先处理第一页
@@ -71,9 +73,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        vaddr = (vaddr&0xfffff000) + PGSIZE;
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        memset((void*)paddr,0,(phlf.p_vaddr+phlf.p_memsz)&0xfff);
+       
+
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
+
+
        #endif
     }
   }
@@ -91,6 +97,10 @@ void naive_uload(PCB *pcb, const char *filename) {
 void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]){
   uint32_t start,sp;
   start=(uint32_t)new_page(8);  //表示用户栈的开始
+  for(int i=0;i<8;i++){
+    void* paddr = (void*)(start + i * PGSIZE);
+    map(&pcb->as, (void *)((uint32_t)pcb->as.area.end - (8 - i) * PGSIZE), paddr, 0);
+  }
   sp=start+31*1024;               //栈指针，并将最高的1KB设置为unspecified区域
   if(argv!=NULL&&envp!=NULL){
   int num;
