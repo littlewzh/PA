@@ -47,6 +47,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
        int pagenum = (((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE +1;
      uint32_t vaddr = phlf.p_vaddr;
+     printf("vaddr= %x\n",vaddr);
     uint32_t code_limit = phlf.p_vaddr + phlf.p_filesz;
     //printf("code limit %x\n",proheader.p_vaddr + proheader.p_memsz);
     for(int j=0;j<pagenum;j++){
