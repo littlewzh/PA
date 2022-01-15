@@ -81,6 +81,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        int pagenum1=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        int pagenum2=(((phlf.p_vaddr+phlf.p_filesz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        uint32_t vaddr = phlf.p_vaddr;                                           //由于第一页可能未对齐，故先处理第一页
+       printf("vaddr= %x\n",vaddr);
        uint32_t paddr = (uint32_t)new_page(1);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        size_t len = PGSIZE-(vaddr&0xfff);
