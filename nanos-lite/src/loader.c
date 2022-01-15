@@ -96,9 +96,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        }
        pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;
        //printf("maxbrak=%x\n",pcb->max_brk);
+
        #else
+
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
+
        #endif
     }
   }
@@ -114,13 +117,20 @@ void naive_uload(PCB *pcb, const char *filename) {
 }
 
 void context_uload(PCB *pcb,const char *filename, char *const argv[], char *const envp[]){
-  protect(&pcb->as);
+  
+
   uint32_t start,sp;
   start=(uint32_t)new_page(8);  //表示用户栈的开始
+
+  #ifdef HAS_VME
+  protect(&pcb->as);
   for(int i=0;i<8;i++){
     void* paddr = (void*)(start + i * PGSIZE);
     map(&pcb->as, (void *)((uint32_t)pcb->as.area.end - (8 - i) * PGSIZE), paddr, 0);
   }
+
+  #endif
+  
   sp=start+31*1024;               //栈指针，并将最高的1KB设置为unspecified区域
   if(argv!=NULL&&envp!=NULL){                          //填写参数
   int num;
