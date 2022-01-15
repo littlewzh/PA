@@ -104,8 +104,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
        }
-       
-       
        if(phlf.p_memsz>phlf.p_filesz){
          uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
          if((phlf.p_memsz&0xfffff000)>(phlf.p_filesz&0xfffff000)){
