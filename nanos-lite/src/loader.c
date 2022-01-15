@@ -45,7 +45,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
        #ifdef HAS_VME
 
-      int pagenum = (((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE +1;
+     /* int pagenum = (((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE +1;
      uint32_t vaddr = phlf.p_vaddr;
      printf("vaddr= %x\n",vaddr);
     uint32_t code_limit = phlf.p_vaddr + phlf.p_filesz;
@@ -77,8 +77,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       map(&pcb->as,(void*)(vaddr&0xfffff000),(void*)paddr,0);
       vaddr = (vaddr&0xfffff000) + PGSIZE;
       pcb->max_brk = vaddr;
-      }
-       /*int pagenum1=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
+      }*/
+       int pagenum1=(((phlf.p_vaddr+phlf.p_memsz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        int pagenum2=(((phlf.p_vaddr+phlf.p_filesz)&0xfffff000)-(phlf.p_vaddr &0xfffff000))/PGSIZE;
        uint32_t vaddr = phlf.p_vaddr;                                           //由于第一页可能未对齐，故先处理第一页
        printf("vaddr= %x\n",vaddr);
@@ -108,7 +108,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        vaddr = (vaddr&0xfffff000) + PGSIZE;
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        memset((void*)paddr,0,(phlf.p_vaddr+phlf.p_memsz)&0xfff);
-       pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;*/
+       pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
