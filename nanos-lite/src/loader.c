@@ -103,6 +103,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        printf("vaddr= %x\n",vaddr);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
+       printf("limit= %x\n",limit);
        }
        if(phlf.p_memsz>phlf.p_filesz){
          uint32_t limit = phlf.p_vaddr + phlf.p_filesz;
@@ -117,10 +118,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
            paddr = (uint32_t)new_page(1);
            vaddr = (vaddr&0xfffff000) + PGSIZE;
            printf("vaddr= %x\n",vaddr);
-           printf("vaddr= %x\n",phlf.p_vaddr+phlf.p_memsz);
+          
            map(&pcb->as,(void*)vaddr,(void*)paddr,0);
            memset((void*)paddr,0,(phlf.p_vaddr+phlf.p_memsz)&0xfff);
-         
+           printf("total= %x\n",phlf.p_vaddr+phlf.p_memsz);
          }
          else{
            memset((void*)(paddr+(limit&0xfff)),0,phlf.p_memsz-phlf.p_filesz);
