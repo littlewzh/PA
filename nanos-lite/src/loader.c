@@ -77,8 +77,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
-
-
        #endif
     }
   }
@@ -102,7 +100,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
     map(&pcb->as, (void *)((uint32_t)pcb->as.area.end - (8 - i) * PGSIZE), paddr, 0);
   }
   sp=start+31*1024;               //栈指针，并将最高的1KB设置为unspecified区域
-  if(argv!=NULL&&envp!=NULL){
+  if(argv!=NULL&&envp!=NULL){                          //填写参数
   int num;
   char *uenvp[16];
   for(num=0;envp[num]!=0;num++) {
