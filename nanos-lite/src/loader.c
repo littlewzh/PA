@@ -95,6 +95,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        }
        paddr = (uint32_t)new_page(1); 
        vaddr = (vaddr&0xfffff000) + PGSIZE;
+       printf("vaddr= %x\n",vaddr);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        fs_read(fd,(void*)paddr,limit&0xfff);
        memset((void*)(paddr+(limit&0xfff)),0,PGSIZE-(limit&0xfff));
@@ -106,9 +107,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
        }
        paddr = (uint32_t)new_page(1);
        vaddr = (vaddr&0xfffff000) + PGSIZE;
+       printf("vaddr= %x\n",vaddr);
        map(&pcb->as,(void*)vaddr,(void*)paddr,0);
        memset((void*)paddr,0,(phlf.p_vaddr+phlf.p_memsz)&0xfff);
        pcb->max_brk =(vaddr&0xfffff000) + PGSIZE;
+
        #else
        fs_read(fd,(void *)phlf.p_vaddr,phlf.p_memsz);
        memset((void *)(phlf.p_vaddr+phlf.p_filesz),0,phlf.p_memsz-phlf.p_filesz);
