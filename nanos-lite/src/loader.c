@@ -134,7 +134,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
   sp=start+31*1024;               //栈指针，并将最高的1KB设置为unspecified区域
   if(argv!=NULL&&envp!=NULL){                          //填写参数
   int num;
-  char *uenvp[16];
+  char *uenvp[8];
   for(num=0;envp[num]!=0;num++) {
 		sp-=strlen(envp[num])+1;
 		memcpy((void *)sp, (void *)(envp[num]), strlen(envp[num]) + 1);
