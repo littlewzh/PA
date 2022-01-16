@@ -72,14 +72,12 @@ void map(AddrSpace *as, void *va, void *pa, int prot) {            //它用于�
   uint32_t off_second=((uint32_t)va&0x003ff000)>>12;         //二级页表偏移
   uint32_t *base = (uint32_t *)as->ptr;                       //base
   uint32_t *pte = (uint32_t*)((uint32_t)((uint32_t)base & 0xfffff000)+ off_first*4);
-  //uint32_t* pte = &base[off_first];
   if(((*pte) & 1)==0){
   uint32_t* tem = (uint32_t*)pgalloc_usr(4096);
   *pte = ((uint32_t)tem &  0xfffff000) | 1;
   }
   uint32_t *addr=(uint32_t*)((int)(*pte & 0xfffff000)+ off_second*4);
   *addr=((uint32_t)pa & 0xfffff000) | 1;
-  //*(uint32_t*)((int)(*pte & 0xfffff000)+ off_second*4) = (((uint32_t)pa & 0xfffff000) | 1);
 }
 
 Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
