@@ -45,11 +45,15 @@ static void fetch_decode_exec_updatepc(Decode *s) {
   s->EHelper(s);
   cpu.pc = s->dnpc;
   #ifdef HAS_TIMER_IRQ
+
+
     word_t intr = isa_query_intr();
     if (intr != INTR_EMPTY) {
       cpu.pc = isa_raise_intr(intr, cpu.pc-4);
     }
-    #endif
+
+
+  #endif
 }
 
 static void statistic() {
