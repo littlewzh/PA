@@ -3,7 +3,7 @@ extern void do_syscall(Context *c);
 extern Context* schedule(Context *prev);
 static Context* do_event(Event e, Context* c) {
   switch (e.event) {
-    case 3:yield();break;
+    case 3:Log("time interruption\n");yield();break;
     case 1:return schedule(c);break;
     case 2:do_syscall(c);break;
     //case 3:printf("ev.event = EVENT_PAGEFAULT\n"); break;
