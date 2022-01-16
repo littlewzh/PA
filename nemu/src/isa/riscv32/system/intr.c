@@ -16,7 +16,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 }
 
 word_t isa_query_intr() {
-   printf("%d\n",(cpu.mstatus&0x8));
+   //printf("%d\n",(cpu.mstatus&0x8));
    if ((cpu.INTR==true)&&((cpu.mstatus&0x8)!=0)) {
     cpu.INTR = false;
     return IRQ_TIMER;
