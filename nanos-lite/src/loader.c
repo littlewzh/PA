@@ -142,7 +142,7 @@ void context_uload(PCB *pcb,const char *filename, char *const argv[], char *cons
 	}
   uenvp[num]=0;                   //
   int argc;
-  char *uargv[16];
+  char *uargv[8];
 	for(argc=0;argv[argc]!=0;argc++) {
 		sp-=strlen(argv[argc])+1;
 		memcpy((void *)sp, (void *)(argv[argc]), strlen(argv[argc]) + 1);
