@@ -44,6 +44,12 @@ static void fetch_decode_exec_updatepc(Decode *s) {
   fetch_decode(s, cpu.pc);
   s->EHelper(s);
   cpu.pc = s->dnpc;
+  #ifdef HAS_TIMER_IRQ
+    word_t intr = isa_query_intr();
+    if (intr != INTR_EMPTY) {
+      cpu.pc = isa_raise_intr(intr, cpu.pc-4);
+    }
+    #endif
 }
 
 static void statistic() {
@@ -111,12 +117,7 @@ void cpu_exec(uint64_t n) {
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
-    #ifdef HAS_TIMER_IRQ
-    word_t intr = isa_query_intr();
-    if (intr != INTR_EMPTY) {
-      cpu.pc = isa_raise_intr(intr, cpu.pc-4);
-    }
-    #endif
+    
     //
 
   }
