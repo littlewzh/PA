@@ -10,7 +10,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   cpu.mcause=NO;
   cpu.mepc=epc;
   //printf("%x\n",cpu.mtvec);
-  cpu.mstatus=(cpu.mstatus&0x8)<<4;                                   //MIE(3) MPIE(7)  
+  cpu.mstatus=(cpu.mstatus|0x8)<<4;                                   //MIE(3) MPIE(7)  
 
   return cpu.mtvec;
 }
