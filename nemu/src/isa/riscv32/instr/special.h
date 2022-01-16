@@ -27,7 +27,7 @@ def_EHelper(csrrw){
 }
 def_EHelper(mret){
   s->dnpc=cpu.mepc;
-  printf("mstatus11=%x\n",cpu.mstatus);
+  //printf("mstatus11=%x\n",cpu.mstatus);
   cpu.mstatus=(cpu.mstatus&0x80)==0 ? (cpu.mstatus&(~0x8))|0x80 :(cpu.mstatus|0x8);
-  printf("mstatus22=%x\n",cpu.mstatus);
+  //printf("mstatus22=%x\n",cpu.mstatus);
 }

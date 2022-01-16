@@ -9,9 +9,9 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   #endif
   cpu.mcause=NO;
   cpu.mepc=epc;
-  printf("mstatus1=%x\n",cpu.mstatus);
+  //printf("mstatus1=%x\n",cpu.mstatus);
   cpu.mstatus=((cpu.mstatus)&0x8)==0 ? (cpu.mstatus&~0x80): ((cpu.mstatus|0x80)&~0x8);                                   //MIE(3) MPIE(7)  
-  printf("mstatus2=%x\n",cpu.mstatus);
+  //printf("mstatus2=%x\n",cpu.mstatus);
   return cpu.mtvec;
 }
 
