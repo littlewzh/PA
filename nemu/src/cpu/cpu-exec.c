@@ -4,13 +4,15 @@
 #include <isa-all-instr.h>
 #include <locale.h>
 #include "../monitor/sdb/sdb.h"
+//#define HAS_TIMER_IRQ
+
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
  * You can modify this value as you want.
  */
 #define MAX_INSTR_TO_PRINT 1000
-#define HAS_TIMER_IRQ
+
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_instr = 0;
