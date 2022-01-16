@@ -32,14 +32,14 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   //context_uload(&pcb[0], "/bin/hello");
-  //context_kload(&pcb[1], hello_fun, NULL);
+  context_kload(&pcb[1], hello_fun, NULL);
   //context_kload(&pcb[0], hello_fun, "A");
   char* empty[] ={NULL};
   //char *environ[] ={NULL };
 	char *args[] = {"--skip", NULL};
   //context_uload(&pcb[0], "/bin/exec-test",empty,empty);
   context_uload(&pcb[0], "/bin/pal",args,empty);
-  context_uload(&pcb[1], "/bin/hello",args,empty);
+  //context_uload(&pcb[1], "/bin/hello",args,empty);
   //context_uload(&pcb[0], "/bin/nterm",args,empty);
   //context_kload(&pcb[1], hello_fun, (void *)1000);
   switch_boot_pcb();
