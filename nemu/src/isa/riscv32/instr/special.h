@@ -27,5 +27,5 @@ def_EHelper(csrrw){
 }
 def_EHelper(mret){
   s->dnpc=cpu.mepc+4;
-  cpu.mstatus=(cpu.mstatus>>4)|0x80;
+  cpu.mstatus=(cpu.mstatus&0x80)==0 ? (cpu.mstatus&(~0x8))|0x80 :(cpu.mstatus|0x8);
 }
