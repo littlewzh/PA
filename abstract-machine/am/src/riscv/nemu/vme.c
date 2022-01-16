@@ -85,7 +85,7 @@ Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
    memset(text,0,sizeof(Context));
    //text->gpr[10]=(uintptr_t)heap.end;
    text->mepc=(uintptr_t)entry;
-   text->mstatus=0x88;
+   text->mstatus=0x8;
    text->pdir=(void *)as->ptr;
    return text;
   //return NULL;
